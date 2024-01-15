@@ -3,10 +3,10 @@ import connectToDB from './db.js';
 import url from 'url';
 import util from 'util';
 
-const db = await connectToDB('postgresql://postgres:postgres@localhost:5432/uplow');
+export const db = await connectToDB('postgresql://postgres:postgres@localhost:5432/uplow');
 
 // ANCHOR -- Customer
-class Customer extends Model {
+export class Customer extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
@@ -21,7 +21,11 @@ Customer.init(
       unique: true,
       allowNull: false,
     },
-    name: {
+    firstName: {
+      type: DataTypes.STRING(40),
+      allowNull: false,
+    },
+    lastName: {
       type: DataTypes.STRING(40),
       allowNull: false,
     },
@@ -49,7 +53,7 @@ Customer.init(
 );
 
 // ANCHOR -- Worker
-class Worker extends Model {
+export class Worker extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
@@ -64,7 +68,11 @@ Worker.init(
       unique: true,
       allowNull: false,
     },
-    name: {
+    firstName: {
+      type: DataTypes.STRING(40),
+      allowNull: false,
+    },
+    lastName: {
       type: DataTypes.STRING(40),
       allowNull: false,
     },
@@ -92,7 +100,7 @@ Worker.init(
 );
 
 // ANCHOR -- Worker Service
-class WorkerService extends Model {
+export class WorkerService extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
@@ -129,7 +137,7 @@ WorkerService.init(
 );
 
 // ANCHOR -- Property
-class Property extends Model {
+export class Property extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
@@ -149,11 +157,28 @@ Property.init(
       allowNull: false,
     },
     picture: {
-      type: DataTypes.ARRAY(DataTypes.STRING(60)), // NOTE -- not sure if this will work, will have to check
+      type: DataTypes.STRING(60), // NOTE -- not sure if this will work, will have to check
       allowNull: false,
       validate: { notEmpty: true },
     },
-
+    address: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING(60),
+    },
+    state: {
+      type: DataTypes.STRING(2),
+    },
+    zipcode: {
+      type: DataTypes.INTEGER(5),
+    },
+    coordinates: {
+      type: DataTypes.ARRAY(DataTypes.FLOAT),
+      allowNull: false,
+      defaultValue: [0, 0],
+    },
     // ownerId: {
     // NOTE - foreign key for user connection
     // }
@@ -164,7 +189,7 @@ Property.init(
 );
 
 // ANCHOR -- Job
-class Job extends Model {
+export class Job extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
@@ -183,10 +208,21 @@ Job.init(
       type: DataTypes.STRING(30),
       allowNull: false,
     },
+    jobSize: {
+      type: DataTypes.INTEGER(),
+      allowNull: false,
+    },
+    pictures: {
+      type: DataTypes.ARRAY(DataTypes.STRING()),
+    },
     instructions: {
       type: DataTypes.ARRAY(DataTypes.STRING(255)), // NOTE - make sure array works and string length is appropriate
       allowNull: false,
       validate: { notEmpty: true },
+    },
+    subscribed: {
+      type: DataTypes.STRING(),
+      allowNull: true,
     },
     // NOTE - FK - subscriber_id - connects to worker
     // NOTE - FK - property_id, connects to worker
@@ -197,7 +233,7 @@ Job.init(
 );
 
 // ANCHOR -- Service
-class Service extends Model {
+export class Service extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
@@ -226,7 +262,7 @@ Service.init(
 );
 
 // ANCHOR -- Alert
-class Alert extends Model {
+export class Alert extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
@@ -260,7 +296,7 @@ Alert.init(
   }
 );
 // ANCHOR -- Message
-class Message extends Model {
+export class Message extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
@@ -293,6 +329,26 @@ Message.init(
   }
 );
 
+// ANCHOR -- Worker Review
+// export class WorkerReview extends Model {
+//   [util.inspect.custom]() {
+//     return this.toJSON();
+//   }
+// }
+
+// WorkerReview.init({
+//   workerReview_id: {
+//     type: DataTypes.INTEGER,
+//     autoIncrement: true,
+//     primaryKey: true,
+//     unique: true,
+//     allowNull: false,
+//   },
+// },{
+//   sequelize: db,
+//     timestamps: true,
+// });
+
 // ANCHOR -- Relationships
 Customer.hasMany(Property, { foreignKey: 'customer_id' });
 Property.belongsTo(Customer, { foreignKey: 'customer_id' });
@@ -320,6 +376,10 @@ Alert.belongsTo(Customer, { foreignKey: 'customer_id' });
 // --
 Worker.hasMany(Alert, { foreignKey: 'worker_id' });
 Alert.belongsTo(Worker, { foreignKey: 'worker_id' });
+
+// ANCHOR -- Sync Database
+// await db.sync({ force: true });
+// await db.close();
 
 // ANCHOR -- Export
 export default db;

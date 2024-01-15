@@ -1,0 +1,42 @@
+[
+  {
+    "worker_service_id": "1",
+    "jobType": "driveway",
+    "description": "I'll plow the shit out of your shit",
+    "rateType": "flat",
+    "rate": "45",
+    "worker_id": "1"
+  },
+  {
+    "worker_service_id": "2",
+    "jobType": "parking lot",
+    "description": "I'll plow the shit out of your shit",
+    "rateType": "parking spaces",
+    "rate": ".5",
+    "worker_id": "1"
+  },
+  {
+    "worker_service_id": "3",
+    "jobType": "walkway",
+    "description": "will shovel for food",
+    "rateType": "length",
+    "rate": ".5",
+    "worker_id": "2"
+  },
+  {
+    "worker_service_id": "4",
+    "jobType": "sidewalk",
+    "description": "will shovel for food",
+    "rateType": "length",
+    "rate": ".5",
+    "worker_id": "2"
+  },
+  {
+    "worker_service_id": "5",
+    "jobType": "roof",
+    "description": "will shovel for food",
+    "rateType": "sqft",
+    "rate": "2",
+    "worker_id": "2"
+  }
+]

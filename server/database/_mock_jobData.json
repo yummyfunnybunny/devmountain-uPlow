@@ -1,0 +1,38 @@
+[
+  {
+    "job_id": "1",
+    "jobType": "sidewalk",
+    "jobSize": "300",
+    "pictures": ["img1", "img2", "img3"],
+    "instructions": ["please make sure to get right infront of the steps", "dont pile snow next to the entrance sign"],
+    "subscribed": null,
+    "property_id": "1"
+  },
+  {
+    "job_id": "2",
+    "jobType": "parking lot",
+    "jobSize": "250",
+    "pictures": ["img1", "img2", "img3"],
+    "instructions": ["please pile snow on the back end of the lot"],
+    "subscribed": null,
+    "property_id": "2"
+  },
+  {
+    "job_id": "3",
+    "jobType": "walkway",
+    "jobSize": "500",
+    "pictures": ["img1", "img2", "img3"],
+    "instructions": [],
+    "subscribed": null,
+    "property_id": "2"
+  },
+  {
+    "job_id": "4",
+    "jobType": "driveway",
+    "jobSize": "1000",
+    "pictures": ["img1", "img2", "img3"],
+    "instructions": ["please watch out for the dog toys!", "please plow all the way to the side of the garage"],
+    "subscribed": null,
+    "property_id": "3"
+  }
+]

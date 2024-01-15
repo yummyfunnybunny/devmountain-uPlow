@@ -1,0 +1,47 @@
+[
+  {
+    "customer_id": "1",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "test@gmail.com",
+    "password": "test1234",
+    "phone": "123456789",
+    "profilePicture": "img123"
+  },
+  {
+    "customer_id": "2",
+    "firstName": "Mary",
+    "lastName": "Kate",
+    "email": "katem@protonmail.com",
+    "password": "test1234",
+    "phone": "123456789",
+    "profilePicture": "img123"
+  },
+  {
+    "customer_id": "3",
+    "firstName": "Jake",
+    "lastName": "Nichols",
+    "email": "nichols@yahoo.com",
+    "password": "test1234",
+    "phone": "123456789",
+    "profilePicture": "img123"
+  },
+  {
+    "customer_id": "4",
+    "firstName": "Cody",
+    "lastName": "Farrington",
+    "email": "codyf@gmail.com",
+    "password": "test1234",
+    "phone": "123456789",
+    "profilePicture": "img123"
+  },
+  {
+    "customer_id": "5",
+    "firstName": "Jared",
+    "lastName": "Collier",
+    "email": "colliebudz@aol.com",
+    "password": "test1234",
+    "phone": "123456789",
+    "profilePicture": "img123"
+  }
+]
