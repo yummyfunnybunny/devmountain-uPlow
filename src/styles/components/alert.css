@@ -1,0 +1,38 @@
+.alert {
+  border: 1px solid black;
+  display: flex;
+  height: 10rem;
+  justify-content: space-evenly;
+  padding: 0.5rem;
+}
+.alert__icon {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+}
+
+.alert__meta {
+  /* border: 1px solid red; */
+}
+
+.alert__customer {
+  /* border: 1px solid red; */
+}
+
+.alert__property {
+  /* border: 1px solid red; */
+}
+
+.alert__job {
+  /* border: 1px solid red; */
+}
+
+.alert__instructions {
+  /* border: 1px solid red; */
+}
+
+.alert__buttons {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+}

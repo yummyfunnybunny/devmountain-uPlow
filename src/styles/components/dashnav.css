@@ -1,0 +1,13 @@
+.dashnav {
+  border: 1px solid black;
+  width: 15rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashnav__btn {
+  padding: 1rem;
+  font-size: 1.25rem;
+  border-radius: 0;
+}

@@ -1,0 +1,5 @@
+.auth {
+  height: var(--window_h);
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,61 @@
+.dashMyJobs {
+  border: 1px solid black;
+}
+
+.my-job__list {
+  border: 1px solid red;
+}
+
+.my-job {
+  border: 1px solid blue;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.my-job__slides {
+}
+
+.my-job__pic {
+}
+
+.my-job__details {
+}
+
+.my-job__type {
+}
+
+.my-job__size {
+}
+
+.my-job__status {
+}
+
+.my-job__instructions {
+}
+
+.my-job__header {
+}
+
+.my-job__instruction {
+}
+
+.my-job__address {
+}
+
+.my-job__street {
+}
+
+.my-job__city {
+}
+
+.my-job__state {
+}
+
+.my-job__zip {
+}
+
+.my-job__options {
+  display: flex;
+  flex-direction: column;
+}

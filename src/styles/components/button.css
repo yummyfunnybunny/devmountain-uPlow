@@ -1,0 +1,33 @@
+.btn {
+  border-radius: 5px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn:active {
+  color: red;
+}
+
+.btn__cta1 {
+}
+
+.btn__cta2 {
+}
+
+.btn--sm {
+}
+
+.btn--md {
+  font-size: 1rem;
+  padding: 0.25rem 1.5rem;
+}
+
+.btn--lg {
+  font-size: 2rem;
+  padding: 0.5rem 2rem;
+}
+
+.btn--xl {
+}

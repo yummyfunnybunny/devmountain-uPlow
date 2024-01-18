@@ -1,0 +1,23 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+}
+
+/* ANCHOR -- NAVBAR */
+
+:root {
+  --primarycolor: #161a30;
+  --window_h: calc(100vh - 5rem);
+}
+
+.container {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+}

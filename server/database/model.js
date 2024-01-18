@@ -2,8 +2,12 @@ import { DataTypes, Model } from 'sequelize';
 import connectToDB from './db.js';
 import url from 'url';
 import util from 'util';
+import dotenv from 'dotenv';
 
-export const db = await connectToDB('postgresql://postgres:postgres@localhost:5432/uplow');
+dotenv.config();
+const { POSTGRES_CONNECTION_STRING } = process.env;
+
+export const db = await connectToDB(POSTGRES_CONNECTION_STRING);
 
 // ANCHOR -- Customer
 export class Customer extends Model {
