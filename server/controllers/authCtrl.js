@@ -112,4 +112,15 @@ export default {
       next();
     }
   },
+  isLoggedIn: async (req, res) => {
+    console.log('=== is logged in route ==');
+    if (!req.session.user_id) {
+      res.status(401).send({ error: 'Unauthorized' });
+    } else {
+      res.status(200).send({
+        success: true,
+        message: 'Authorized',
+      });
+    }
+  },
 };

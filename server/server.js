@@ -23,11 +23,12 @@ app.use(session({ secret: 'uplowRocks$69', saveUninitialized: true, resave: fals
 // SECTION -- Route Handlers
 
 // ANCHOR -- Auth
-const { signup, login, logout, changePassword, loginRequired } = authCtrl;
+const { signup, login, logout, changePassword, loginRequired, isLoggedIn } = authCtrl;
 app.post('/signup', signup);
 app.post('/login', login);
 app.post('/logout', loginRequired, logout);
 app.post('/changePassword', loginRequired, changePassword);
+app.get('/isLoggedIn', isLoggedIn);
 
 // ANCHOR -- Users
 const { getMe, editMe, deleteMe } = userCtrl;

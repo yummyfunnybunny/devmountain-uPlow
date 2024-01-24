@@ -1,14 +1,31 @@
 TODO:
 
-TODO Friday 1/19
+- display different versions of the Jobs component based on the role of the loggeed-in user
 
-- DashAccount -> edit account info
-- DashAccount -> delete account
-- DashNav -> get user role and display appropriate tabs based on role
+- display available jobs on the find jobs map
+
+- display workers on the find workers map
+
+- click map nodes to pull up data about the node
+
+- ALERTS - allow workers to request service for a job
+
+- ALERTS - allow customers to request service from a worker
+
+- allow uploading of pictures into the DB
+
+- allow serving up of pictures from the db
+
+-- ERROR HANDLING
+
+-- FORM VALIDATION
+
+- remove extra white space
+- lowercase everything but first letters of words
+- format phone numbers (dashes, numbers only)
+-
 
 MVC:
-
-- AUTh: login, logout, signup, delete account, express sessions
 
 STRETCH:
 
@@ -18,6 +35,7 @@ STRETCH:
 - FAQ page
 - loading spinner when map is loading
 - bcrypt replaces express sessions
+- weather alerts and weather forecasts on home dashboard
 
 <!-- NOTE -->
 
