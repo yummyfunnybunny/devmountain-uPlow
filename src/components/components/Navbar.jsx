@@ -1,9 +1,13 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSnowplow, faUser } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/components/navbar.css';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Navbar() {
+  const loggedIn = useSelector((state) => state.loggedInReducer.loggedIn);
+  const dispatch = useDispatch();
+
   return (
     <div className='navbar'>
       <NavLink to='/' className='navbar__logo'>
@@ -20,15 +24,25 @@ function Navbar() {
         <NavLink className='nav__link' to='/Faq'>
           FAQ
         </NavLink>
-        <NavLink className='nav__link' to='/Signup'>
-          Signup
-        </NavLink>
-        <NavLink className='nav__link' to='/Login'>
-          Login
-        </NavLink>
-        <NavLink className='nav__link' to='/dashboard'>
-          <FontAwesomeIcon icon={faUser} size='2x' />
-        </NavLink>
+        {loggedIn ? (
+          <>
+            <button className='nav__link' onClick={() => dispatch({ type: 'LOGOUT' })}>
+              Logout
+            </button>
+            <NavLink className='nav__link' to='/dashboard'>
+              <FontAwesomeIcon icon={faUser} size='2x' />
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink className='nav__link' to='/Signup'>
+              Signup
+            </NavLink>
+            <NavLink className='nav__link' to='/Login'>
+              Login
+            </NavLink>
+          </>
+        )}
       </div>
     </div>
   );

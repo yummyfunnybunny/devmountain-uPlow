@@ -35,3 +35,8 @@
   /* border: 1px solid pink; */
   width: 30%;
 }
+.form__textarea {
+  resize: none;
+  /* border: 1px solid pink; */
+  /* width: 30%; */
+}

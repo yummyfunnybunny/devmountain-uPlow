@@ -22,7 +22,7 @@
     "jobType": "walkway",
     "jobSize": "500",
     "pictures": ["img1", "img2", "img3"],
-    "instructions": [],
+    "instructions": ["blahblahblah", "blahblahblah"],
     "subscribed": null,
     "property_id": "2"
   },

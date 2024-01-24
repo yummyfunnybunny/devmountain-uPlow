@@ -1,12 +1,12 @@
-import '../../styles/components/property-job.css';
+import '../../styles/components/job.css';
 
-function PropertyJob() {
+function Job() {
   return (
-    <div className='property-job'>
-      <div className='property-job__slider'>
-        <img className='property-job__pic' src='https://picsum.photos/200'></img>
+    <div className='job'>
+      <div className='job__slider'>
+        <img className='job__pic' src='https://picsum.photos/200'></img>
       </div>
-      <div className='property-job__details'>
+      <div className='job__details'>
         <h2 className='property-job__type'>Job Type</h2>
         <div className='property-job__size'>Job Size</div>
       </div>
@@ -29,4 +29,4 @@ function PropertyJob() {
   );
 }
 
-export default PropertyJob;
+export default Job;

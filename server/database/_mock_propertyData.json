@@ -3,33 +3,33 @@
     "property_id": "1",
     "name": "My humble Abode",
     "picture": "img12345",
-    "address": "1264 N Commerce Dr H308",
+    "street": "1264 N Commerce Dr H308",
     "city": "Saratoga Springs",
     "state": "UT",
     "zipcode": "84045",
     "coordinates": [40.3847755, -111.9133662],
-    "customer_id": "3"
+    "user_id": "1"
   },
   {
     "property_id": "2",
     "name": "DevMountain Office",
     "picture": "img12345",
-    "address": "1550 W Digital Dr",
+    "street": "1550 W Digital Dr",
     "city": "Lehi",
     "state": "UT",
     "zipcode": "84043",
     "coordinates": [40.4194356, -111.8746606],
-    "customer_id": "5"
+    "user_id": "1"
   },
   {
     "property_id": "3",
     "name": "Centennial Blvd Home",
     "picture": "img12345",
-    "address": "246 E Green Ct",
+    "street": "246 E Green Ct",
     "city": "Saratoga Springs",
     "state": "UT",
     "zipcode": "84045",
     "coordinates": [40.3310042, -111.9026504],
-    "customer_id": "2"
+    "user_id": "1"
   }
 ]

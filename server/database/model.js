@@ -9,6 +9,56 @@ const { POSTGRES_CONNECTION_STRING } = process.env;
 
 export const db = await connectToDB(POSTGRES_CONNECTION_STRING);
 
+// ANCHOR -- user
+export class User extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+
+User.init(
+  {
+    user_id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      unique: true,
+      allowNull: false,
+    },
+    firstName: {
+      type: DataTypes.STRING(40),
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING(40),
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING(60),
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+    },
+    phone: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
+    role: {
+      type: DataTypes.STRING(),
+      allowNull: false,
+    },
+    profilePicture: {
+      type: DataTypes.STRING(100), // TODO - make sure data type is right for pictures
+      allowNull: true,
+    },
+  },
+  {
+    sequelize: db,
+  }
+);
+
 // ANCHOR -- Customer
 export class Customer extends Model {
   [util.inspect.custom]() {
@@ -42,7 +92,7 @@ Customer.init(
       allowNull: false,
     },
     phone: {
-      type: DataTypes.INTEGER(10),
+      type: DataTypes.STRING(10),
       alllowNull: false,
     },
     profilePicture: {
@@ -89,7 +139,7 @@ Worker.init(
       allowNull: false,
     },
     phone: {
-      type: DataTypes.INTEGER(10),
+      type: DataTypes.STRING(10),
       alllowNull: false,
     },
     profilePicture: {
@@ -165,7 +215,7 @@ Property.init(
       allowNull: false,
       validate: { notEmpty: true },
     },
-    address: {
+    street: {
       type: DataTypes.STRING(100),
       allowNull: false,
     },
@@ -354,8 +404,11 @@ Message.init(
 // });
 
 // ANCHOR -- Relationships
-Customer.hasMany(Property, { foreignKey: 'customer_id' });
-Property.belongsTo(Customer, { foreignKey: 'customer_id' });
+// Customer.hasMany(Property, { foreignKey: 'customer_id' });
+// Property.belongsTo(Customer, { foreignKey: 'customer_id' });
+
+User.hasMany(Property, { foreignKey: 'user_id' });
+Property.belongsTo(User, { foreignKey: 'user_id' });
 // --
 Property.hasMany(Job, { foreignKey: 'property_id' });
 Job.belongsTo(Property, { foreignKey: 'property_id' });
@@ -363,23 +416,35 @@ Job.belongsTo(Property, { foreignKey: 'property_id' });
 Job.hasMany(Service, { foreignKey: 'job_id' });
 Service.belongsTo(Job, { foreignKey: 'job_id' });
 // --
-Worker.hasMany(Service, { foreignKey: 'worker_id' });
-Service.belongsTo(Worker, { foreignKey: 'worker_id' });
+// Worker.hasMany(Service, { foreignKey: 'worker_id' });
+// Service.belongsTo(Worker, { foreignKey: 'worker_id' });
+
+User.hasMany(Service, { foreignKey: 'user_id' });
+Service.belongsTo(User, { foreignKey: 'user_id' });
 // --
-Worker.hasMany(WorkerService, { foreignKey: 'worker_id' });
-WorkerService.belongsTo(Worker, { foreignKey: 'worker_id' });
+// Worker.hasMany(WorkerService, { foreignKey: 'worker_id' });
+// WorkerService.belongsTo(Worker, { foreignKey: 'worker_id' });
+
+// User.hasMany(WorkerService, { foreignKey: 'worker_id' });
+// WorkerService.belongsTo(User, { foreignKey: 'worker_id' });
 // --
-Customer.hasMany(Message, { foreignKey: 'customer_id' });
-Message.belongsTo(Customer, { foregnKey: 'customer_id' });
+// Customer.hasMany(Message, { foreignKey: 'customer_id' });
+// Message.belongsTo(Customer, { foregnKey: 'customer_id' });
 // --
-Worker.hasMany(Message, { foreignKey: 'worker_id' });
-Message.belongsTo(Worker, { foregnKey: 'worker_id' });
+// Worker.hasMany(Message, { foreignKey: 'worker_id' });
+// Message.belongsTo(Worker, { foregnKey: 'worker_id' });
+
+User.hasMany(Message, { foreignKey: 'user_id' });
+Message.belongsTo(User, { foreignKey: 'user_id' });
 // --
-Customer.hasMany(Alert, { foreignKey: 'customer_id' });
-Alert.belongsTo(Customer, { foreignKey: 'customer_id' });
+// Customer.hasMany(Alert, { foreignKey: 'customer_id' });
+// Alert.belongsTo(Customer, { foreignKey: 'customer_id' });
 // --
-Worker.hasMany(Alert, { foreignKey: 'worker_id' });
-Alert.belongsTo(Worker, { foreignKey: 'worker_id' });
+// Worker.hasMany(Alert, { foreignKey: 'worker_id' });
+// Alert.belongsTo(Worker, { foreignKey: 'worker_id' });
+
+User.hasMany(Alert, { foreignKey: 'user_id' });
+Alert.belongsTo(User, { foreignKey: 'user_id' });
 
 // ANCHOR -- Sync Database
 // await db.sync({ force: true });

@@ -6,11 +6,11 @@
 }
 
 .property__list {
-  width: 40%;
+  width: 100%;
   height: 100%;
   border: 1px solid black;
 }
 
-.job__list {
+/* .job__list {
   width: 60%;
-}
+} */

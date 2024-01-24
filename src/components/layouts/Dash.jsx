@@ -1,5 +1,5 @@
 import '../../styles/layouts/dash.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Home from './DashHome.jsx';
 import Alerts from './DashAlerts.jsx';
 import Messages from './DashMessages.jsx';

@@ -2,7 +2,6 @@ import '../../styles/components/dashNav.css';
 import { useDispatch } from 'react-redux';
 
 function Dashnav() {
-  // const dashMode = useSelector((state) => state.dashReducer.dashMode);
   const dispatch = useDispatch();
 
   return (
