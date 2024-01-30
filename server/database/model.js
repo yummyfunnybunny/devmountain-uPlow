@@ -369,6 +369,26 @@ Alert.init(
       type: DataTypes.STRING(),
       allowNull: false,
     },
+    recipient_id: {
+      type: DataTypes.INTEGER(),
+      allowNull: true,
+      defaultValue: null,
+    },
+    sender_id: {
+      type: DataTypes.INTEGER(),
+      allowNull: true,
+      defaultValue: null,
+    },
+    job_id: {
+      type: DataTypes.INTEGER(),
+      allowNull: false,
+      defaultValue: null,
+    },
+    property_id: {
+      type: DataTypes.INTEGER(),
+      allowNull: false,
+      defaultValue: null,
+    },
   },
   {
     sequelize: db,
@@ -469,8 +489,14 @@ Message.belongsTo(User, { foreignKey: 'user_id' });
 // Worker.hasMany(Alert, { foreignKey: 'worker_id' });
 // Alert.belongsTo(Worker, { foreignKey: 'worker_id' });
 
-User.hasMany(Alert, { foreignKey: 'user_id' });
-Alert.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Alert, { foreignKey: 'sender_id' });
+Alert.belongsTo(User, { foreignKey: 'sender_id' });
+
+Job.hasMany(Alert, { foreignKey: 'job_id' });
+Alert.belongsTo(Job, { foreignKey: 'job_id' });
+
+Property.hasMany(Alert, { foreignKey: 'property_id' });
+Alert.belongsTo(Property, { foreignKey: 'property_id' });
 
 // ANCHOR -- Sync Database
 // await db.sync({ force: true });

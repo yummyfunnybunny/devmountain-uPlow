@@ -7,6 +7,7 @@ import authCtrl from './controllers/authCtrl.js';
 import userCtrl from './controllers/userCtrl.js';
 import propertyCtrl from './controllers/propertyCtrl.js';
 import jobCtrl from './controllers/jobCtrl.js';
+import alertCtrl from './controllers/alertCtrl.js';
 
 // ANCHOR -- Initializers
 const app = express();
@@ -47,14 +48,31 @@ app.put('/properties', loginRequired, editProperty);
 app.delete('/properties/:property_id', loginRequired, deleteProperty);
 
 // ANCHOR -- Jobs
-const { myJobs, availableJobs, createJob, updateJob, deleteJob, getSubscriptions, unsubscribeWorker } = jobCtrl;
+const {
+  myJobs,
+  availableJobs,
+  createJob,
+  updateJob,
+  deleteJob,
+  getSubscriptions,
+  unsubscribeWorker,
+  myJobsWithProperties,
+  acceptJobOffer,
+} = jobCtrl;
 app.get('/myJobs', loginRequired, myJobs);
+app.get('/myJobsWithProperties', loginRequired, myJobsWithProperties);
 app.get('/availableJobs', loginRequired, availableJobs);
 app.post('/jobs', loginRequired, createJob);
 app.put('/jobs', loginRequired, updateJob);
 app.put('/unsubscribeWorker/:job_id', loginRequired, unsubscribeWorker);
 app.delete('/jobs/:job_id', loginRequired, deleteJob);
 app.get('/mySubscriptions/:user_id', loginRequired, getSubscriptions);
+app.put('/acceptJobOffer', loginRequired, acceptJobOffer);
+
+// ANCHOER -- Alerts
+const { myAlerts, requestWorker } = alertCtrl;
+app.get('/myAlerts', loginRequired, myAlerts);
+app.post('/requestWorker', loginRequired, requestWorker);
 
 // !SECTION
 

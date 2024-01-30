@@ -20,6 +20,8 @@ TODO:
 
 - fix DashMyJobs not refreshing/updating after unsubscribing a worker (user perspective)
 
+- combine all of my modal redux states into the modalReducer!
+
 -- ERROR HANDLING
 
 -- FORM VALIDATION

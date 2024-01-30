@@ -20,7 +20,7 @@
 
 .map__popup {
   height: 100%;
-  width: 10rem;
+  width: 8rem;
   border: 1px solid red;
   z-index: 10;
   position: absolute;
@@ -44,7 +44,9 @@
 }
 
 .mapboxgl-popup-content {
-  width: 15rem;
+  width: 10rem;
+  /* height: 10rem; */
+  border: 1px solid red;
 }
 /* .mapboxgl-popup-content div {
   width: 100%;
@@ -56,8 +58,10 @@
 
 .mapboxgl-popup-content div {
   width: 100%;
-  height: 5rem;
+  /* height: 5rem; */
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;

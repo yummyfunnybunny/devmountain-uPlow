@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSnowflake } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 // mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 mapboxgl.accessToken = import.meta.env.VITE_REACT_APP_MAPBOX_ACCESS_TOKEN;
@@ -71,15 +72,35 @@ function Mapbox(props) {
         console.log('== Worker Node Data ==');
         console.log(node);
 
-        const innerHtmlContent = `<div class='test_popup'>YO FUCKERS</div>`;
+        const innerHtmlContent = `
+          <div class='map_popup'>
+            <h2>Details</h2>
+            <p>Name: ${node.firstName} ${node.lastName}</p>
+            <p>Phone: ${node.phone}</p>
+            <p>Address: ${node.address}</p>
+            <p>Rating: *****</p>
+          </div>
+        `;
 
         const divElement = document.createElement('div');
         const assignBtn = document.createElement('div');
-        assignBtn.innerHTML = `<button class='test_map_btn'>test button</button>`;
+        assignBtn.innerHTML = `<button class='test_map_btn'>Request Service</button>`;
         divElement.innerHTML = innerHtmlContent;
         divElement.appendChild(assignBtn);
+
         assignBtn.addEventListener('click', (e) => {
-          console.log('test button clicked');
+          console.log('Send Request Service Alert');
+          console.log(node);
+          dispatch({ type: 'REQUEST_WORKER' });
+          dispatch({ type: 'SET_WORKER', payload: node });
+          // axios
+          //   .post(`/requestWorker`, node)
+          //   .then((res) => {
+          //     console.log(res.data);
+          //   })
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
         });
 
         const popup = new mapboxgl.Popup().setDOMContent(divElement);

@@ -1,5 +1,6 @@
 const initialState = {
   modalType: 'NONE',
+  // data: null,
 };
 
 function modalReducer(state = initialState, action) {
@@ -30,6 +31,12 @@ function modalReducer(state = initialState, action) {
       return { ...state, modalType: 'UNSUBSCRIBE_WORKER' };
     case 'REQUEST_WORKER':
       return { ...state, modalType: 'REQUEST_WORKER' };
+    case 'ACCEPT_REQUEST_WORKER':
+      return { ...state, modalType: 'ACCEPT_REQUEST_WORKER' };
+    case 'COUNTER_REQUEST_WORKER':
+      return { ...state, modalType: 'COUNTER_REQUEST_WORKER' };
+    case 'REJECT_REQUEST_WORKER':
+      return { ...state, modalType: 'REJECT_REQUEST_WORKER' };
     default:
       return state;
   }

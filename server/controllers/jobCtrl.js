@@ -1,4 +1,4 @@
-import { User, Property, Job } from '../database/model.js';
+import { User, Property, Job, Alert } from '../database/model.js';
 
 export default {
   myJobs: async (req, res) => {
@@ -134,6 +134,63 @@ export default {
       res.status(200).send({
         success: true,
         message: "you've successfully unsubscribed the worker from this job",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  myJobsWithProperties: async (req, res) => {
+    console.log('==my jobs with properties route');
+    try {
+      const user = await User.findByPk(req.session.user_id);
+      const properties = await user.getProperties();
+      const propertyIds = properties.map((prop) => {
+        return prop.property_id;
+      });
+      console.log(propertyIds);
+      const jobsWithProperties = await Job.findAll({
+        where: {
+          property_id: [...propertyIds],
+          subscribed: null,
+        },
+        include: [
+          {
+            model: Property,
+            attributes: ['name', 'street', 'city', 'state', 'zipcode'],
+          },
+        ],
+      });
+      res.status(200).send({
+        success: true,
+        message: 'jobs with properties successfully retrieved',
+        jobsWithProperties: jobsWithProperties,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  acceptJobOffer: async (req, res) => {
+    console.log('== accept job offer route ==');
+    console.log(req.body);
+    try {
+      // TODO - workers should not be able to accept a job if someone else accepted it
+      const job = await Job.findByPk(req.body.job_id);
+      if (job.subscribed != null) {
+        return res.status(200).send({
+          success: false,
+          message: 'This job is no longer available. Someone else may have already accepted this job.',
+        });
+      }
+      job.subscribed = req.session.user_id;
+      await job.save();
+      await Alert.destroy({
+        where: {
+          alert_id: req.body.alert_id,
+        },
+      });
+      res.status(200).send({
+        success: true,
+        message: 'You have successfully subscribed to this job!',
       });
     } catch (err) {
       console.log(err);

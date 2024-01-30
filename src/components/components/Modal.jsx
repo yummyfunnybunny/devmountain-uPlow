@@ -16,15 +16,32 @@ function Modal() {
   const property = useSelector((state) => state.propertyReducer);
   const job = useSelector((state) => state.jobReducer);
   const worker = useSelector((state) => state.workerReducer);
+  const alert = useSelector((state) => state.alertReducer);
+  const [myJobs, setMyJobs] = useState([]);
 
-  console.log('Redux User:');
-  console.log(user);
-  console.log('Redux Property:');
-  console.log(property);
-  console.log('Redux Jobs:');
-  console.log(job);
-  console.log('Redux Worker:');
-  console.log(worker);
+  useEffect(() => {
+    axios
+      .get('/myJobsWithProperties')
+      .then((res) => {
+        console.log(res.data.jobsWithProperties);
+        setMyJobs(res.data.jobsWithProperties);
+        // myJobs = [...res.data.jobs];
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // console.log('Redux User:');
+  // console.log(user);
+  // console.log('Redux Property:');
+  // console.log(property);
+  // console.log('Redux Jobs:');
+  // console.log(job);
+  // console.log('Redux Worker:');
+  // console.log(worker);
+  console.log('Redux Alert:');
+  console.log(alert);
 
   // STATE VARIABLES
   const [firstName, setFirstName] = useState(user.firstName);
@@ -71,6 +88,8 @@ function Modal() {
   const [editJobInstructions1, setEditJobInstructions1] = useState(job.instructions[0] || '');
   const [editJobInstructions2, setEditJobInstructions2] = useState(job.instructions[1] || '');
   const [editJobInstructions3, setEditJobInstructions3] = useState(job.instructions[2] || '');
+
+  const [jobToRequestWorker, setJobToRequestWorker] = useState('');
 
   // TODO - see if you can combine these two switch statements
   let newJobSizeMeasure = '';
@@ -435,6 +454,33 @@ function Modal() {
   const submitRequestWorker = (e) => {
     e.preventDefault();
     console.log('submitting a request for work!!!!');
+    // console.log(jobToRequestWorker.jobSize);
+    const job = myJobs[jobToRequestWorker];
+    job.recipient_id = worker.user_id;
+    console.log(job);
+    axios
+      .post('/requestWorker', job)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: 'NONE' });
+        dispatch({ type: 'RESET_WORKER' });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const submitAcceptRequestWorker = (e) => {
+    e.preventDefault();
+    axios
+      .put('/acceptJobOffer', alert)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: 'NONE' });
+        dispatch({ type: 'RESET_ALERT' });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   let modalDisplay;
@@ -1016,16 +1062,49 @@ function Modal() {
                 <p>Select the job you'd like to request this worker for:</p>
               </div>
               <div className='form__row'>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
+                <select defaultValue={jobToRequestWorker} onChange={(e) => setJobToRequestWorker(e.target.value)}>
+                  <option value='' disabled>
+                    Select Job
+                  </option>
+                  {myJobs
+                    ? myJobs.map((job, idx) => {
+                        return (
+                          <option key={job.job_id} value={idx}>
+                            {job.Property.name} - {job.jobType}
+                          </option>
+                        );
+                      })
+                    : null}
                 </select>
               </div>
               {/* BUTTONS */}
               <div className='form__row'>
                 <button className='btn' type='submit'>
                   Request Work
+                </button>
+                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      );
+    case 'ACCEPT_REQUEST_WORKER':
+      return (
+        <div className='modal__bg'>
+          <div className='modal'>
+            <form className='form form--modal' onSubmit={(e) => submitAcceptRequestWorker(e)}>
+              <div className='form__row'>
+                <h2>Delete Job</h2>
+              </div>
+              <div className='form__row'>
+                <p>Are you sure you want to accept this job offer?</p>
+              </div>
+              {/* BUTTONS */}
+              <div className='form__row'>
+                <button className='btn' type='submit'>
+                  Accept Offer
                 </button>
                 <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
                   Cancel
