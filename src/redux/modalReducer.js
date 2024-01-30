@@ -26,6 +26,10 @@ function modalReducer(state = initialState, action) {
       return { ...state, modalType: 'EDIT_JOB' };
     case 'DELETE_JOB':
       return { ...state, modalType: 'DELETE_JOB' };
+    case 'UNSUBSCRIBE_WORKER':
+      return { ...state, modalType: 'UNSUBSCRIBE_WORKER' };
+    case 'REQUEST_WORKER':
+      return { ...state, modalType: 'REQUEST_WORKER' };
     default:
       return state;
   }

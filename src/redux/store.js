@@ -4,6 +4,9 @@ import loggedInReducer from './loggedInReducer.js';
 import modalReducer from './modalReducer.js';
 import propertyReducer from './propertyReducer.js';
 import jobReducer from './jobReducer.js';
+import findJobsReducer from './findJobsReducer.js';
+import workerReducer from './workerReducer.js';
+import mapboxPopupReducer from './mapboxPopupReducer.js';
 
 export default configureStore({
   reducer: {
@@ -12,5 +15,8 @@ export default configureStore({
     modalReducer: modalReducer,
     propertyReducer: propertyReducer,
     jobReducer: jobReducer,
+    findJobsReducer: findJobsReducer,
+    workerReducer: workerReducer,
+    mapboxPopupReducer: mapboxPopupReducer,
   },
 });

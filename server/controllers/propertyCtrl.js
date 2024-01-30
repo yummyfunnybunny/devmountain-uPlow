@@ -20,20 +20,35 @@ export default {
       console.log(err);
     }
   },
+  getPropertyBySubscription: async (req, res) => {
+    console.log('== Get Property By Subscription Route ==');
+    console.log(req.params.job_id);
+    try {
+      const job = await Job.findByPk(req.params.job_id);
+      const property = await job.getProperty();
+      res.status(200).send({
+        success: true,
+        message: 'property successfully retrieved',
+        property: property,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   createProperty: async (req, res) => {
     // console.log('== create property route ==');
-    // console.log(req.body);
-    const { name, street, city, state, zip } = req.body;
+    console.log(req.body);
+    const { name, street, city, state, zipcode, coordinates } = req.body;
 
     try {
       await Property.create({
         name: name,
         picture: 'img1',
-        address: street,
+        street: street,
         city: city,
         state: state,
-        zipcode: zip,
-        coordinates: [0, 0],
+        zipcode: zipcode,
+        coordinates: coordinates,
         user_id: req.session.user_id,
       });
     } catch (err) {

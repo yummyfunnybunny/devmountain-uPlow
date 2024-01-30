@@ -1,16 +1,16 @@
 const initialState = {
-  job_id: '',
-  jobType: '',
-  jobSize: '',
-  picture: '',
-  instructions: [],
-  subscribed: '',
-  property_id: '',
+  job_id: '-',
+  jobType: '-',
+  jobSize: '-',
+  picture: '-',
+  instructions: ['-', '-', '-'],
+  subscribed: '-',
+  // property_id: '-',
 };
 
 function jobReducer(state = initialState, action) {
   switch (action.type) {
-    case true:
+    case 'SET_JOB':
       return {
         ...state,
         job_id: action.payload.job_id,
@@ -19,18 +19,18 @@ function jobReducer(state = initialState, action) {
         picture: action.payload.picture,
         instructions: action.payload.instructions,
         subscribed: action.payload.subscribed,
-        property_id: action.payload.property_id,
+        // property_id: action.payload.property_id,
       };
-    case false:
+    case 'RESET_JOB':
       return {
         ...state,
-        job_id: '',
-        jobType: '',
-        jobSize: '',
-        picture: '',
-        instructions: [],
-        subscribed: '',
-        property_id: '',
+        job_id: '-',
+        jobType: '-',
+        jobSize: '-',
+        picture: '-',
+        instructions: ['-', '-', '-'],
+        subscribed: '-',
+        // property_id: '-',
       };
     default:
       return state;

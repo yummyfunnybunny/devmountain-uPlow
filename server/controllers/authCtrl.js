@@ -117,10 +117,16 @@ export default {
     if (!req.session.user_id) {
       res.status(401).send({ error: 'Unauthorized' });
     } else {
-      res.status(200).send({
-        success: true,
-        message: 'Authorized',
-      });
+      try {
+        const user = await User.findByPk(req.session.user_id);
+        res.status(200).send({
+          success: true,
+          message: 'Authorized',
+          user: user,
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
 };

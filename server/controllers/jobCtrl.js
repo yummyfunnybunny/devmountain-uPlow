@@ -25,6 +25,24 @@ export default {
       jobs: jobs,
     });
   },
+  availableJobs: async (req, res) => {
+    console.log(' == Available Jobs Route ==');
+
+    try {
+      const availableJobs = await Job.findAll({
+        where: {
+          subscribed: null,
+        },
+      });
+      res.status(200).send({
+        success: true,
+        message: 'available jobs successfully retrieved',
+        availableJobs: availableJobs,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   createJob: async (req, res) => {
     console.log('== Create Job Route ==');
     const createJob = req.body;
@@ -46,6 +64,9 @@ export default {
     console.log('== Update Job Route ==');
     console.log(req.body);
     const editJob = req.body;
+    editJob.jobSize = +editJob.jobSize;
+    console.log('after changing data type');
+    console.log(editJob);
 
     try {
       await Job.update(
@@ -78,6 +99,41 @@ export default {
       res.status(200).send({
         success: true,
         message: 'Job was successfully deleted',
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getSubscriptions: async (req, res) => {
+    console.log('== get subscriptions route ==');
+    console.log(req.params.user_id);
+    const userId = req.params.user_id;
+    try {
+      const subscriptions = await Job.findAll({
+        where: {
+          subscribed: userId,
+        },
+      });
+      console.log(subscriptions);
+      res.status(200).send({
+        success: true,
+        message: 'subscriptions successfully retrieved',
+        subscriptions: subscriptions,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  unsubscribeWorker: async (req, res) => {
+    console.log('== unsubscribe worker route ==');
+    console.log(req.params.job_id);
+    try {
+      const job = await Job.findByPk(req.params.job_id);
+      job.subscribed = null;
+      await job.save();
+      res.status(200).send({
+        success: true,
+        message: "you've successfully unsubscribed the worker from this job",
       });
     } catch (err) {
       console.log(err);

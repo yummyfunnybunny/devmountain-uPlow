@@ -24,7 +24,7 @@ function Login() {
       .post('/login', loginData)
       .then((res) => {
         console.log(res.data);
-        dispatch({ type: true, payload: res.data.user });
+        dispatch({ type: 'SET_LOGGED_IN', payload: res.data.user });
         navigate(res.data.redirectUri);
         // TODO - display success toast
       })

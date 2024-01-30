@@ -6,15 +6,21 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Signup() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+
+  const [street, setStreet] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zipcode, setZipcode] = useState('');
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('');
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const submitSignup = (e) => {
     e.preventDefault();
@@ -40,7 +46,7 @@ function Signup() {
       .then((res) => {
         console.log(res);
         console.log(window);
-        dispatch({ type: true, payload: res.data.user });
+        dispatch({ type: 'SET_LOGGED_IN', payload: res.data.user });
         navigate(res.data.redirectUri);
         // TODO - display success toast
       })
@@ -111,6 +117,66 @@ function Signup() {
             name='phone'
             required
             defaultValue={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          ></input>
+        </div>
+
+        {/* Street */}
+        <div className='form__row'>
+          <label className='form__label' htmlFor='street'>
+            Street:&emsp;
+          </label>
+          <input
+            className='form__input'
+            id='street'
+            name='street'
+            required
+            defaultValue={street}
+            onChange={(e) => setPhone(e.target.value)}
+          ></input>
+        </div>
+
+        {/* City */}
+        <div className='form__row'>
+          <label className='form__label' htmlFor='city'>
+            City:&emsp;
+          </label>
+          <input
+            className='form__input'
+            id='city'
+            name='city'
+            required
+            defaultValue={city}
+            onChange={(e) => setPhone(e.target.value)}
+          ></input>
+        </div>
+
+        {/* State */}
+        <div className='form__row'>
+          <label className='form__label' htmlFor='state'>
+            State:&emsp;
+          </label>
+          <input
+            className='form__input'
+            id='state'
+            name='state'
+            required
+            defaultValue={state}
+            onChange={(e) => setPhone(e.target.value)}
+          ></input>
+        </div>
+
+        {/* ZIPCODE */}
+        <div className='form__row'>
+          <label className='form__label' htmlFor='zipcode'>
+            Zipcode:&emsp;
+          </label>
+          <input
+            className='form__input'
+            id='zipcode'
+            name='zipcode'
+            required
+            defaultValue={zipcode}
             onChange={(e) => setPhone(e.target.value)}
           ></input>
         </div>

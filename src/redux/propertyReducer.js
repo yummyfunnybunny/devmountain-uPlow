@@ -5,14 +5,14 @@ const initialState = {
   street: '',
   city: '',
   state: '',
-  zip: '',
+  zipcode: '',
   coordinates: [0, 0],
   user_id: '',
 };
 
 function propertyReducer(state = initialState, action) {
   switch (action.type) {
-    case true:
+    case 'SET_PROPERTY':
       console.log(action.payload);
       return {
         ...state,
@@ -22,11 +22,11 @@ function propertyReducer(state = initialState, action) {
         street: action.payload.street,
         city: action.payload.city,
         state: action.payload.state,
-        zip: action.payload.zip,
+        zipcode: action.payload.zipcode,
         coordinates: action.payload.coordinates,
         user_id: action.payload.user_id,
       };
-    case false:
+    case 'RESET_PROPERTY':
       return {
         ...state,
         property_id: '',
@@ -35,7 +35,7 @@ function propertyReducer(state = initialState, action) {
         street: '',
         city: '',
         state: '',
-        zip: '',
+        zipcode: '',
         coordinates: '',
         user_id: '',
       };

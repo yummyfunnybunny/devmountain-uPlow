@@ -31,13 +31,13 @@ export default {
     const userId = req.session.user_id;
     console.log(userId);
     // console.log(req.body);
-    const newUser = req.body;
-    console.log('newUser:');
-    // console.log(newUser);
+    const editUser = req.body;
+    console.log('editUser:');
+    console.log(editUser);
 
     try {
       await User.update(
-        { ...newUser },
+        { ...editUser },
         {
           where: {
             user_id: userId,
@@ -50,7 +50,7 @@ export default {
 
     res.status(200).send({
       message: 'your information has been updated successfully',
-      user: newUser,
+      user: editUser,
     });
   },
   deleteMe: async (req, res) => {
@@ -59,9 +59,26 @@ export default {
     try {
       // TODO - send alerts to all workers subscribed to your jobs
       // TODO - Delete all jobs associated with this user
-      // TODO - Delete all properties associated with this user
       const userToDelete = await User.findByPk(req.session.user_id);
       if (userToDelete.password === password) {
+        let propertiesToDelete;
+        propertiesToDelete = await userToDelete.getProperties();
+        await Promise.all(
+          propertiesToDelete.map(async (prop) => {
+            await Job.destroy({
+              where: {
+                property_id: prop.property_id,
+              },
+            });
+          })
+        );
+
+        // TODO - Delete all properties associated with this user
+        await Property.destroy({
+          where: {
+            user_id: req.session.user_id,
+          },
+        });
         await User.destroy({
           where: {
             user_id: req.session.user_id,
@@ -74,6 +91,43 @@ export default {
         success: true,
         message: 'your account has been successfully deleted',
         redirectUri: '/',
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getWorkers: async (req, res) => {
+    console.log('== Get Workers Route ==');
+
+    try {
+      const workers = await User.findAll({
+        where: {
+          role: 'worker',
+        },
+      });
+      res.status(200).send({
+        success: true,
+        message: 'workers successfully retrieved',
+        workers: workers,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getWorker: async (req, res) => {
+    console.log('== Get Worker Route ==');
+    console.log(req.params.job_id);
+    try {
+      const job = await Job.findByPk(req.params.job_id);
+      const worker = await User.findOne({
+        where: {
+          user_id: job.subscribed,
+        },
+      });
+      res.status(200).send({
+        success: true,
+        message: 'worker successfully retrieved',
+        worker: worker,
       });
     } catch (err) {
       console.log(err);

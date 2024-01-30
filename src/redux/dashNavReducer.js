@@ -14,6 +14,8 @@ function DashNavReducer(state = initialState, action) {
       return { ...state, dashMode: 'MY_PROPERTIES' };
     case 'MY_JOBS':
       return { ...state, dashMode: 'MY_JOBS' };
+    case 'MY_SUBSCRIPTIONS':
+      return { ...state, dashMode: 'MY_SUBSCRIPTIONS' };
     case 'ACCOUNT':
       return { ...state, dashMode: 'ACCOUNT' };
     case 'FIND_JOBS':

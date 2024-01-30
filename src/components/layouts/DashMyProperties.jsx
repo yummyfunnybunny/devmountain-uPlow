@@ -1,6 +1,6 @@
 import '../../styles/layouts/dashMyProperties.css';
 import Property from '../components/Property.jsx';
-import PropertyJob from '../components/___Job2.jsx';
+// import PropertyJob from '../components/___Job2.jsx';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import axios from 'axios';
 function DashMyProperties() {
   const dispatch = useDispatch();
   const reduxProperties = useSelector((state) => state.propertyReducer);
+  const reduxJobs = useSelector((state) => state.jobReducer);
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ function DashMyProperties() {
                   street={prop.street}
                   city={prop.city}
                   state={prop.state}
-                  zip={prop.zipcode}
+                  zipcode={prop.zipcode}
                   coordinates={prop.coordinates}
                 />
               );
@@ -45,7 +46,12 @@ function DashMyProperties() {
           ) : (
             <></>
           )}
-          <button className='btn' onClick={() => dispatch({ type: 'CREATE_PROPERTY' })}>
+          <button
+            className='btn'
+            onClick={() => {
+              dispatch({ type: 'CREATE_PROPERTY' }), dispatch({ type: 'RESET_JOBS' });
+            }}
+          >
             Create New Property
           </button>
         </div>

@@ -7,6 +7,9 @@ function DashMyJobs() {
   const reduxJobs = useSelector((state) => state.jobReducer);
   const [jobs, setJobs] = useState([]);
 
+  console.log('dash my jobs:');
+  console.log(reduxJobs);
+
   useEffect(() => {
     axios
       .get('/myJobs')
@@ -23,16 +26,17 @@ function DashMyJobs() {
     <div className='dashMyJobs'>
       <div className='my-job__list'>
         {jobs.length > 0 ? (
-          jobs.map((prop) => {
+          jobs.map((job) => {
             return (
               <Job
-                key={prop.job_id}
-                id={prop.job_id}
-                jobType={prop.jobType}
-                jobSize={prop.jobSize}
-                picture={prop.picture}
-                subscribed={prop.subscribed}
-                instructions={prop.instructions}
+                key={job.job_id}
+                job={job}
+                // id={job.job_id}
+                // jobType={job.jobType}
+                // jobSize={job.jobSize}
+                // picture={job.picture}
+                // subscribed={job.subscribed}
+                // instructions={job.instructions}
               />
             );
           })

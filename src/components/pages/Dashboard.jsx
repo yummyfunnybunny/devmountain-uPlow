@@ -8,17 +8,17 @@ import axios from 'axios';
 function Dashboard() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get('/isLoggedIn')
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        navigate('/');
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('/isLoggedIn')
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       navigate('/');
+  //     });
+  // }, []);
   return (
     <div className='dashboard'>
       <DashNav />

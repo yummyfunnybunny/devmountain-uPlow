@@ -3,10 +3,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSnowplow, faUser } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/components/navbar.css';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 function Navbar() {
-  const loggedIn = useSelector((state) => state.loggedInReducer.loggedIn);
+  const loggedIn = useSelector((state) => state.loggedInReducer);
   const dispatch = useDispatch();
+  console.log('==loggedInReducer==');
+  console.log(loggedIn);
+
+  useEffect(() => {
+    axios
+      .get('/isLoggedIn')
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: 'SET_LOGGED_IN', payload: { ...res.data.user } });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className='navbar'>
@@ -24,7 +40,7 @@ function Navbar() {
         <NavLink className='nav__link' to='/Faq'>
           FAQ
         </NavLink>
-        {loggedIn ? (
+        {loggedIn.loggedIn ? (
           <>
             <button className='nav__link' onClick={() => dispatch({ type: 'LOGOUT' })}>
               Logout

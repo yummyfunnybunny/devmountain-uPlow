@@ -56,7 +56,31 @@ function DashAccount() {
           <p className='dashAccount__detail'>{user.phone}</p>
         </div>
 
-        {/* Role */}
+        {/* STREET */}
+        <div className='dashAccount__row'>
+          <h2 className='dashAccount__label'>Street:&emsp; </h2>
+          <p className='dashAccount__detail'>{user.street}</p>
+        </div>
+
+        {/* CITY */}
+        <div className='dashAccount__row'>
+          <h2 className='dashAccount__label'>City:&emsp; </h2>
+          <p className='dashAccount__detail'>{user.city}</p>
+        </div>
+
+        {/* STATE */}
+        <div className='dashAccount__row'>
+          <h2 className='dashAccount__label'>State:&emsp; </h2>
+          <p className='dashAccount__detail'>{user.state}</p>
+        </div>
+
+        {/* ZIPCODE */}
+        <div className='dashAccount__row'>
+          <h2 className='dashAccount__label'>Zipcode:&emsp; </h2>
+          <p className='dashAccount__detail'>{user.zipcode}</p>
+        </div>
+
+        {/* ROLE */}
         <div className='dashAccount__row'>
           <h2 className='dashAccount__label'>Role:&emsp; </h2>
           <p className='dashAccount__detail'>{user.role}</p>

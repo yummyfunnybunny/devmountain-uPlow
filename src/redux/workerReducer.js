@@ -1,5 +1,4 @@
 const initialState = {
-  loggedIn: false,
   user_id: '',
   firstName: '',
   lastName: '',
@@ -13,13 +12,11 @@ const initialState = {
   role: '',
 };
 
-function loggedInReducer(state = initialState, action) {
+function workerReducer(state = initialState, action) {
   switch (action.type) {
-    case 'SET_LOGGED_IN':
-      // return { ...state, loggedIn: true };
+    case 'SET_WORKER':
       return {
         ...state,
-        loggedIn: true,
         user_id: action.payload.user_id,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
@@ -32,10 +29,9 @@ function loggedInReducer(state = initialState, action) {
         coordinates: action.payload.coordinates,
         role: action.payload.role,
       };
-    case 'RESET_LOGGED_IN':
+    case 'RESET_WORKER':
       return {
         ...state,
-        loggedIn: false,
         user_id: '',
         firstName: '',
         lastName: '',
@@ -53,4 +49,4 @@ function loggedInReducer(state = initialState, action) {
   }
 }
 
-export default loggedInReducer;
+export default workerReducer;

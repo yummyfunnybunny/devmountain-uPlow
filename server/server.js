@@ -31,24 +31,30 @@ app.post('/changePassword', loginRequired, changePassword);
 app.get('/isLoggedIn', isLoggedIn);
 
 // ANCHOR -- Users
-const { getMe, editMe, deleteMe } = userCtrl;
+const { getMe, editMe, deleteMe, getWorkers, getWorker } = userCtrl;
 app.get('/me', loginRequired, getMe);
-app.post('/me', loginRequired, editMe);
+app.put('/me', loginRequired, editMe);
 app.delete('/me/:password', loginRequired, deleteMe);
+app.get('/workers', loginRequired, getWorkers);
+app.get('/workerByjob/:job_id', loginRequired, getWorker);
 
 // ANCHOR -- Properties
-const { myProperties, createProperty, editProperty, deleteProperty } = propertyCtrl;
+const { myProperties, getPropertyBySubscription, createProperty, editProperty, deleteProperty } = propertyCtrl;
 app.get('/properties', loginRequired, myProperties);
+app.get('/propertyBySubscription/:job_id', loginRequired, getPropertyBySubscription);
 app.post('/properties', loginRequired, createProperty);
 app.put('/properties', loginRequired, editProperty);
 app.delete('/properties/:property_id', loginRequired, deleteProperty);
 
 // ANCHOR -- Jobs
-const { myJobs, createJob, updateJob, deleteJob } = jobCtrl;
+const { myJobs, availableJobs, createJob, updateJob, deleteJob, getSubscriptions, unsubscribeWorker } = jobCtrl;
 app.get('/myJobs', loginRequired, myJobs);
+app.get('/availableJobs', loginRequired, availableJobs);
 app.post('/jobs', loginRequired, createJob);
 app.put('/jobs', loginRequired, updateJob);
+app.put('/unsubscribeWorker/:job_id', loginRequired, unsubscribeWorker);
 app.delete('/jobs/:job_id', loginRequired, deleteJob);
+app.get('/mySubscriptions/:user_id', loginRequired, getSubscriptions);
 
 // !SECTION
 

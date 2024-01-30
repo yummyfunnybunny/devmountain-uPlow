@@ -13,7 +13,20 @@ console.log('Started seeding!');
 // ANCHOR -- Add Users
 await Promise.all(
   userData.map(async (user) => {
-    const { firstName, lastName, email, password, phone, role, profilePicture } = user;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      phone,
+      street,
+      city,
+      state,
+      zipcode,
+      coordinates,
+      role,
+      profilePicture,
+    } = user;
 
     await User.create({
       firstName: firstName,
@@ -21,6 +34,11 @@ await Promise.all(
       email: email,
       password: password,
       phone: phone,
+      street: street,
+      city: city,
+      state: state,
+      zipcode: zipcode,
+      coordinates: coordinates,
       role: role,
       profilePicture: profilePicture,
     });
@@ -68,12 +86,13 @@ await Promise.all(
 // ANCHOR -- Add Jobs
 await Promise.all(
   jobData.map(async (job) => {
-    const { jobType, jobSize, pictures, instructions, subscribed, property_id } = job;
+    const { jobType, jobSize, pictures, coordinates, instructions, subscribed, property_id } = job;
 
     await Job.create({
       jobType: jobType,
       jobSize: jobSize,
       pictures: pictures,
+      coordinates: coordinates,
       instructions: instructions,
       subscribed: subscribed,
       property_id: property_id,

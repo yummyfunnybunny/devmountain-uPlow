@@ -45,6 +45,27 @@ User.init(
       type: DataTypes.STRING(10),
       allowNull: false,
     },
+    street: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING(60),
+      allowNull: false,
+    },
+    state: {
+      type: DataTypes.STRING(2),
+      allowNull: false,
+    },
+    zipcode: {
+      type: DataTypes.INTEGER(5),
+      allowNull: false,
+    },
+    coordinates: {
+      type: DataTypes.ARRAY(DataTypes.FLOAT),
+      allowNull: false,
+      defaultValue: [0, 0],
+    },
     role: {
       type: DataTypes.STRING(),
       allowNull: false,
@@ -268,6 +289,11 @@ Job.init(
     },
     pictures: {
       type: DataTypes.ARRAY(DataTypes.STRING()),
+    },
+    coordinates: {
+      type: DataTypes.ARRAY(DataTypes.FLOAT),
+      allowNull: false,
+      defaultValue: [0, 0],
     },
     instructions: {
       type: DataTypes.ARRAY(DataTypes.STRING(255)), // NOTE - make sure array works and string length is appropriate
