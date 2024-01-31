@@ -482,6 +482,18 @@ function Modal() {
         console.log(err);
       });
   };
+  const submitRequestJob = (e) => {
+    e.preventDefault();
+
+    axios
+      .post('/requestJob', job)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   let modalDisplay;
   switch (modal) {
@@ -1081,6 +1093,30 @@ function Modal() {
               <div className='form__row'>
                 <button className='btn' type='submit'>
                   Request Work
+                </button>
+                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      );
+    case 'REQUEST_JOB':
+      return (
+        <div className='modal__bg'>
+          <div className='modal'>
+            <form className='form form--modal' onSubmit={(e) => submitRequestJob(e)}>
+              <div className='form__row'>
+                <h2>Request Job</h2>
+              </div>
+              <div className='form__row'>
+                <p>Are you sure you'd like to request this job?</p>
+              </div>
+              {/* BUTTONS */}
+              <div className='form__row'>
+                <button className='btn' type='submit'>
+                  Request Job
                 </button>
                 <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
                   Cancel

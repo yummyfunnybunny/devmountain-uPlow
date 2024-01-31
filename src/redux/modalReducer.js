@@ -31,6 +31,8 @@ function modalReducer(state = initialState, action) {
       return { ...state, modalType: 'UNSUBSCRIBE_WORKER' };
     case 'REQUEST_WORKER':
       return { ...state, modalType: 'REQUEST_WORKER' };
+    case 'REQUEST_JOB':
+      return { ...state, modalType: 'REQUEST_JOB' };
     case 'ACCEPT_REQUEST_WORKER':
       return { ...state, modalType: 'ACCEPT_REQUEST_WORKER' };
     case 'COUNTER_REQUEST_WORKER':

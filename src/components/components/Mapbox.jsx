@@ -45,26 +45,60 @@ function Mapbox(props) {
       locationData.forEach((node) => {
         console.log('== Job Node Data ==');
         console.log(node);
+
+        // 1: Set the HTML to place inside the popup
+        const innerHtmlContent = `
+          <div class='map_popup'>
+            <h2>Details</h2>
+            <p>Job Type: ${node.jobType}</p>
+            <p>Size: ${node.jobSize}</p>
+            <h4>Address</h4>
+            <p>${node.Property.street}</p>
+            <p>${node.Property.city}, ${node.Property.state} ${node.Property.zipcode}</p>
+            <p>Rating: *****</p>
+          </div>
+        `;
+
+        // 2: create the HTMl container and the button
+        const divElement = document.createElement('div');
+        const assignBtn = document.createElement('div');
+        assignBtn.innerHTML = `<button class='test_map_btn'>Request Job</button>`;
+        divElement.innerHTML = innerHtmlContent;
+        divElement.appendChild(assignBtn);
+
+        // 3: create the button event listener
+        assignBtn.addEventListener('click', (e) => {
+          console.log('Send Request Job Alert');
+          console.log(node);
+          dispatch({ type: 'REQUEST_JOB' });
+          dispatch({ type: 'SET_JOB', payload: node });
+        });
+
+        // 4: Create the marker and add it to the map
         const marker1 = new mapboxgl.Marker()
           .setLngLat([node.coordinates[0], node.coordinates[1]])
-          .setPopup(
-            new mapboxgl.Popup().setHTML(`
-          <div className="popup__img">
-          <img src='https://picsum.photos/200' />
-          </div>
-          <h4>Job Type:</h4>
-          <p>${node.jobType}</p>
-          <h4>Job Size:</h4>
-          <p>${node.jobSize}</p>
-          <h4>Instructions:</h4>
-          <p>- ${node.instructions[0]}</p>
-          <p>- ${node.instructions[1]}</p>
-          <p>- ${node.instructions[2]}</p>
-          <button>Request Service</button>
-          
-          `)
-          )
+          .setPopup(new mapboxgl.Popup().setDOMContent(divElement))
           .addTo(map.current);
+
+        // const marker1 = new mapboxgl.Marker()
+        //   .setLngLat([node.coordinates[0], node.coordinates[1]])
+        //   .setPopup(
+        //     new mapboxgl.Popup().setHTML(`
+        //   <div className="popup__img">
+        //   <img src='https://picsum.photos/200' />
+        //   </div>
+        //   <h4>Job Type:</h4>
+        //   <p>${node.jobType}</p>
+        //   <h4>Job Size:</h4>
+        //   <p>${node.jobSize}</p>
+        //   <h4>Instructions:</h4>
+        //   <p>- ${node.instructions[0]}</p>
+        //   <p>- ${node.instructions[1]}</p>
+        //   <p>- ${node.instructions[2]}</p>
+        //   <button>Request Service</button>
+        //   `)
+        //   )
+        //   .addTo(map.current);
       });
     } else if (props.dataType === 'workers') {
       console.log('dataType = workers');
@@ -72,6 +106,7 @@ function Mapbox(props) {
         console.log('== Worker Node Data ==');
         console.log(node);
 
+        // 1: Set the HTML to place inside the popup
         const innerHtmlContent = `
           <div class='map_popup'>
             <h2>Details</h2>
@@ -82,67 +117,44 @@ function Mapbox(props) {
           </div>
         `;
 
+        // 2: create the HTMl container and the button
         const divElement = document.createElement('div');
         const assignBtn = document.createElement('div');
         assignBtn.innerHTML = `<button class='test_map_btn'>Request Service</button>`;
         divElement.innerHTML = innerHtmlContent;
         divElement.appendChild(assignBtn);
 
+        // 3: create the button event listener
         assignBtn.addEventListener('click', (e) => {
           console.log('Send Request Service Alert');
           console.log(node);
           dispatch({ type: 'REQUEST_WORKER' });
           dispatch({ type: 'SET_WORKER', payload: node });
-          // axios
-          //   .post(`/requestWorker`, node)
-          //   .then((res) => {
-          //     console.log(res.data);
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //   });
         });
 
-        const popup = new mapboxgl.Popup().setDOMContent(divElement);
+        // const popup = new mapboxgl.Popup().setDOMContent(divElement);
 
-        // use popup - cant click into button this way
+        // 4: Create the marker and add it to the map
         const marker1 = new mapboxgl.Marker()
           .setLngLat([node.coordinates[0], node.coordinates[1]])
-          .setPopup(
-            // new mapboxgl.Popup()
-            new mapboxgl.Popup().setDOMContent(divElement)
-            // .setHTML(`
-            // //   <h4>Name:</h4>
-            // //   <p>
-            // //     ${node.firstName} ${node.lastName}
-            // //   </p>
-            // //   <h4>Address:</h4>
-            // //   <p>${node.street},</p>
-            // //   <p>
-            // //     ${node.city}, ${node.state} ${node.zipcode}
-            // //   </p>
-            // //   <h4>Rating:</h4>
-            // //   <p>* * * * *</p>
-            // //   <button onClick='{submitRequest}'>Request Service</button>
-            // // `)
-          )
+          .setPopup(new mapboxgl.Popup().setDOMContent(divElement))
           .addTo(map.current);
 
-        marker1.getElement().addEventListener('click', () => {
-          console.log('blahblahblah');
-          if (!reduxShowPopup) {
-            dispatch({ type: 'SHOW_POPUP' });
-          } else {
-            dispatch({ type: 'HIDE_POPUP' });
-          }
-        });
+        // marker1.getElement().addEventListener('click', () => {
+        //   console.log('blahblahblah');
+        //   if (!reduxShowPopup) {
+        //     dispatch({ type: 'SHOW_POPUP' });
+        //   } else {
+        //     dispatch({ type: 'HIDE_POPUP' });
+        //   }
+        // });
       });
     }
   }, [locationData]);
 
-  const submitRequest = () => {
-    console.log('blahblahblah');
-  };
+  // const submitRequest = () => {
+  //   console.log('blahblahblah');
+  // };
 
   // Update the lng, lat, zoom states
   if (map.current) {

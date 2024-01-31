@@ -33,6 +33,11 @@ export default {
         where: {
           subscribed: null,
         },
+        include: [
+          {
+            model: Property,
+          },
+        ],
       });
       res.status(200).send({
         success: true,

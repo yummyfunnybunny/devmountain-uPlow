@@ -70,9 +70,10 @@ app.get('/mySubscriptions/:user_id', loginRequired, getSubscriptions);
 app.put('/acceptJobOffer', loginRequired, acceptJobOffer);
 
 // ANCHOER -- Alerts
-const { myAlerts, requestWorker } = alertCtrl;
+const { myAlerts, requestWorker, requestJob } = alertCtrl;
 app.get('/myAlerts', loginRequired, myAlerts);
 app.post('/requestWorker', loginRequired, requestWorker);
+app.post('/requestJob', loginRequired, requestJob);
 
 // !SECTION
 
