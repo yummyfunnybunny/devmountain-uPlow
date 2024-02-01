@@ -13,6 +13,7 @@
   justify-content: space-between;
   /* border: 1px solid red; */
   height: 16rem;
+  color: var(--color-text-light);
 }
 
 .footer__social-link {
@@ -22,6 +23,7 @@
 .footer__center {
   display: flex;
   flex-direction: column;
+  color: var(--color-text-light);
 }
 
 .footer__links {
@@ -34,4 +36,6 @@
 .footer__link {
   /* border: 1px solid red; */
   margin-bottom: 1rem;
+  color: var(--color-text-light);
+  text-decoration: none;
 }

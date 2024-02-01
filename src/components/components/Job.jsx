@@ -6,6 +6,7 @@ import axios from 'axios';
 function MyJob(props) {
   // console.log(props);
   const { job_id, jobType, jobSize, picture, subscribed, instructions } = props.job;
+  console.log(props.job);
 
   const [worker, setWorker] = useState(null);
   const dispatch = useDispatch();
@@ -115,7 +116,7 @@ function MyJob(props) {
             dispatch({
               type: 'SET_JOB',
               payload: {
-                job_id: id,
+                job_id: job_id,
                 jobType: jobType,
                 jobSize: jobSize,
                 picture: picture,

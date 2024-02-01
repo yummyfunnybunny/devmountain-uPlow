@@ -1,10 +1,12 @@
 import '../../styles/layouts/dashAlerts.css';
 import Alert from '../components/Alert.jsx';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 function DashAlerts() {
   const [myAlerts, setMyAlerts] = useState([]);
+  const reduxAlert = useSelector((state) => state.alertReducer);
 
   useEffect(() => {
     axios
@@ -16,7 +18,7 @@ function DashAlerts() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [reduxAlert]);
 
   return (
     <div className='dashAlerts'>

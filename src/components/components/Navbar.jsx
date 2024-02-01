@@ -25,7 +25,7 @@ function Navbar() {
   }, []);
 
   return (
-    <div className='navbar'>
+    <div className='navbar glass-1'>
       <NavLink to='/' className='navbar__logo'>
         <FontAwesomeIcon className='navbar__logo--icon' icon={faSnowplow} size='3x' />
         <h1 className='navbar__logo--title'>uPlow</h1>
@@ -51,10 +51,10 @@ function Navbar() {
           </>
         ) : (
           <>
-            <NavLink className='nav__link' to='/Signup'>
+            <NavLink className='nav__link glass-2' to='/Signup'>
               Signup
             </NavLink>
-            <NavLink className='nav__link' to='/Login'>
+            <NavLink className='nav__link glass-2' to='/Login'>
               Login
             </NavLink>
           </>

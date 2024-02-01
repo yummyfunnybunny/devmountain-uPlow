@@ -58,6 +58,7 @@ const {
   unsubscribeWorker,
   myJobsWithProperties,
   acceptJobOffer,
+  acceptServiceOffer,
 } = jobCtrl;
 app.get('/myJobs', loginRequired, myJobs);
 app.get('/myJobsWithProperties', loginRequired, myJobsWithProperties);
@@ -68,12 +69,16 @@ app.put('/unsubscribeWorker/:job_id', loginRequired, unsubscribeWorker);
 app.delete('/jobs/:job_id', loginRequired, deleteJob);
 app.get('/mySubscriptions/:user_id', loginRequired, getSubscriptions);
 app.put('/acceptJobOffer', loginRequired, acceptJobOffer);
+app.put('/acceptWorkerOffer', loginRequired, acceptServiceOffer);
 
 // ANCHOER -- Alerts
-const { myAlerts, requestWorker, requestJob } = alertCtrl;
+const { myAlerts, requestWorker, requestJob, rejectRequestWorker, rejectRequestJob, deleteAlert } = alertCtrl;
 app.get('/myAlerts', loginRequired, myAlerts);
 app.post('/requestWorker', loginRequired, requestWorker);
 app.post('/requestJob', loginRequired, requestJob);
+app.delete('/rejectRequestWorker/:alert_id', loginRequired, rejectRequestWorker);
+app.delete('/rejectRequestJob/:alert_id', loginRequired, rejectRequestJob);
+app.delete('/deleteAlert/:alert_id', loginRequired, deleteAlert);
 
 // !SECTION
 

@@ -6,13 +6,13 @@ import Promotions from '../layouts/Promotions.jsx';
 
 function Home() {
   return (
-    <>
+    <container className='page-container'>
       <Hero />
       <Features />
       <Benefits />
       <Testimonials />
       <Promotions />
-    </>
+    </container>
   );
 }
 

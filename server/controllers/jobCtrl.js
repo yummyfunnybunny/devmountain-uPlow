@@ -175,27 +175,80 @@ export default {
     }
   },
   acceptJobOffer: async (req, res) => {
+    // Worker => Accepts => Customer Offer
     console.log('== accept job offer route ==');
     console.log(req.body);
     try {
-      // TODO - workers should not be able to accept a job if someone else accepted it
+      // get the job to accept
       const job = await Job.findByPk(req.body.job_id);
+
+      // make sure noone else already accepted the job
       if (job.subscribed != null) {
         return res.status(200).send({
           success: false,
           message: 'This job is no longer available. Someone else may have already accepted this job.',
         });
       }
+
+      // subscribe to the job
       job.subscribed = req.session.user_id;
       await job.save();
-      await Alert.destroy({
-        where: {
-          alert_id: req.body.alert_id,
-        },
-      });
+
+      // create job acceptance alert
+      const newAlert = {
+        alertType: 'ACCEPT_CUSTOMER_OFFER',
+        hasRead: false,
+        recipient_id: req.body.sender_id,
+        sender_id: req.session.user_id,
+        job_id: req.body.job_id,
+        property_id: req.body.property_id,
+        message: `A worker has accepted your job offer!`,
+      };
+      await Alert.create({ ...newAlert });
+
+      // destroy the job offer alert
+      const destroyAlert = await Alert.findByPk(req.body.alert_id);
+      await destroyAlert.destroy();
+
+      // send response
       res.status(200).send({
         success: true,
         message: 'You have successfully subscribed to this job!',
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  acceptServiceOffer: async (req, res) => {
+    // Customer => Accepts => Worker Offer
+    console.log('== Accept Service Offer Route ==');
+    console.log(req.body);
+    try {
+      // set job subscribed to worker id
+      const job = await Job.findByPk(req.body.job_id);
+      job.subscribed = req.body.sender_id;
+      await job.save();
+
+      // create service acceptance alert for worker
+      const newAlert = {
+        alertType: 'ACCEPT_WORKER_OFFER',
+        hasRead: false,
+        recipient_id: req.body.sender_id,
+        sender_id: req.session.user_id,
+        job_id: req.body.job_id,
+        property_id: req.body.property_id,
+        message: `A customer has accepted your service offer!`,
+      };
+      await Alert.create({ ...newAlert });
+
+      // destroy the worker offer alert
+      const destroyAlert = await Alert.findByPk(req.body.alert_id);
+      await destroyAlert.destroy();
+
+      // send response
+      res.status(200).send({
+        success: true,
+        message: 'you have accepted the workers service offer!',
       });
     } catch (err) {
       console.log(err);

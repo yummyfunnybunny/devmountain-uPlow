@@ -1,16 +1,22 @@
 import '../../styles/layouts/footer.css';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSnowplow, faFaceSmile, faUser } from '@fortawesome/free-solid-svg-icons';
-
+import { faSnowplow } from '@fortawesome/free-solid-svg-icons';
+// faFaceSmile,
+// faUser,
+// ,
+// faXTwitter,
+// faStackOverflow,
+// faYoutube,
+// faInstagram,
 function Footer() {
   return (
-    <div className='footer'>
+    <div className='footer glass-1'>
       <div className='footer__socials'>
-        <FontAwesomeIcon className='footer__social-icon' icon={faFaceSmile} size='3x' />
-        <FontAwesomeIcon className='footer__social-icon' icon={faFaceSmile} size='3x' />
-        <FontAwesomeIcon className='footer__social-icon' icon={faFaceSmile} size='3x' />
-        <FontAwesomeIcon className='footer__social-icon' icon={faFaceSmile} size='3x' />
+        <FontAwesomeIcon className='footer__social-icon' icon={faSnowplow} size='2x' />
+        <FontAwesomeIcon className='footer__social-icon' icon={faSnowplow} size='2x' />
+        <FontAwesomeIcon className='footer__social-icon' icon={faSnowplow} size='2x' />
+        <FontAwesomeIcon className='footer__social-icon' icon={faSnowplow} size='2x' />
       </div>
       <div className='footer__center'>
         <FontAwesomeIcon className='navbar__logo--icon' icon={faSnowplow} size='3x' />

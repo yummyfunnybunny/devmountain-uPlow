@@ -20,10 +20,10 @@ function Hero() {
           <h1>Get started now!</h1>
           <div className='hero__cta'>
             <NavLink to='/signup'>
-              <button className='btn btn_cta1 btn--lg'>Sign Up</button>
+              <button className='btn btn__cta1 btn--lg'>Sign Up</button>
             </NavLink>
             <NavLink to='/login'>
-              <button className='btn btn_cta2 btn--lg'>Login</button>
+              <button className='btn btn__cta2 btn--lg'>Login</button>
             </NavLink>
           </div>
         </div>

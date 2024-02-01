@@ -1,33 +1,54 @@
 .btn {
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .btn:hover {
   cursor: pointer;
+  transform: translateY(-2px);
+  /* transition: transform 100ms ease-in; */
 }
 
 .btn:active {
-  color: red;
+  /* color: red; */
+  transform: translateY(3px);
 }
 
 .btn__cta1 {
+  /* background-image: linear-gradient(to right top, rgba(74, 144, 226, 0.6), rgba(74, 144, 226, 0.85)); */
+  /* background-image: linear-gradient(to right top, rgba(126, 211, 33, 0.6), rgba(126, 211, 33, 0.85)); */
+  background-image: var(--color-btn-blue);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .btn__cta2 {
+  /* background-image: linear-gradient(to right top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.85)); */
+  /* background-image: var(--color-btn-orange); */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .btn--sm {
+  margin: 0.5rem;
 }
 
 .btn--md {
   font-size: 1rem;
   padding: 0.25rem 1.5rem;
+  margin: 1rem;
 }
 
 .btn--lg {
   font-size: 2rem;
+  font-weight: 700;
   padding: 0.5rem 2rem;
+  margin: 2rem;
 }
 
 .btn--xl {
+  margin: 3rem;
 }

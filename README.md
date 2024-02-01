@@ -1,37 +1,45 @@
 TODO:
 
-- display different versions of the Jobs component based on the role of the loggeed-in user
+==== FEATURES ====
 
-- ALERTS - allow workers to request service for a job
+- weather API alerts
+- file uploads into the DB
+- pricing and payment system
+- counter offers
+- service jobs, verify service, create service
+- service history
+- dashboard home -> helpful widgets
+- home-page benefits -> flipping cards animation on mouse-over
+- Home-page testimonials -> carousel
+- contact-page -> mapbox with HQ location, contact info,
+- FAQ page -> accordian
+- Sass for styling
+- bcrypt + json webtokens
+- jobs multiple pictures carousel
 
-- ALERTS - allow customers to request service from a worker
-
-- allow uploading of pictures into the DB
-
-- allow serving up of pictures from the db
-
-- change all redux variable names to 'reduxName'
-
-- change all dispatch functions to use the spread operator instead of listing each attribute
-
-- rename all dashnav components by removing 'Dash' (file name AND component name)
+==== ISSUES ====
 
 - fix issue with stacked nodes on the mapbox
-
 - fix DashMyJobs not refreshing/updating after unsubscribing a worker (user perspective)
+- alerts need date/time they were created
 
-- combine all of my modal redux states into the modalReducer!
+==== ERROR HANDLING ====
 
--- ERROR HANDLING
-
--- FORM VALIDATION
+==== FORM VALIDATION ====
 
 - remove extra white space
 - lowercase everything but first letters of words
 - format phone numbers (dashes, numbers only)
--
 
-MVC:
+==== NORMALIZATION, NAME CHANGES, condensing code ====
+
+- RENAME: customer rejects/accepts/counters worker offer (modalType, modal submit function, endpoint, controller function)
+- RENAME: worker rejects/accepts/counters customer offer (modalType, modal submit function, endpoint, controller function)
+- CONDENSE: combine all of my modal redux states into the modalReducer!
+- RENAME: all dashnav components by removing 'Dash' (file name AND component name)
+- RENAME: change all redux variable names to 'reduxName'
+- CONDENSE: combine all modal form states into single states that can be updated with a single onChange function
+- CONDENSE: change all dispatch functions to use the spread operator instead of listing each attribute
 
 STRETCH:
 

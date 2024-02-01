@@ -36,12 +36,12 @@ function Modal() {
   // console.log(user);
   // console.log('Redux Property:');
   // console.log(property);
-  // console.log('Redux Jobs:');
-  // console.log(job);
+  console.log('Redux Jobs:');
+  console.log(job);
   // console.log('Redux Worker:');
   // console.log(worker);
-  console.log('Redux Alert:');
-  console.log(alert);
+  // console.log('Redux Alert:');
+  // console.log(alert);
 
   // STATE VARIABLES
   const [firstName, setFirstName] = useState(user.firstName);
@@ -470,9 +470,23 @@ function Modal() {
       });
   };
   const submitAcceptRequestWorker = (e) => {
+    // Worker => Accepts => Customer Offer
     e.preventDefault();
     axios
       .put('/acceptJobOffer', alert)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: 'NONE' });
+        dispatch({ type: 'RESET_ALERT' });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const submitRejectRequestWorker = (e) => {
+    e.preventDefault();
+    axios
+      .delete(`/rejectRequestWorker/${alert.alert_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -489,6 +503,51 @@ function Modal() {
       .post('/requestJob', job)
       .then((res) => {
         console.log(res.data);
+        dispatch({ type: 'NONE' });
+        dispatch({ type: 'RESET_WORKER' });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const submitDismissAlert = (e) => {
+    e.preventDefault();
+    console.log();
+
+    axios
+      .delete(`/deleteAlert/${alert.alert_id}`)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: 'NONE' });
+        dispatch({ type: 'RESET_ALERT' });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const submitAcceptRequestJob = (e) => {
+    // Customer => Accepts => Worker Offer
+    e.preventDefault();
+
+    axios
+      .put('/acceptWorkerOffer', alert)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: 'NONE' });
+        dispatch({ type: 'RESET_ALERT' });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const submitRejectRequestJob = (e) => {
+    e.preventDefault();
+    axios
+      .delete(`/rejectRequestJob/${alert.alert_id}`)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: 'NONE' });
+        dispatch({ type: 'RESET_ALERT' });
       })
       .catch((err) => {
         console.log(err);
@@ -1102,6 +1161,58 @@ function Modal() {
           </div>
         </div>
       );
+    case 'ACCEPT_REQUEST_WORKER':
+      // Worker => accepts => customer Offer
+      return (
+        <div className='modal__bg'>
+          <div className='modal'>
+            <form className='form form--modal' onSubmit={(e) => submitAcceptRequestWorker(e)}>
+              <div className='form__row'>
+                <h2>Accept Job Offer</h2>
+              </div>
+              <div className='form__row'>
+                <p>Are you sure you want to accept this job offer?</p>
+              </div>
+              {/* BUTTONS */}
+              <div className='form__row'>
+                <button className='btn' type='submit'>
+                  Accept Offer
+                </button>
+                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      );
+    case 'COUNTER_REQUEST_WORKER':
+      return <></>;
+    case 'CUSTOMER_OFFER_REJECTED':
+      // Worker => Rejects => Customer Offer
+      return (
+        <div className='modal__bg'>
+          <div className='modal'>
+            <form className='form form--modal' onSubmit={(e) => submitRejectRequestWorker(e)}>
+              <div className='form__row'>
+                <h2>Reject Job</h2>
+              </div>
+              <div className='form__row'>
+                <p>Are you sure you want to reject this job offer</p>
+              </div>
+              {/* BUTTONS */}
+              <div className='form__row'>
+                <button className='btn' type='submit'>
+                  Reject Job
+                </button>
+                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      );
     case 'REQUEST_JOB':
       return (
         <div className='modal__bg'>
@@ -1126,21 +1237,73 @@ function Modal() {
           </div>
         </div>
       );
-    case 'ACCEPT_REQUEST_WORKER':
+    case 'ACCEPT_REQUEST_JOB':
+      // Customer => accepts => Worker Offer
       return (
         <div className='modal__bg'>
           <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitAcceptRequestWorker(e)}>
+            <form className='form form--modal' onSubmit={(e) => submitAcceptRequestJob(e)}>
               <div className='form__row'>
-                <h2>Delete Job</h2>
+                <h2>Accept Service Offer</h2>
               </div>
               <div className='form__row'>
-                <p>Are you sure you want to accept this job offer?</p>
+                <p>Are you sure you want to accept this service offer?</p>
               </div>
               {/* BUTTONS */}
               <div className='form__row'>
                 <button className='btn' type='submit'>
                   Accept Offer
+                </button>
+                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      );
+    case 'COUNTER_REQUEST_JOB':
+      return <></>;
+    case 'REJECT_REQUEST_JOB':
+      // Customer => Rejects => Worker Offer
+      return (
+        <div className='modal__bg'>
+          <div className='modal'>
+            <form className='form form--modal' onSubmit={(e) => submitRejectRequestJob(e)}>
+              <div className='form__row'>
+                <h2>Reject Service Offer</h2>
+              </div>
+              <div className='form__row'>
+                <p>Are you sure you want to reject this Service offer</p>
+              </div>
+              {/* BUTTONS */}
+              <div className='form__row'>
+                <button className='btn' type='submit'>
+                  Reject Job
+                </button>
+                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      );
+    case 'DISMISS_ALERT':
+      return (
+        <div className='modal__bg'>
+          <div className='modal'>
+            <form className='form form--modal' onSubmit={(e) => submitDismissAlert(e)}>
+              <div className='form__row'>
+                <h2>Dismiss Alert</h2>
+              </div>
+              <div className='form__row'>
+                <p>Are you sure you want to delete this alert?</p>
+              </div>
+              {/* BUTTONS */}
+              <div className='form__row'>
+                <button className='btn' type='submit'>
+                  delete Alert
                 </button>
                 <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
                   Cancel

@@ -35,7 +35,8 @@ function Login() {
   };
 
   return (
-    <div className='container auth'>
+    <container className='page-container'>
+      {/* <div className='container auth'> */}
       <form className='form form--auth' onSubmit={(e) => submitLogin(e)}>
         <h1 className='form__header'>Login</h1>
 
@@ -72,7 +73,8 @@ function Login() {
           Login
         </button>
       </form>
-    </div>
+      {/* </div> */}
+    </container>
   );
 }
 

@@ -12,12 +12,100 @@
 /* ANCHOR -- NAVBAR */
 
 :root {
-  --primarycolor: #161a30;
+  /* colors */
+  --color-text-light: #eee;
+  --color-text-dark: #000000;
+  --color-glass-1: linear-gradient(to right bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
+  --color-glass-2: linear-gradient(to right top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.85));
+  --color-glass-red: linear-gradient(to right top, rgba(208, 2, 27, 0.6), rgba(208, 2, 27, 0.85));
+  --color-glass-blue: linear-gradient(to right top, rgba(74, 144, 226, 0.6), rgba(74, 144, 226, 0.85));
+  --color-glass-green: linear-gradient(to right top, rgba(126, 211, 33, 0.6), rgba(126, 211, 33, 0.85));
+  --color-glass-yellow: linear-gradient(to right top, rgba(248, 231, 28, 0.6), rgba(248, 231, 28, 0.85));
+  --color-glass-orange: linear-gradient(to right top, rgba(245, 166, 35, 0.6), rgba(245, 166, 35, 0.85));
+  --color-btn-green: linear-gradient(to right bottom, rgba(0, 255, 119, 0.9), rgba(46, 255, 109, 0.8));
+  --color-btn-blue: linear-gradient(to right bottom, rgba(0, 89, 255, 0.9), rgba(47, 161, 255, 0.9));
+  --color-btn-red: linear-gradient(to right bottom, rgba(235, 77, 75, 0.9), rgba(235, 75, 110, 0.7));
+  --color-btn-yellow: linear-gradient(to right bottom, rgba(235, 232, 76, 0.9), rgba(225, 235, 76, 0.702));
+
+  --radius: 5px;
+
   --window_h: calc(100vh - 5rem);
+
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./page-bg2.webp');
+  background-repeat: no-repeat;
+  background-size: 100vw auto;
+  background-attachment: fixed;
 }
 
 .container {
-  /* border: 1px solid red; */
+  border: 1px solid red;
   display: flex;
   justify-content: center;
+  background-image: var(--color-bg0);
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90vw;
+  overflow: hidden;
+}
+
+.glass-1 {
+  background-image: var(--color-glass-1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-2 {
+  background-image: var(--color-glass-2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-red {
+  background-image: var(--color-glass-red);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-blue {
+  background-image: var(--color-glass-blue);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-green {
+  background-image: var(--color-glass-green);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-yellow {
+  background-image: var(--color-glass-yellow);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-orange {
+  background-image: var(--color-glass-orange);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
