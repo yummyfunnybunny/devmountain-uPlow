@@ -1,26 +1,50 @@
 .modal__bg {
-  /* border: 1px solid red; */
   position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
   width: 100vw;
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
   overflow-y: hidden;
+  animation: modal-bg 0.2s ease-out;
 }
 
 .modal {
-  border: 1px solid red;
-  width: 40%;
-  padding: 2rem 0;
-  margin: 5vh auto;
-  /* border: 1px solid orange; */
+  /* border: 1px solid red; */
+  min-width: 40%;
+  /* padding: 1rem 0; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  /* background-color: white; */
   font-size: 1.25rem;
-  border: 2px solid var(--dark);
-  border-radius: 5px;
+  /* border: 2px solid var(--dark); */
+  border-radius: var (--radius-outer);
+  /* opacity: 0; */
+  /* animation: showModal 0.5s ease-in; */
+  animation: modal 0.2s ease-out;
+}
+
+@keyframes modal-bg {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes modal {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

@@ -23,16 +23,16 @@ function DashMySubscriptions() {
   }, []);
 
   return (
-    <div className='my-subscriptions'>
-      <div className='my-subscriptions__list'>
-        {subscriptions.length > 0 ? (
-          subscriptions.map((sub) => {
-            return <Subscription key={sub.job_id} subscription={sub} />;
-          })
-        ) : (
-          <></>
-        )}
-      </div>
+    <div className='subscriptions'>
+      {/* <div className='my-subscriptions__list'> */}
+      {subscriptions.length > 0 ? (
+        subscriptions.map((sub) => {
+          return <Subscription key={sub.job_id} subscription={sub} />;
+        })
+      ) : (
+        <></>
+      )}
+      {/* </div> */}
     </div>
   );
 }

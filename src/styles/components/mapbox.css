@@ -24,7 +24,7 @@
 /* ANCHOR -- POPUP */
 
 .mapboxgl-popup-content {
-  /* width: 15rem; */
+  width: 15rem;
   background-image: var(--color-glass-1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-outer);
@@ -37,6 +37,7 @@
   justify-content: center;
   overflow: hidden;
   position: relative;
+  width: 100%;
   /* border: 1px solid red; */
 }
 
@@ -52,6 +53,7 @@
 .mapboxgl-popup-content h2 {
   position: relative;
   margin: 1rem;
+  padding: 0.5rem;
   color: var(--color-text-light);
 }
 
@@ -75,7 +77,8 @@
 .mapboxgl-popup-content p {
   color: var(--color-text-dark);
   font-size: 1rem;
-  margin: 0.2rem;
+  padding: 0.25rem;
+  /* border: 1px solid red; */
 }
 
 .mapboxgl-popup-content button {

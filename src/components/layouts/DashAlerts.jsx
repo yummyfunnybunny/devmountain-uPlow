@@ -21,7 +21,7 @@ function DashAlerts() {
   }, [reduxAlert]);
 
   return (
-    <div className='dashAlerts'>
+    <div className='alerts'>
       {myAlerts.length > 0
         ? myAlerts.map((alert) => {
             return <Alert key={alert.alert_id} alert={alert} />;

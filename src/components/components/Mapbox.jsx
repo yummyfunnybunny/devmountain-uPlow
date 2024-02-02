@@ -29,6 +29,7 @@ function Mapbox(props) {
 
     // Add Markers to The Map
     if (props.dataType === 'jobs') {
+      // Role : Worker
       console.log('dataType = jobs');
       locationData.forEach((node) => {
         // 1: Set the HTML to place inside the popup
@@ -36,12 +37,12 @@ function Mapbox(props) {
           <div>
             <h2>Job Details</h2>
             <container>
-            <p><span>Job Type:</span> ${node.jobType}</p>
-            <p><span>Size:</span> ${node.jobSize}</p>
-            <p><span>Address</span></p>
-            <p>${node.Property.street}</p>
-            <p>${node.Property.city}, ${node.Property.state} ${node.Property.zipcode}</p>
-            <p>Rating: *****</p>
+              <p><span>Job Type:</span> ${node.jobType}</p>
+              <p><span>Size:</span> ${node.jobSize}</p>
+              <p><span>Address:</span></p>
+              <p>${node.Property.street}</p>
+              <p>${node.Property.city}, ${node.Property.state} ${node.Property.zipcode}</p>
+              <p><span>Rating:</span>*****</p>
             </container>
           </div>
         `;
@@ -68,6 +69,7 @@ function Mapbox(props) {
           .addTo(map.current);
       });
     } else if (props.dataType === 'workers') {
+      // Role : Customer
       console.log('dataType = workers');
       locationData.forEach((node) => {
         console.log('== Worker Node Data ==');
@@ -92,7 +94,6 @@ function Mapbox(props) {
         const divElement = document.createElement('div');
         const assignBtn = document.createElement('div');
         assignBtn.innerHTML = `<button>Request Service</button>`;
-        // assignBtn.classList.add('btn');
         divElement.innerHTML = innerHtmlContent;
         divElement.appendChild(assignBtn);
 

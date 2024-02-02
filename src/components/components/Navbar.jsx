@@ -51,10 +51,10 @@ function Navbar() {
           </>
         ) : (
           <>
-            <NavLink className='nav__link glass-2' to='/Signup'>
+            <NavLink className='nav__link' to='/Signup'>
               Signup
             </NavLink>
-            <NavLink className='nav__link glass-2' to='/Login'>
+            <NavLink className='nav__link' to='/Login'>
               Login
             </NavLink>
           </>

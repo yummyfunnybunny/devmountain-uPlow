@@ -554,770 +554,719 @@ function Modal() {
       });
   };
 
-  let modalDisplay;
+  let modalContent;
   switch (modal) {
     case 'LOGOUT':
-      return (
-        <div className='modal__bg'>
-          <div className='modal glass-1'>
-            <div className='modal__row'>
-              <h2>Are you sure you want to logout?</h2>
-            </div>
-            <div className='modal__row'>
-              <button className='btn' onClick={() => submitLogout()}>
-                Logout
-              </button>
-              <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                Cancel
-              </button>
-            </div>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitLogout(e)}>
+          <div className='modal__row'>
+            <h2 className='section__subheader'>Are you sure you want to logout?</h2>
           </div>
-        </div>
+          <div className='modal__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Logout
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'EDIT_ACCOUNT':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitEditAccount(e)}>
-              <div className='form__row'>
-                <h2>Edit Account Info</h2>
-              </div>
-
-              {/* FIRST NAME */}
-              <div className='form__row'>
-                <label className='form__label'>First Name:&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={user.firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                ></input>
-              </div>
-
-              {/* LAST NAME */}
-              <div className='form__row'>
-                <label className='form__label'>Last Name:&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={user.lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                ></input>
-              </div>
-
-              {/* EMAIL */}
-              <div className='form__row'>
-                <label className='form__label'>Email Name:&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={user.email}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></input>
-              </div>
-
-              {/* PHONE */}
-              <div className='form__row'>
-                <label className='form__label'>Phone Name:&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={user.phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                ></input>
-              </div>
-
-              {/* STREET */}
-              <div className='form__row'>
-                <label className='form__label' htmlFor='street'>
-                  Street:&emsp;
-                </label>
-                <input
-                  id='street'
-                  name='street'
-                  className='form__input'
-                  defaultValue={user.street}
-                  onChange={(e) => setStreet(e.target.value)}
-                ></input>
-              </div>
-
-              {/* CITY */}
-              <div className='form__row'>
-                <label className='form__label' htmlFor='city'>
-                  City:&emsp;
-                </label>
-                <input
-                  id='city'
-                  name='city'
-                  className='form__input'
-                  defaultValue={user.city}
-                  onChange={(e) => setCity(e.target.value)}
-                ></input>
-              </div>
-
-              {/* STATE */}
-              <div className='form__row'>
-                <label className='form__label' htmlFor='state'>
-                  State:&emsp;
-                </label>
-                <input
-                  id='state'
-                  name='state'
-                  className='form__input'
-                  defaultValue={user.state}
-                  onChange={(e) => setState(e.target.value)}
-                ></input>
-              </div>
-
-              {/* ZIPCODE */}
-              <div className='form__row'>
-                <label className='form__label' htmlFor='zipcode'>
-                  Zipcode:&emsp;
-                </label>
-                <input
-                  id='zipcode'
-                  name='zipcode'
-                  className='form__input'
-                  defaultValue={user.zipcode}
-                  onChange={(e) => setZipcode(e.target.value)}
-                ></input>
-              </div>
-
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Submit
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitEditAccount(e)}>
+          <div className='form__row'>
+            <h2 className='section__subheader'>Edit Account Info</h2>
           </div>
-        </div>
+
+          {/* FIRST NAME */}
+          <div className='form__row'>
+            <label className='form__label'>First Name:&emsp;</label>
+            <input
+              className='form__input'
+              minLength='10'
+              defaultValue={user.firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            ></input>
+          </div>
+
+          {/* LAST NAME */}
+          <div className='form__row'>
+            <label className='form__label'>Last Name:&emsp;</label>
+            <input
+              className='form__input'
+              defaultValue={user.lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            ></input>
+          </div>
+
+          {/* EMAIL */}
+          <div className='form__row'>
+            <label className='form__label'>Email Name:&emsp;</label>
+            <input className='form__input' defaultValue={user.email} onChange={(e) => setEmail(e.target.value)}></input>
+          </div>
+
+          {/* PHONE */}
+          <div className='form__row'>
+            <label className='form__label'>Phone Name:&emsp;</label>
+            <input className='form__input' defaultValue={user.phone} onChange={(e) => setPhone(e.target.value)}></input>
+          </div>
+
+          {/* STREET */}
+          <div className='form__row'>
+            <label className='form__label' htmlFor='street'>
+              Street:&emsp;
+            </label>
+            <input
+              id='street'
+              name='street'
+              className='form__input'
+              defaultValue={user.street}
+              onChange={(e) => setStreet(e.target.value)}
+            ></input>
+          </div>
+
+          {/* CITY */}
+          <div className='form__row'>
+            <label className='form__label' htmlFor='city'>
+              City:&emsp;
+            </label>
+            <input
+              id='city'
+              name='city'
+              className='form__input'
+              defaultValue={user.city}
+              onChange={(e) => setCity(e.target.value)}
+            ></input>
+          </div>
+
+          {/* STATE */}
+          <div className='form__row'>
+            <label className='form__label' htmlFor='state'>
+              State:&emsp;
+            </label>
+            <input
+              id='state'
+              name='state'
+              className='form__input'
+              defaultValue={user.state}
+              onChange={(e) => setState(e.target.value)}
+            ></input>
+          </div>
+
+          {/* ZIPCODE */}
+          <div className='form__row'>
+            <label className='form__label' htmlFor='zipcode'>
+              Zipcode:&emsp;
+            </label>
+            <input
+              id='zipcode'
+              name='zipcode'
+              className='form__input'
+              defaultValue={user.zipcode}
+              onChange={(e) => setZipcode(e.target.value)}
+            ></input>
+          </div>
+
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Submit
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'CHANGE_PASSWORD':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitChangePassword(e)}>
-              <div className='form__row'>
-                <h2>Edit Account Info</h2>
-              </div>
-
-              {/* OLD PASSWORD */}
-              <div className='form__row'>
-                <label className='form__label'>Current Password:&emsp;</label>
-                <input
-                  className='form__input'
-                  type='password'
-                  defaultValue={oldPassword}
-                  onChange={(e) => setOldPassword(e.target.value)}
-                ></input>
-              </div>
-
-              {/* NEW PASSWORD */}
-              <div className='form__row'>
-                <label className='form__label'>New Password:&emsp;</label>
-                <input
-                  className='form__input'
-                  type='password'
-                  defaultValue={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                ></input>
-              </div>
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Submit
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitChangePassword(e)}>
+          <div className='form__row'>
+            <h2 className='section__subheader'>Edit Password</h2>
           </div>
-        </div>
+
+          {/* OLD PASSWORD */}
+          <div className='form__row'>
+            <label className='form__label'>Current Password:&emsp;</label>
+            <input
+              className='form__input'
+              type='password'
+              defaultValue={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+            ></input>
+          </div>
+
+          {/* NEW PASSWORD */}
+          <div className='form__row'>
+            <label className='form__label'>New Password:&emsp;</label>
+            <input
+              className='form__input'
+              type='password'
+              defaultValue={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            ></input>
+          </div>
+          <div className='form__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Submit
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'DELETE_ACCOUNT':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitDeleteAccount(e)}>
-              <div className='form__row'>
-                <h2>Are you sure you want to delete yout account?</h2>
-                <h3>Deleting your account will permanently delete all of your properties and jobs</h3>
-              </div>
-              {/* PASSWORD */}
-              <div className='form__row'>
-                <label className='form__label'>Password:&emsp;</label>
-                <input
-                  className='form__input'
-                  type='password'
-                  defaultValue={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                ></input>
-              </div>
-
-              {/* CONFIRM PASSWORD */}
-              <div className='form__row'>
-                <label className='form__label'>Confirm Password:&emsp;</label>
-                <input
-                  className='form__input'
-                  type='password'
-                  defaultValue={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                ></input>
-              </div>
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Delete
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitDeleteAccount(e)}>
+          <div className='form__row'>
+            <h2 className='section__subheader'>Are you sure you want to delete yout account?</h2>
           </div>
-        </div>
+
+          <div className='form__row'>
+            <p className='form__extra-text'>
+              Deleting your account will permanently delete all of your properties and jobs
+            </p>
+          </div>
+          {/* PASSWORD */}
+          <div className='form__row'>
+            <label className='form__label'>Password:&emsp;</label>
+            <input
+              className='form__input'
+              type='password'
+              defaultValue={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+          </div>
+
+          {/* CONFIRM PASSWORD */}
+          <div className='form__row'>
+            <label className='form__label'>Confirm Password:&emsp;</label>
+            <input
+              className='form__input'
+              type='password'
+              defaultValue={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            ></input>
+          </div>
+          <div className='form__row'>
+            <button className='btn btn__warning btn--md' type='submit'>
+              Delete
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'CREATE_PROPERTY':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitCreateProperty(e)}>
-              <div className='form__row'>
-                <h2>Create New Property</h2>
-              </div>
-              {/* PROPERTY NAME */}
-              <div className='form__row'>
-                <label className='form__label'>Property Name:&emsp;</label>
-                <input className='form__input' onChange={(e) => setNewPropertyName(e.target.value)}></input>
-              </div>
-
-              {/* STREET */}
-              <div className='form__row'>
-                <label className='form__label'>Street Address:&emsp;</label>
-                <input className='form__input' onChange={(e) => setNewPropertyStreet(e.target.value)}></input>
-              </div>
-
-              {/* CITY */}
-              <div className='form__row'>
-                <label className='form__label'>City:&emsp;</label>
-                <input className='form__input' onChange={(e) => setNewPropertyCity(e.target.value)}></input>
-              </div>
-
-              {/* STATE */}
-              <div className='form__row'>
-                <label className='form__label'>State:&emsp;</label>
-                <input className='form__input' onChange={(e) => setNewPropertyState(e.target.value)}></input>
-              </div>
-
-              {/* ZIPCODE */}
-              <div className='form__row'>
-                <label className='form__label'>Zipcode:&emsp;</label>
-                <input className='form__input' onChange={(e) => setNewPropertyZipcode(e.target.value)}></input>
-              </div>
-
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Submit
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitCreateProperty(e)}>
+          <div className='form__row'>
+            <h2>Create New Property</h2>
           </div>
-        </div>
+          {/* PROPERTY NAME */}
+          <div className='form__row'>
+            <label className='form__label'>Property Name:&emsp;</label>
+            <input className='form__input' onChange={(e) => setNewPropertyName(e.target.value)}></input>
+          </div>
+
+          {/* STREET */}
+          <div className='form__row'>
+            <label className='form__label'>Street Address:&emsp;</label>
+            <input className='form__input' onChange={(e) => setNewPropertyStreet(e.target.value)}></input>
+          </div>
+
+          {/* CITY */}
+          <div className='form__row'>
+            <label className='form__label'>City:&emsp;</label>
+            <input className='form__input' onChange={(e) => setNewPropertyCity(e.target.value)}></input>
+          </div>
+
+          {/* STATE */}
+          <div className='form__row'>
+            <label className='form__label'>State:&emsp;</label>
+            <input className='form__input' onChange={(e) => setNewPropertyState(e.target.value)}></input>
+          </div>
+
+          {/* ZIPCODE */}
+          <div className='form__row'>
+            <label className='form__label'>Zipcode:&emsp;</label>
+            <input className='form__input' onChange={(e) => setNewPropertyZipcode(e.target.value)}></input>
+          </div>
+
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Submit
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'EDIT_PROPERTY':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitEditProperty(e)}>
-              <div className='form__row'>
-                <h2>Edit Property</h2>
-              </div>
-
-              {/* PROPERTY NAME */}
-              <div className='form__row'>
-                <label className='form__label'>Property Name:&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={property.name}
-                  onChange={(e) => setEditPropertyName(e.target.value)}
-                ></input>
-              </div>
-
-              {/* STREET */}
-              <div className='form__row'>
-                <label className='form__label'>Street Address:&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={property.street}
-                  onChange={(e) => setEditPropertyStreet(e.target.value)}
-                ></input>
-              </div>
-
-              {/* CITY */}
-              <div className='form__row'>
-                <label className='form__label'>City:&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={property.city}
-                  onChange={(e) => setEditPropertyCity(e.target.value)}
-                ></input>
-              </div>
-
-              {/* STATE */}
-              <div className='form__row'>
-                <label className='form__label'>State:&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={property.state}
-                  onChange={(e) => setEditPropertyState(e.target.value)}
-                ></input>
-              </div>
-
-              {/* ZIPCODE */}
-              <div className='form__row'>
-                <label className='form__label'>Zipcode:&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={property.zipcode}
-                  onChange={(e) => setEditPropertyZipcode(e.target.value)}
-                ></input>
-              </div>
-
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Submit
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitEditProperty(e)}>
+          <div className='form__row'>
+            <h2>Edit Property</h2>
           </div>
-        </div>
+
+          {/* PROPERTY NAME */}
+          <div className='form__row'>
+            <label className='form__label'>Property Name:&emsp;</label>
+            <input
+              className='form__input'
+              defaultValue={property.name}
+              onChange={(e) => setEditPropertyName(e.target.value)}
+            ></input>
+          </div>
+
+          {/* STREET */}
+          <div className='form__row'>
+            <label className='form__label'>Street Address:&emsp;</label>
+            <input
+              className='form__input'
+              defaultValue={property.street}
+              onChange={(e) => setEditPropertyStreet(e.target.value)}
+            ></input>
+          </div>
+
+          {/* CITY */}
+          <div className='form__row'>
+            <label className='form__label'>City:&emsp;</label>
+            <input
+              className='form__input'
+              defaultValue={property.city}
+              onChange={(e) => setEditPropertyCity(e.target.value)}
+            ></input>
+          </div>
+
+          {/* STATE */}
+          <div className='form__row'>
+            <label className='form__label'>State:&emsp;</label>
+            <input
+              className='form__input'
+              defaultValue={property.state}
+              onChange={(e) => setEditPropertyState(e.target.value)}
+            ></input>
+          </div>
+
+          {/* ZIPCODE */}
+          <div className='form__row'>
+            <label className='form__label'>Zipcode:&emsp;</label>
+            <input
+              className='form__input'
+              defaultValue={property.zipcode}
+              onChange={(e) => setEditPropertyZipcode(e.target.value)}
+            ></input>
+          </div>
+
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Submit
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'DELETE_PROPERTY':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitDeleteProperty(e)}>
-              <div className='form__row'>
-                <h2>Delete Property</h2>
-              </div>
-              <div className='form__row'>
-                <p>
-                  Are you sure you want to delete this property? all jobs associaited with this property will also be
-                  deleted
-                </p>
-              </div>
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Delete
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitDeleteProperty(e)}>
+          <div className='form__row'>
+            <h2>Delete Property</h2>
           </div>
-        </div>
+          <div className='form__row'>
+            <p>
+              Are you sure you want to delete this property? all jobs associaited with this property will also be
+              deleted
+            </p>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__warning btn--md' type='submit'>
+              Delete
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'CREATE_JOB':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitCreateJob(e)}>
-              <div className='form__row'>
-                <h2>Create New Job</h2>
-              </div>
-              {/* JOB TYPE */}
-              <div className='form__row'>
-                <label className='form__label'>Job Type:&emsp;</label>
-                <select className='form__input' onChange={(e) => setNewJobType(e.target.value)}>
-                  <option disabled>- choose type -</option>
-                  <option value='driveway'>Driveway</option>
-                  <option value='parking-lot'>Parking Lot</option>
-                  <option value='sidewalk'>Sidewalk</option>
-                  <option value='walkway'>Walkway</option>
-                  <option value='roof'>Roof</option>
-                  <option value='pond'>Pond</option>
-                </select>
-              </div>
-
-              {/* JOB SIZE */}
-              <div className='form__row'>
-                <label className='form__label'>Job Size-({newJobSizeMeasure}):&emsp;</label>
-                <input className='form__input' onChange={(e) => setNewJobSize(e.target.value)}></input>
-              </div>
-
-              {/* PICTURES */}
-              <div className='form__row'>
-                <label className='form__label'>Add Picture:&emsp;</label>
-                <input className='form__input' onChange={(e) => setNewJobPicture(e.target.value)}></input>
-              </div>
-
-              {/* INSTRUCTIONS */}
-              <label className='form__label'>Instructions:&emsp;</label>
-              <p className='form__label'>Separate individual instructions with a period.</p>
-              <div className='form__row'>
-                <input className='form__input' onChange={(e) => setNewJobInstructions1(e.target.value)}></input>
-              </div>
-              <div className='form__row'>
-                <input className='form__input' onChange={(e) => setNewJobInstructions2(e.target.value)}></input>
-              </div>
-              <div className='form__row'>
-                <input className='form__input' onChange={(e) => setNewJobInstructions3(e.target.value)}></input>
-              </div>
-
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Create Job
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitCreateJob(e)}>
+          <div className='form__row'>
+            <h2>Create New Job</h2>
           </div>
-        </div>
+          {/* JOB TYPE */}
+          <div className='form__row'>
+            <label className='form__label'>Job Type:&emsp;</label>
+            <select className='form__input' onChange={(e) => setNewJobType(e.target.value)}>
+              <option disabled>- choose type -</option>
+              <option value='driveway'>Driveway</option>
+              <option value='parking-lot'>Parking Lot</option>
+              <option value='sidewalk'>Sidewalk</option>
+              <option value='walkway'>Walkway</option>
+              <option value='roof'>Roof</option>
+              <option value='pond'>Pond</option>
+            </select>
+          </div>
+
+          {/* JOB SIZE */}
+          <div className='form__row'>
+            <label className='form__label'>Job Size-({newJobSizeMeasure}):&emsp;</label>
+            <input className='form__input' onChange={(e) => setNewJobSize(e.target.value)}></input>
+          </div>
+
+          {/* PICTURES */}
+          <div className='form__row'>
+            <label className='form__label'>Add Picture:&emsp;</label>
+            <input className='form__input' onChange={(e) => setNewJobPicture(e.target.value)}></input>
+          </div>
+
+          {/* INSTRUCTIONS */}
+          <label className='form__label'>Instructions:&emsp;</label>
+          <p className='form__label'>Separate individual instructions with a period.</p>
+          <div className='form__row'>
+            <input className='form__input' onChange={(e) => setNewJobInstructions1(e.target.value)}></input>
+          </div>
+          <div className='form__row'>
+            <input className='form__input' onChange={(e) => setNewJobInstructions2(e.target.value)}></input>
+          </div>
+          <div className='form__row'>
+            <input className='form__input' onChange={(e) => setNewJobInstructions3(e.target.value)}></input>
+          </div>
+
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Create Job
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'EDIT_JOB':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitEditJob(e)}>
-              <div className='form__row'>
-                <h2>Edit Job</h2>
-              </div>
-              {/* JOB TYPE */}
-              <div className='form__row'>
-                <label className='form__label'>Job Type:&emsp;</label>
-                <select
-                  className='form__input'
-                  defaultValue={editJobType}
-                  onChange={(e) => setEditJobType(e.target.value)}
-                >
-                  <option disabled>- choose type -</option>
-                  <option value='driveway'>Driveway</option>
-                  <option value='parking-lot'>Parking Lot</option>
-                  <option value='sidewalk'>Sidewalk</option>
-                  <option value='walkway'>Walkway</option>
-                  <option value='roof'>Roof</option>
-                  <option value='pond'>Pond</option>
-                </select>
-              </div>
-
-              {/* JOB SIZE */}
-              <div className='form__row'>
-                <label className='form__label'>Job Size-({editJobSizeMeasure}):&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={editJobSize}
-                  onChange={(e) => setEditJobSize(e.target.value)}
-                ></input>
-              </div>
-
-              {/* PICTURES */}
-              <div className='form__row'>
-                <label className='form__label'>Add Picture:&emsp;</label>
-                <input
-                  className='form__input'
-                  defaultValue={editJobPicture}
-                  onChange={(e) => setEditJobPicture(e.target.value)}
-                ></input>
-              </div>
-
-              {/* INSTRUCTIONS */}
-              <label className='form__label'>Instructions:&emsp;</label>
-              <p className='form__label'>Separate individual instructions with a period.</p>
-              <div className='form__row'>
-                <input
-                  className='form__input'
-                  defaultValue={editJobInstructions1}
-                  onChange={(e) => setEditJobInstructions1(e.target.value)}
-                ></input>
-              </div>
-              <div className='form__row'>
-                <input
-                  className='form__input'
-                  defaultValue={editJobInstructions2}
-                  onChange={(e) => setEditJobInstructions2(e.target.value)}
-                ></input>
-              </div>
-              <div className='form__row'>
-                <input
-                  className='form__input'
-                  defaultValue={editJobInstructions3}
-                  onChange={(e) => setEditJobInstructions3(e.target.value)}
-                ></input>
-              </div>
-
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Create Job
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitEditJob(e)}>
+          <div className='form__row'>
+            <h2>Edit Job</h2>
           </div>
-        </div>
+          {/* JOB TYPE */}
+          <div className='form__row'>
+            <label className='form__label'>Job Type:&emsp;</label>
+            <select className='form__input' defaultValue={editJobType} onChange={(e) => setEditJobType(e.target.value)}>
+              <option disabled>- choose type -</option>
+              <option value='driveway'>Driveway</option>
+              <option value='parking-lot'>Parking Lot</option>
+              <option value='sidewalk'>Sidewalk</option>
+              <option value='walkway'>Walkway</option>
+              <option value='roof'>Roof</option>
+              <option value='pond'>Pond</option>
+            </select>
+          </div>
+
+          {/* JOB SIZE */}
+          <div className='form__row'>
+            <label className='form__label'>Job Size-({editJobSizeMeasure}):&emsp;</label>
+            <input
+              className='form__input'
+              defaultValue={editJobSize}
+              onChange={(e) => setEditJobSize(e.target.value)}
+            ></input>
+          </div>
+
+          {/* PICTURES */}
+          <div className='form__row'>
+            <label className='form__label'>Add Picture:&emsp;</label>
+            <input
+              className='form__input'
+              defaultValue={editJobPicture}
+              onChange={(e) => setEditJobPicture(e.target.value)}
+            ></input>
+          </div>
+
+          {/* INSTRUCTIONS */}
+          <label className='form__label'>Instructions:&emsp;</label>
+          <p className='form__label'>Separate individual instructions with a period.</p>
+          <div className='form__row'>
+            <input
+              className='form__input'
+              defaultValue={editJobInstructions1}
+              onChange={(e) => setEditJobInstructions1(e.target.value)}
+            ></input>
+          </div>
+          <div className='form__row'>
+            <input
+              className='form__input'
+              defaultValue={editJobInstructions2}
+              onChange={(e) => setEditJobInstructions2(e.target.value)}
+            ></input>
+          </div>
+          <div className='form__row'>
+            <input
+              className='form__input'
+              defaultValue={editJobInstructions3}
+              onChange={(e) => setEditJobInstructions3(e.target.value)}
+            ></input>
+          </div>
+
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Create Job
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'DELETE_JOB':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitDeleteJob(e)}>
-              <div className='form__row'>
-                <h2>Delete Job</h2>
-              </div>
-              <div className='form__row'>
-                <p>Are you sure you want to delete this job?</p>
-              </div>
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Delete
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitDeleteJob(e)}>
+          <div className='form__row'>
+            <h2>Delete Job</h2>
           </div>
-        </div>
+          <div className='form__row'>
+            <p>Are you sure you want to delete this job?</p>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__warning btn--md' type='submit'>
+              Delete
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'UNSUBSCRIBE_WORKER':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitUnsubscribeWorker(e)}>
-              <div className='form__row'>
-                <h2>Unsubscribe Worker</h2>
-              </div>
-              <div className='form__row'>
-                <p>Are you sure you want to unsubscribe the currently subscribed worker?</p>
-              </div>
-              <div className='form__row'>
-                <p>We will send an alert to the worker to notify them that their services have been cancelled</p>
-              </div>
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Unsubscribe Worker
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitUnsubscribeWorker(e)}>
+          <div className='form__row'>
+            <h2>Unsubscribe Worker</h2>
           </div>
-        </div>
+          <div className='form__row'>
+            <p>Are you sure you want to unsubscribe the currently subscribed worker?</p>
+          </div>
+          <div className='form__row'>
+            <p>We will send an alert to the worker to notify them that their services have been cancelled</p>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__warning btn--md' type='submit'>
+              Unsubscribe Worker
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'REQUEST_WORKER':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitRequestWorker(e)}>
-              <div className='form__row'>
-                <h2>Request Worker</h2>
-              </div>
-              <div className='form__row'>
-                <p>Select the job you'd like to request this worker for:</p>
-              </div>
-              <div className='form__row'>
-                <select defaultValue={jobToRequestWorker} onChange={(e) => setJobToRequestWorker(e.target.value)}>
-                  <option value='' disabled>
-                    Select Job
-                  </option>
-                  {myJobs
-                    ? myJobs.map((job, idx) => {
-                        return (
-                          <option key={job.job_id} value={idx}>
-                            {job.Property.name} - {job.jobType}
-                          </option>
-                        );
-                      })
-                    : null}
-                </select>
-              </div>
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Request Work
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitRequestWorker(e)}>
+          <div className='form__row'>
+            <h2>Request Worker</h2>
           </div>
-        </div>
+          <div className='form__row'>
+            <p>Select the job you'd like to request this worker for:</p>
+          </div>
+          <div className='form__row'>
+            <select defaultValue={jobToRequestWorker} onChange={(e) => setJobToRequestWorker(e.target.value)}>
+              <option value='' disabled>
+                Select Job
+              </option>
+              {myJobs
+                ? myJobs.map((job, idx) => {
+                    return (
+                      <option key={job.job_id} value={idx}>
+                        {job.Property.name} - {job.jobType}
+                      </option>
+                    );
+                  })
+                : null}
+            </select>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Request Work
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'ACCEPT_REQUEST_WORKER':
       // Worker => accepts => customer Offer
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitAcceptRequestWorker(e)}>
-              <div className='form__row'>
-                <h2>Accept Job Offer</h2>
-              </div>
-              <div className='form__row'>
-                <p>Are you sure you want to accept this job offer?</p>
-              </div>
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Accept Offer
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitAcceptRequestWorker(e)}>
+          <div className='form__row'>
+            <h2>Accept Job Offer</h2>
           </div>
-        </div>
+          <div className='form__row'>
+            <p>Are you sure you want to accept this job offer?</p>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Accept Offer
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'COUNTER_REQUEST_WORKER':
-      return <></>;
+      modalContent = <></>;
+      break;
     case 'CUSTOMER_OFFER_REJECTED':
       // Worker => Rejects => Customer Offer
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitRejectRequestWorker(e)}>
-              <div className='form__row'>
-                <h2>Reject Job</h2>
-              </div>
-              <div className='form__row'>
-                <p>Are you sure you want to reject this job offer</p>
-              </div>
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Reject Job
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitRejectRequestWorker(e)}>
+          <div className='form__row'>
+            <h2>Reject Job</h2>
           </div>
-        </div>
+          <div className='form__row'>
+            <p>Are you sure you want to reject this job offer</p>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__warning btn--md' type='submit'>
+              Reject Job
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'REQUEST_JOB':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitRequestJob(e)}>
-              <div className='form__row'>
-                <h2>Request Job</h2>
-              </div>
-              <div className='form__row'>
-                <p>Are you sure you'd like to request this job?</p>
-              </div>
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Request Job
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitRequestJob(e)}>
+          <div className='form__row'>
+            <h2>Request Job</h2>
           </div>
-        </div>
+          <div className='form__row'>
+            <p>Are you sure you'd like to request this job?</p>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Request Job
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'ACCEPT_REQUEST_JOB':
       // Customer => accepts => Worker Offer
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitAcceptRequestJob(e)}>
-              <div className='form__row'>
-                <h2>Accept Service Offer</h2>
-              </div>
-              <div className='form__row'>
-                <p>Are you sure you want to accept this service offer?</p>
-              </div>
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Accept Offer
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitAcceptRequestJob(e)}>
+          <div className='form__row'>
+            <h2>Accept Service Offer</h2>
           </div>
-        </div>
+          <div className='form__row'>
+            <p>Are you sure you want to accept this service offer?</p>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__success btn--md' type='submit'>
+              Accept Offer
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'COUNTER_REQUEST_JOB':
-      return <></>;
+      modalContent = <></>;
+      break;
     case 'REJECT_REQUEST_JOB':
       // Customer => Rejects => Worker Offer
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitRejectRequestJob(e)}>
-              <div className='form__row'>
-                <h2>Reject Service Offer</h2>
-              </div>
-              <div className='form__row'>
-                <p>Are you sure you want to reject this Service offer</p>
-              </div>
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  Reject Job
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitRejectRequestJob(e)}>
+          <div className='form__row'>
+            <h2>Reject Service Offer</h2>
           </div>
-        </div>
+          <div className='form__row'>
+            <p>Are you sure you want to reject this Service offer</p>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__warning btn--md' type='submit'>
+              Reject Job
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     case 'DISMISS_ALERT':
-      return (
-        <div className='modal__bg'>
-          <div className='modal'>
-            <form className='form form--modal' onSubmit={(e) => submitDismissAlert(e)}>
-              <div className='form__row'>
-                <h2>Dismiss Alert</h2>
-              </div>
-              <div className='form__row'>
-                <p>Are you sure you want to delete this alert?</p>
-              </div>
-              {/* BUTTONS */}
-              <div className='form__row'>
-                <button className='btn' type='submit'>
-                  delete Alert
-                </button>
-                <button className='btn' onClick={() => dispatch({ type: 'NONE' })}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitDismissAlert(e)}>
+          <div className='form__row'>
+            <h2>Dismiss Alert</h2>
           </div>
-        </div>
+          <div className='form__row'>
+            <p>Are you sure you want to delete this alert?</p>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__warning btn--md' type='submit'>
+              delete Alert
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
       );
+      break;
     default:
-      return <></>;
+      modalContent = <></>;
+      break;
   }
 
-  return { modalDisplay };
+  return (
+    <div className='modal__bg'>
+      <div className='modal glass-3'>{modalContent}</div>
+    </div>
+  );
 }
 
 export default Modal;

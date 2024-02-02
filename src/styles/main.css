@@ -18,10 +18,14 @@
   /* --color-text-blue: rgba(0, 89, 255, 0.9); */
   /* --color-text-blue: rgba(0, 217, 255, 0.9); */
   --color-text-blue: rgb(84, 228, 247);
-  --color-text-red: rgba(208, 2, 27, 0.6);
+  --color-text-red: rgba(208, 2, 27, 1);
+  --color-text-green: rgba(0, 255, 119, 1);
 
   --color-glass-1: linear-gradient(to right bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
-  --color-glass-2: linear-gradient(to right top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.85));
+  --color-glass-2: linear-gradient(to right top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.65));
+  /* --color-glass-2: linear-gradient(to right top, rgb(84, 228, 247, 0.4), rgb(84, 228, 247, 0.65)); */
+  /* --color-glass-2: linear-gradient(to right top, rgba(155, 231, 241, 0.4), rgba(155, 231, 241, 0.65)); */
+  --color-glass-3: linear-gradient(to right top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.95));
   --color-glass-red: linear-gradient(to right top, rgba(208, 2, 27, 0.6), rgba(208, 2, 27, 0.85));
   --color-glass-blue: linear-gradient(to right top, rgba(74, 144, 226, 0.6), rgba(74, 144, 226, 0.85));
   --color-glass-green: linear-gradient(to right top, rgba(126, 211, 33, 0.6), rgba(126, 211, 33, 0.85));
@@ -85,6 +89,8 @@
 }
 
 .section__subheader {
+  text-align: center;
+  margin: 1rem;
 }
 
 .glass-1 {
@@ -97,6 +103,15 @@
 
 .glass-2 {
   background-image: var(--color-glass-2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-3 {
+  background-image: var(--color-glass-3);
+  /* background-color: rgba(255, 255, 255, 0.9); */
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
