@@ -1,5 +1,5 @@
 function DashHome() {
-  return <div className='dashHome'>Dash Home</div>;
+  return <div className='dash__home'>Dash Home</div>;
 }
 
 export default DashHome;

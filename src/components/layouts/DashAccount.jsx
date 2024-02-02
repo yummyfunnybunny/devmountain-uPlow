@@ -1,4 +1,4 @@
-import '../../styles/layouts/dashAccount.css';
+import '../../styles/layouts/account.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -28,78 +28,86 @@ function DashAccount() {
   // }, []);
 
   return (
-    <div className='dashAccount'>
-      <div className='dashAccount__container'>
-        <h1 className='dashAccount__header'>Personal Info</h1>
+    <div className='account'>
+      <div className='account__container'>
+        <h1 className='section__header'>Account Info</h1>
 
-        {/* FIRST NAME */}
-        <div className='dashAccount__row'>
-          <h2 className='dashAccount__label'>First Name:&emsp; </h2>
-          <p className='dashAccount__detail'>{user.firstName}</p>
-        </div>
+        <container className='account__row'>
+          <container className='account__column glass-2'>
+            <h1 className='account__subheader'>Personal Info</h1>
+            {/* FIRST NAME */}
+            <div className='account__row'>
+              <h2 className='account__label'>First Name:&emsp; </h2>
+              <p className='account__detail'>{user.firstName}</p>
+            </div>
 
-        {/* LAST NAME */}
-        <div className='dashAccount__row'>
-          <h2 className='dashAccount__label'>Last Name:&emsp; </h2>
-          <p className='dashAccount__detail'>{user.lastName}</p>
-        </div>
+            {/* LAST NAME */}
+            <div className='account__row'>
+              <h2 className='account__label'>Last Name:&emsp; </h2>
+              <p className='account__detail'>{user.lastName}</p>
+            </div>
 
-        {/* EMAIL */}
-        <div className='dashAccount__row'>
-          <h2 className='dashAccount__label'>Email:&emsp; </h2>
-          <p className='dashAccount__detail'>{user.email}</p>
-        </div>
+            {/* EMAIL */}
+            <div className='account__row'>
+              <h2 className='account__label'>Email:&emsp; </h2>
+              <p className='account__detail'>{user.email}</p>
+            </div>
 
-        {/* PHONE */}
-        <div className='dashAccount__row'>
-          <h2 className='dashAccount__label'>Phone:&emsp; </h2>
-          <p className='dashAccount__detail'>{user.phone}</p>
-        </div>
+            {/* PHONE */}
+            <div className='account__row'>
+              <h2 className='account__label'>Phone:&emsp; </h2>
+              <p className='account__detail'>{user.phone}</p>
+            </div>
 
-        {/* STREET */}
-        <div className='dashAccount__row'>
-          <h2 className='dashAccount__label'>Street:&emsp; </h2>
-          <p className='dashAccount__detail'>{user.street}</p>
-        </div>
+            {/* ROLE */}
+            <div className='account__row'>
+              <h2 className='account__label'>Role:&emsp; </h2>
+              <p className='account__detail'>{user.role}</p>
+            </div>
+          </container>
 
-        {/* CITY */}
-        <div className='dashAccount__row'>
-          <h2 className='dashAccount__label'>City:&emsp; </h2>
-          <p className='dashAccount__detail'>{user.city}</p>
-        </div>
+          <container className='account__column glass-2'>
+            <h1 className='account__subheader'>Address Info</h1>
+            {/* STREET */}
+            <div className='account__row'>
+              <h2 className='account__label'>Street:&emsp; </h2>
+              <p className='account__detail'>{user.street}</p>
+            </div>
 
-        {/* STATE */}
-        <div className='dashAccount__row'>
-          <h2 className='dashAccount__label'>State:&emsp; </h2>
-          <p className='dashAccount__detail'>{user.state}</p>
-        </div>
+            {/* CITY */}
+            <div className='account__row'>
+              <h2 className='account__label'>City:&emsp; </h2>
+              <p className='account__detail'>{user.city}</p>
+            </div>
 
-        {/* ZIPCODE */}
-        <div className='dashAccount__row'>
-          <h2 className='dashAccount__label'>Zipcode:&emsp; </h2>
-          <p className='dashAccount__detail'>{user.zipcode}</p>
-        </div>
+            {/* STATE */}
+            <div className='account__row'>
+              <h2 className='account__label'>State:&emsp; </h2>
+              <p className='account__detail'>{user.state}</p>
+            </div>
 
-        {/* ROLE */}
-        <div className='dashAccount__row'>
-          <h2 className='dashAccount__label'>Role:&emsp; </h2>
-          <p className='dashAccount__detail'>{user.role}</p>
-        </div>
+            {/* ZIPCODE */}
+            <div className='account__row'>
+              <h2 className='account__label'>Zipcode:&emsp; </h2>
+              <p className='account__detail'>{user.zipcode}</p>
+            </div>
+          </container>
+        </container>
 
         {/* BUTTONS */}
-        <div className='dashAccount__row dashAccount__btns'>
-          <button className='btn' onClick={() => dispatch({ type: 'EDIT_ACCOUNT' })}>
-            Edit Account Info
+        <div className='account__row account__btns'>
+          <button className='btn btn__success btn--md' onClick={() => dispatch({ type: 'EDIT_ACCOUNT' })}>
+            Edit Info
           </button>
 
-          <button className='btn' onClick={() => dispatch({ type: 'CHANGE_PASSWORD' })}>
+          <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'CHANGE_PASSWORD' })}>
             Change Password
           </button>
 
-          <button className='btn' onClick={() => dispatch({ type: 'LOGOUT' })}>
+          <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'LOGOUT' })}>
             Logout
           </button>
-          <button className='btn' onClick={() => dispatch({ type: 'DELETE_ACCOUNT' })}>
+          <button className='btn btn__warning btn--md' onClick={() => dispatch({ type: 'DELETE_ACCOUNT' })}>
             Delete Account
           </button>
         </div>

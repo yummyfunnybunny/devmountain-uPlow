@@ -35,45 +35,51 @@ function Login() {
   };
 
   return (
-    <container className='page-container'>
-      {/* <div className='container auth'> */}
-      <form className='form form--auth' onSubmit={(e) => submitLogin(e)}>
-        <h1 className='form__header'>Login</h1>
+    <container className='page__container'>
+      <container className='page__section'>
+        <form className='form form--login glass-1' onSubmit={(e) => submitLogin(e)}>
+          <h1 className='form__header'>Login</h1>
 
-        {/* EMAIL */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='email'>
-            Email:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='email'
-            name='email'
-            required
-            defaultValue={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
-        </div>
+          <container className='form__column glass-2'>
+            {/* EMAIL */}
+            <container className='form__row'>
+              <label className='form__label' htmlFor='email'>
+                Email:&emsp;
+              </label>
+              <input
+                className='form__input'
+                id='email'
+                name='email'
+                required
+                defaultValue={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
+            </container>
 
-        {/* PASSWORD */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='password'>
-            Password:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='password'
-            name='password'
-            required
-            defaultValue={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-        </div>
-        <button className='btn btn--md' type='submit'>
-          Login
-        </button>
-      </form>
-      {/* </div> */}
+            {/* PASSWORD */}
+            <container className='form__row'>
+              <label className='form__label' htmlFor='password'>
+                Password:&emsp;
+              </label>
+              <input
+                className='form__input'
+                id='password'
+                name='password'
+                required
+                defaultValue={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
+            </container>
+          </container>
+
+          {/* BUTTON */}
+          <container className='form__row form__row--btn'>
+            <button className='btn btn--lg btn__success' type='submit'>
+              Login
+            </button>
+          </container>
+        </form>
+      </container>
     </container>
   );
 }

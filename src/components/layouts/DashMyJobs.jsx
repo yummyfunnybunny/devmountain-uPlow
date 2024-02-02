@@ -23,28 +23,14 @@ function DashMyJobs() {
   }, [reduxJobs]);
 
   return (
-    <div className='dashMyJobs'>
-      <div className='my-job__list'>
-        {jobs.length > 0 ? (
-          jobs.map((job) => {
-            return (
-              <Job
-                key={job.job_id}
-                job={job}
-                // id={job.job_id}
-                // jobType={job.jobType}
-                // jobSize={job.jobSize}
-                // picture={job.picture}
-                // subscribed={job.subscribed}
-                // instructions={job.instructions}
-              />
-            );
-          })
-        ) : (
-          <></>
-        )}
-        {/* <Job /> */}
-      </div>
+    <div className='jobs'>
+      {jobs.length > 0 ? (
+        jobs.map((job) => {
+          return <Job key={job.job_id} job={job} />;
+        })
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

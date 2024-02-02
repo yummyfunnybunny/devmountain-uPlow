@@ -13,8 +13,13 @@
 
 :root {
   /* colors */
-  --color-text-light: #eee;
-  --color-text-dark: #000000;
+  --color-text-light: rgb(238, 238, 238);
+  --color-text-dark: #161616;
+  /* --color-text-blue: rgba(0, 89, 255, 0.9); */
+  /* --color-text-blue: rgba(0, 217, 255, 0.9); */
+  --color-text-blue: rgb(84, 228, 247);
+  --color-text-red: rgba(208, 2, 27, 0.6);
+
   --color-glass-1: linear-gradient(to right bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
   --color-glass-2: linear-gradient(to right top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.85));
   --color-glass-red: linear-gradient(to right top, rgba(208, 2, 27, 0.6), rgba(208, 2, 27, 0.85));
@@ -23,35 +28,63 @@
   --color-glass-yellow: linear-gradient(to right top, rgba(248, 231, 28, 0.6), rgba(248, 231, 28, 0.85));
   --color-glass-orange: linear-gradient(to right top, rgba(245, 166, 35, 0.6), rgba(245, 166, 35, 0.85));
   --color-btn-green: linear-gradient(to right bottom, rgba(0, 255, 119, 0.9), rgba(46, 255, 109, 0.8));
-  --color-btn-blue: linear-gradient(to right bottom, rgba(0, 89, 255, 0.9), rgba(47, 161, 255, 0.9));
+  --color-btn-orange: linear-gradient(to right bottom, rgba(238, 174, 0, 0.9), rgba(255, 182, 46, 0.8));
+  --color-btn-white: linear-gradient(to right bottom, rgb(238, 238, 238, 0.9), rgba(255, 255, 255, 0.733));
+  /* --color-btn-blue: linear-gradient(to right bottom, rgba(0, 89, 255, 0.9), rgba(47, 161, 255, 0.9)); */
+  --color-btn-blue: linear-gradient(to right bottom, rgb(84, 228, 247, 0.9), rgba(108, 255, 243, 0.8));
   --color-btn-red: linear-gradient(to right bottom, rgba(235, 77, 75, 0.9), rgba(235, 75, 110, 0.7));
   --color-btn-yellow: linear-gradient(to right bottom, rgba(235, 232, 76, 0.9), rgba(225, 235, 76, 0.702));
 
-  --radius: 5px;
+  --radius-outer: 4px;
+  --radius-inner: 2px;
 
-  --window_h: calc(100vh - 5rem);
+  --window_h: calc(100vh - 9rem);
 
   display: flex;
   justify-content: center;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./page-bg2.webp');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./page-bg.webp');
   background-repeat: no-repeat;
   background-size: 100vw auto;
   background-attachment: fixed;
 }
 
-.container {
-  border: 1px solid red;
-  display: flex;
-  justify-content: center;
-  background-image: var(--color-bg0);
-}
-
-.page-container {
+.page__container {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 90vw;
   overflow: hidden;
+}
+
+.page__section {
+  margin: 1rem;
+  width: 100%;
+}
+
+.section__header {
+  font-size: 4rem;
+  margin: 2rem;
+  color: var(--color-text-light);
+  position: relative;
+}
+
+.section__header span {
+  color: var(--color-text-blue);
+}
+
+.section__header::after {
+  content: '';
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 5px;
+  /* background-image: var(--color-btn-blue); */
+  background-color: var(--color-text-light);
+}
+
+.section__subheader {
 }
 
 .glass-1 {

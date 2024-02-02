@@ -1,4 +1,25 @@
 .dashboard {
+  border-radius: var(--radius-outer);
   display: flex;
-  height: var(--window_h);
+  min-height: var(--window_h);
+}
+
+.dash {
+  width: 100%;
+  min-height: 100%;
+  margin-left: 1rem;
+  border-radius: var(--radius-outer);
+}
+
+.dash__home {
+  border-radius: var(--radius-outer);
+}
+
+.dash__nav {
+  min-height: 100%;
+  width: 12rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-outer);
+  margin-right: 1rem;
 }

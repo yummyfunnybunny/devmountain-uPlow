@@ -34,171 +34,104 @@ function MyJob(props) {
   }, []);
 
   return (
-    <div className='my-job'>
-      <div className='my-job__slides'>
-        <img className='my-job__pic' src='https://picsum.photos/200'></img>
-      </div>
-      <div className='my-job__details'>
-        <h2 className='my-job__type'>Job Type</h2>
-        <p className='my-job__size'>{jobType}</p>
-        <p className='my-job__status'>{jobSize}</p>
-      </div>
-      <div className='my-job__instructions'>
-        <h2 className='my-job__header'>Instructions</h2>
-        {instructions.map((inst, idx) => {
-          return <p key={idx}>{inst}</p>;
-        })}
-      </div>
-      <div className='my-job__subscribed'>
-        <h2 className='my-job__header'>Worker</h2>
-        {/* TODO - dynamically add content based on the status of subscribed */}
-        {worker ? (
-          <>
-            {/* Worker is subscribed */}
-            <p>
-              Name: {worker?.firstName} {worker?.lastName}
-            </p>
-            <p>Phone: {worker?.phone}</p>
-          </>
-        ) : (
-          <>
-            {/* No Worker Subscribed  */}
-            <p>No Worker Subscribed</p>
-          </>
-        )}
+    <div className='job glass-2'>
+      <div className='job_image'>
+        <img className='job__pic' src='https://picsum.photos/200'></img>
       </div>
 
-      {/* BUTTONS */}
-      <div className='my-job__options'>
-        <h2 className='my-job__header'>Options</h2>
+      <div className='job__content'>
+        {/* DETAILS */}
+        <container className='job__details'>
+          <h2 className='job__header'>Details</h2>
+          <p className='job__type'>Job Type: {jobType}</p>
+          <p className='job__size'>Job Size: {jobSize}</p>
+        </container>
 
-        {worker ? (
-          <>
-            {/* Unsubscribe Worker */}
-            <button
-              className='btn'
-              onClick={() => (
-                dispatch({ type: 'SET_WORKER', payload: worker }),
-                dispatch({ type: 'SET_JOB', payload: props.job }),
-                dispatch({ type: 'UNSUBSCRIBE_WORKER' })
-              )}
-            >
-              Cancel Worker
-            </button>
-          </>
-        ) : null}
+        <div className='job__divider'></div>
 
-        {/* Edit Job */}
-        <button
-          className='btn'
-          onClick={() => (
-            dispatch({ type: 'EDIT_JOB' }), dispatch({ type: 'SET_JOB', payload: props.job })
-            // dispatch({
-            //   type: 'SET_JOB',
-            //   payload: {
-            //     job_id: id,
-            //     jobType: jobType,
-            //     jobSize: jobSize,
-            //     picture: picture,
-            //     instructions: instructions,
-            //   },
-            // })
+        {/* INSTRUCTIONS */}
+        <div className='job__instructions'>
+          <h2 className='job__header'>Instructions</h2>
+          {instructions.map((inst, idx) => {
+            return <p key={idx}>&#x2022; {inst}</p>;
+          })}
+        </div>
+
+        <div className='job__divider'></div>
+
+        {/* SUBSCRIBER INFO */}
+        <div className='job__subscribed'>
+          <h2 className='job__header'>Worker</h2>
+          {/* TODO - dynamically add content based on the status of subscribed */}
+          {worker ? (
+            <>
+              {/* Worker is subscribed */}
+              <p>
+                Name: {worker?.firstName} {worker?.lastName}
+              </p>
+              <p>Phone: {worker?.phone}</p>
+            </>
+          ) : (
+            <>
+              {/* No Worker Subscribed  */}
+              <p>No Worker Subscribed</p>
+            </>
           )}
-        >
-          Edit Job
-        </button>
+        </div>
 
-        {/* Delete Job */}
-        <button
-          className='btn'
-          onClick={() => (
-            dispatch({ type: 'DELETE_JOB' }),
-            dispatch({
-              type: 'SET_JOB',
-              payload: {
-                job_id: job_id,
-                jobType: jobType,
-                jobSize: jobSize,
-                picture: picture,
-                instructions: instructions,
-              },
-            })
-          )}
-        >
-          Delete Job
-        </button>
+        <div className='job__divider'></div>
+
+        {/* OPTIONS */}
+        <div className='job__options'>
+          <h2 className='job__header'>Options</h2>
+
+          {/* Edit Job */}
+          <button
+            className='btn btn__success btn--md btn--property'
+            onClick={() => (dispatch({ type: 'EDIT_JOB' }), dispatch({ type: 'SET_JOB', payload: props.job }))}
+          >
+            Edit Job
+          </button>
+
+          {/* Unsubscribe Worker */}
+          {worker ? (
+            <>
+              <button
+                className='btn btn__caution btn--md btn--property'
+                onClick={() => (
+                  dispatch({ type: 'SET_WORKER', payload: worker }),
+                  dispatch({ type: 'SET_JOB', payload: props.job }),
+                  dispatch({ type: 'UNSUBSCRIBE_WORKER' })
+                )}
+              >
+                Cancel Worker
+              </button>
+            </>
+          ) : null}
+
+          {/* Delete Job */}
+          <button
+            className='btn btn__warning btn--md btn--property'
+            onClick={() => (
+              dispatch({ type: 'DELETE_JOB' }),
+              dispatch({
+                type: 'SET_JOB',
+                payload: {
+                  job_id: job_id,
+                  jobType: jobType,
+                  jobSize: jobSize,
+                  picture: picture,
+                  instructions: instructions,
+                },
+              })
+            )}
+          >
+            Delete Job
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
 export default MyJob;
-
-// TODO - dynamically change the appearance of job components based on the user role (Customer or Worker)
-/*
-  return (
-    <div className='my-job'>
-      <div className='my-job__slides'>
-        <img className='my-job__pic' src='https://picsum.photos/200'></img>
-      </div>
-      <div className='my-job__details'>
-        <h2 className='my-job__type'>Job Type</h2>
-        <p className='my-job__size'>{jobType}</p>
-        <p className='my-job__status'>{jobSize}</p>
-      </div>
-      <div className='my-job__instructions'>
-        <h2 className='my-job__header'>Instructions</h2>
-        {instructions.map((inst, idx) => {
-          return <p key={idx}>{inst}</p>;
-        })}
-      </div>
-      <div className='my-job__subscribed'>
-        <h2 className='my-job__header'>Status</h2>
-        <p>{subscribed}</p>
-      </div>
-      <div className='my-job__options'>
-        <h2 className='my-job__header'>Options</h2>
-        <button className='btn'>Request Service</button>
-        <button
-          className='btn'
-          onClick={() => (
-            dispatch({ type: 'EDIT_JOB' }),
-            dispatch({
-              type: 'SET_JOB',
-              payload: {
-                job_id: id,
-                jobType: jobType,
-                jobSize: jobSize,
-                picture: picture,
-                instructions: instructions,
-              },
-            })
-          )}
-        >
-          Edit Job
-        </button>
-        <button
-          className='btn'
-          onClick={() => (
-            dispatch({ type: 'DELETE_JOB' }),
-            dispatch({
-              type: 'SET_JOB',
-              payload: {
-                job_id: id,
-                jobType: jobType,
-                jobSize: jobSize,
-                picture: picture,
-                instructions: instructions,
-              },
-            })
-          )}
-        >
-          Delete Job
-        </button>
-        <button className='btn'>Message Owner</button>
-        <button className='btn'>Request Service</button>
-        <button className='btn'>Unsibscribe</button>
-      </div>
-    </div>
-  );
-*/

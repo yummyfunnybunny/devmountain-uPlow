@@ -1,15 +1,14 @@
-import '../../styles/layouts/dashFindWorkers.css';
+// import '../../styles/layouts/dashFindWorkers.css';
 import Mapbox from '../components/Mapbox.jsx';
-import MapboxWorkerPopup from '../components/MapWorkerPopup.jsx';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 function DashFindWorkers() {
   const [workers, setWorkers] = useState([]);
-  const reduxShowPopup = useSelector((state) => state.mapboxPopupReducer.show);
-  console.log('redux show popup');
-  console.log(reduxShowPopup);
+  // const reduxShowPopup = useSelector((state) => state.mapboxPopupReducer.show);
+  // console.log('redux show popup');
+  // console.log(reduxShowPopup);
 
   useEffect(() => {
     axios
@@ -25,11 +24,12 @@ function DashFindWorkers() {
 
   console.log('dashFindWorkers workers:');
   console.log(workers);
+
   return (
-    <div className='dashFindWorkers'>
+    <div className='map-container'>
       {/* <Mapbox /> */}
       {workers.length > 0 && <Mapbox dataType='workers' locationData={workers} />}
-      {reduxShowPopup ? <MapboxWorkerPopup /> : null}
+      {/* {reduxShowPopup ? <MapboxWorkerPopup /> : null} */}
     </div>
   );
 }

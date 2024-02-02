@@ -1,61 +1,82 @@
-.dashMyJobs {
-  border: 1px solid black;
-}
-
-.my-job__list {
-  border: 1px solid red;
-}
-
-.my-job {
-  border: 1px solid blue;
+.jobs {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-outer);
+  padding: 2rem;
   display: flex;
-  justify-content: space-between;
-  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
 }
 
-.my-job__slides {
+.job {
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  border-radius: var(--radius-inner);
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
-.my-job__pic {
+.job__image {
+  padding: 5px;
+  min-width: 20%;
+  display: flex;
+  justify-content: center;
 }
 
-.my-job__details {
+.job__pic {
+  border-radius: var(--radius-inner);
 }
 
-.my-job__type {
+.job__divider {
+  display: block;
+  width: 3px;
+  height: 70%;
+  align-self: center;
+  background-color: var(--color-text-dark);
+  /* background-image: var(--color-btn-blue); */
 }
 
-.my-job__size {
+.job__content {
+  display: flex;
+  padding: 5px;
+  width: 80%;
+  height: 100%;
+  justify-content: space-around;
 }
 
-.my-job__status {
+.job__details {
+  display: flex;
+  flex-direction: column;
 }
 
-.my-job__instructions {
+.job__header {
+  align-self: center;
+  padding: 5px;
+  position: relative;
 }
 
-.my-job__header {
+.job__header::after {
+  content: '';
+  position: absolute;
+  display: block;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-text-dark);
 }
 
-.my-job__instruction {
+.job__instructions {
+  display: flex;
+  flex-direction: column;
 }
 
-.my-job__address {
+.job__subscribed {
+  display: flex;
+  flex-direction: column;
 }
 
-.my-job__street {
-}
-
-.my-job__city {
-}
-
-.my-job__state {
-}
-
-.my-job__zip {
-}
-
-.my-job__options {
+.job__options {
   display: flex;
   flex-direction: column;
 }

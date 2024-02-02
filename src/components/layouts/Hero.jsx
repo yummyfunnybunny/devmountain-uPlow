@@ -6,15 +6,12 @@ function Hero() {
   return (
     <div className='hero'>
       <div className='hero__bg'>
-        <img
-          className='hero__img'
-          src='https://wallpapers.com/images/hd/snowplow-1920-x-1080-wallpaper-92c9mfv6oblv7d17.jpg'
-        ></img>
+        <img className='hero__img' src='./hero-img.jpg'></img>
       </div>
       <div className='hero__content'>
         <div className='hero__left'>
           <h1 className='hero__title'>uPlow</h1>
-          <h3 className='hero__slogan'>snow removal servicing, mondernized</h3>
+          <h2 className='hero__slogan'>An app that helps you easily connect plowers and property owners in need!</h2>
         </div>
         <div className='hero__right'>
           <h1>Get started now!</h1>

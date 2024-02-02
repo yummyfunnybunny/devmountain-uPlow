@@ -40,6 +40,7 @@ TODO:
 - RENAME: change all redux variable names to 'reduxName'
 - CONDENSE: combine all modal form states into single states that can be updated with a single onChange function
 - CONDENSE: change all dispatch functions to use the spread operator instead of listing each attribute
+- CONDENSE: combine css files (dashMyProperties & property)
 
 STRETCH:
 

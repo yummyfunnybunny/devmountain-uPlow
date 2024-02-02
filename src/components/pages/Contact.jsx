@@ -1,8 +1,10 @@
 function Contact() {
   return (
-    <div>
-      <h1>Contact</h1>
-    </div>
+    <container className='page__container'>
+      <container className='page__section'>
+        <h1>Contact</h1>
+      </container>
+    </container>
   );
 }
 

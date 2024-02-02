@@ -6,7 +6,6 @@ import propertyReducer from './propertyReducer.js';
 import jobReducer from './jobReducer.js';
 import findJobsReducer from './findJobsReducer.js';
 import workerReducer from './workerReducer.js';
-import mapboxPopupReducer from './mapboxPopupReducer.js';
 import alertReducer from './alertReducer.js';
 
 export default configureStore({
@@ -18,7 +17,6 @@ export default configureStore({
     jobReducer: jobReducer,
     findJobsReducer: findJobsReducer,
     workerReducer: workerReducer,
-    mapboxPopupReducer: mapboxPopupReducer,
     alertReducer: alertReducer,
   },
 });

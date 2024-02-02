@@ -1,5 +1,5 @@
 .form {
-  border: 1px solid black;
+  /* border: 1px solid red; */
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -7,14 +7,47 @@
   justify-content: center;
 }
 
-.form--auth {
-  /* height: 30rem; */
-  padding: 5rem 0;
-  width: 40rem;
+.form--signup {
+  /* border: 1px solid red; */
+  display: flex;
+}
+
+.form--login {
 }
 
 .form__header {
+  /* border: 1px solid red; */
+  color: var(--color-text-light);
   margin: 2rem;
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.form__header::after {
+  content: '';
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 0;
+  /* left: 50%; */
+  width: 60%;
+  height: 5px;
+  background-color: var(--color-text-light);
+}
+
+.form__column {
+  /* border: 1px solid blue; */
+  padding: 3rem 3rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 2px;
+}
+
+.form__subheader {
+  margin-bottom: 1rem;
 }
 
 .form__row {
@@ -22,18 +55,24 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 1rem;
+  margin: 0.5rem;
+}
+
+.form__row--btn {
+  padding: 1rem;
+  /* border: 1px solid red; */
 }
 
 .form__label {
   /* border: 1px solid blue; */
-  width: 30%;
+  width: 50%;
   text-align: right;
 }
 
 .form__input {
   /* border: 1px solid pink; */
-  width: 30%;
+  width: 50%;
+  min-width: 10rem;
 }
 .form__textarea {
   resize: none;

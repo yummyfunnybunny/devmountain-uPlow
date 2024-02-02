@@ -1,7 +1,7 @@
-import '../../styles/layouts/dashFindJobs.css';
+// import '../../styles/layouts/dashFindJobs.css';
 import Mapbox from '../components/Mapbox.jsx';
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 function DashFindJobs() {
@@ -24,7 +24,7 @@ function DashFindJobs() {
   console.log(availableJobs);
 
   return (
-    <div className='dashFindJobs'>
+    <div className='map-container'>
       {availableJobs.length > 0 && <Mapbox dataType='jobs' locationData={availableJobs} />}
     </div>
   );

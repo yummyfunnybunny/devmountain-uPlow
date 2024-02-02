@@ -19,7 +19,7 @@ function Footer() {
         <FontAwesomeIcon className='footer__social-icon' icon={faSnowplow} size='2x' />
       </div>
       <div className='footer__center'>
-        <FontAwesomeIcon className='navbar__logo--icon' icon={faSnowplow} size='3x' />
+        <FontAwesomeIcon className='footer__logo--icon' icon={faSnowplow} size='3x' />
         <p>&#169; 2024 Jake Nichols USA, inc. All rights reserved.</p>
       </div>
       <div className='footer__links'>

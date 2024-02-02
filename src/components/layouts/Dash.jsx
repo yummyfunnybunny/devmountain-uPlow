@@ -1,4 +1,4 @@
-import '../../styles/layouts/dash.css';
+// import '../../styles/layouts/dash.css';
 import { useSelector } from 'react-redux';
 import Home from './DashHome.jsx';
 import Alerts from './DashAlerts.jsx';
@@ -16,7 +16,7 @@ function Dash() {
   // console.log(dashMode);
 
   return (
-    <div className='dash'>
+    <div className='dash glass-1'>
       {dashMode === 'HOME' ? <Home /> : <></>}
       {dashMode === 'ALERTS' ? <Alerts /> : <></>}
       {dashMode === 'MESSAGES' ? <Messages /> : <></>}

@@ -6,24 +6,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Dashboard() {
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   axios
-  //     .get('/isLoggedIn')
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       navigate('/');
-  //     });
-  // }, []);
   return (
-    <div className='dashboard'>
-      <DashNav />
-      <Dash />
-    </div>
+    <container className='page__container'>
+      <container className='page__section'>
+        <div className='dashboard'>
+          <DashNav />
+          <Dash />
+        </div>
+      </container>
+    </container>
   );
 }
 

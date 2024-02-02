@@ -57,185 +57,199 @@ function Signup() {
   };
 
   return (
-    <div className='container auth'>
-      <form className='form form--auth' onSubmit={(e) => submitSignup(e)}>
-        <h1 className='form__header'>Signup</h1>
+    <container className='page__container'>
+      <container className='page__section'>
+        <form className='form form--signup glass-1' onSubmit={(e) => submitSignup(e)}>
+          <h1 className='form__header'>Signup</h1>
 
-        {/* FIRST NAME */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='firstName'>
-            First Name:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='firstName'
-            name='firstName'
-            required
-            defaultValue={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          ></input>
-        </div>
+          <container className='form__row'>
+            <container className='form__column glass-2'>
+              <h2 className='form__subheader'>Personal Info</h2>
+              {/* FIRST NAME */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='firstName'>
+                  First Name:&emsp;
+                </label>
+                <input
+                  className='form__input'
+                  id='firstName'
+                  name='firstName'
+                  required
+                  defaultValue={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                ></input>
+              </container>
 
-        {/* LAST NAME */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='lastName'>
-            Last Name:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='lastName'
-            name='lastName'
-            required
-            defaultValue={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          ></input>
-        </div>
+              {/* LAST NAME */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='lastName'>
+                  Last Name:&emsp;
+                </label>
+                <input
+                  className='form__input'
+                  id='lastName'
+                  name='lastName'
+                  required
+                  defaultValue={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                ></input>
+              </container>
 
-        {/* EMAIL */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='email'>
-            Email:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='email'
-            name='email'
-            required
-            defaultValue={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
-        </div>
+              {/* EMAIL */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='email'>
+                  Email:&emsp;
+                </label>
+                <input
+                  className='form__input'
+                  id='email'
+                  name='email'
+                  required
+                  defaultValue={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                ></input>
+              </container>
 
-        {/* PHONE */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='phone'>
-            Phone:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='phone'
-            name='phone'
-            required
-            defaultValue={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          ></input>
-        </div>
+              {/* PHONE */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='phone'>
+                  Phone:&emsp;
+                </label>
+                <input
+                  className='form__input'
+                  id='phone'
+                  name='phone'
+                  required
+                  defaultValue={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                ></input>
+              </container>
 
-        {/* Street */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='street'>
-            Street:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='street'
-            name='street'
-            required
-            defaultValue={street}
-            onChange={(e) => setPhone(e.target.value)}
-          ></input>
-        </div>
+              {/* ROLE */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='account-type'>
+                  Choose Your Role:&emsp;
+                </label>
+                <select
+                  className='form__input'
+                  id='accountType'
+                  name='accountType'
+                  required
+                  defaultValue={role}
+                  onChange={(e) => setRole(e.target.value)}
+                >
+                  <option value='' disabled>
+                    - Role -
+                  </option>
+                  <option value='customer'>Customer</option>
+                  <option value='worker'>Worker</option>
+                </select>
+              </container>
+            </container>
 
-        {/* City */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='city'>
-            City:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='city'
-            name='city'
-            required
-            defaultValue={city}
-            onChange={(e) => setPhone(e.target.value)}
-          ></input>
-        </div>
+            <container className='form__column glass-2'>
+              <h2 className='form__subheader'>Address</h2>
+              {/* Street */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='street'>
+                  Street:&emsp;
+                </label>
+                <input
+                  className='form__input'
+                  id='street'
+                  name='street'
+                  required
+                  defaultValue={street}
+                  onChange={(e) => setPhone(e.target.value)}
+                ></input>
+              </container>
 
-        {/* State */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='state'>
-            State:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='state'
-            name='state'
-            required
-            defaultValue={state}
-            onChange={(e) => setPhone(e.target.value)}
-          ></input>
-        </div>
+              {/* City */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='city'>
+                  City:&emsp;
+                </label>
+                <input
+                  className='form__input'
+                  id='city'
+                  name='city'
+                  required
+                  defaultValue={city}
+                  onChange={(e) => setPhone(e.target.value)}
+                ></input>
+              </container>
 
-        {/* ZIPCODE */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='zipcode'>
-            Zipcode:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='zipcode'
-            name='zipcode'
-            required
-            defaultValue={zipcode}
-            onChange={(e) => setPhone(e.target.value)}
-          ></input>
-        </div>
+              {/* State */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='state'>
+                  State:&emsp;
+                </label>
+                <input
+                  className='form__input'
+                  id='state'
+                  name='state'
+                  required
+                  defaultValue={state}
+                  onChange={(e) => setPhone(e.target.value)}
+                ></input>
+              </container>
 
-        {/* PASSWORD */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='password'>
-            Password:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='password'
-            name='password'
-            required
-            defaultValue={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-        </div>
+              {/* ZIPCODE */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='zipcode'>
+                  Zipcode:&emsp;
+                </label>
+                <input
+                  className='form__input'
+                  id='zipcode'
+                  name='zipcode'
+                  required
+                  defaultValue={zipcode}
+                  onChange={(e) => setPhone(e.target.value)}
+                ></input>
+              </container>
+            </container>
 
-        {/* CONFIRM PASSWORD */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='confirm-password'>
-            Confirm Password:&emsp;
-          </label>
-          <input
-            className='form__input'
-            id='confirmPassword'
-            name='confirmPassword'
-            required
-            defaultValue={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          ></input>
-        </div>
+            <container className='form__column glass-2'>
+              <h2 className='form__subheader'>Password</h2>
+              {/* PASSWORD */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='password'>
+                  Password:&emsp;
+                </label>
+                <input
+                  className='form__input'
+                  id='password'
+                  name='password'
+                  required
+                  defaultValue={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></input>
+              </container>
 
-        {/* ROLE */}
-        <div className='form__row'>
-          <label className='form__label' htmlFor='account-type'>
-            Choose Your Role:&emsp;
-          </label>
-          <select
-            className='form__input'
-            id='accountType'
-            name='accountType'
-            required
-            defaultValue={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value='' disabled>
-              - Role -
-            </option>
-            <option value='customer'>Customer</option>
-            <option value='worker'>Worker</option>
-          </select>
-        </div>
-        <button className='btn btn--md' type='submit'>
-          Signup
-        </button>
-      </form>
-    </div>
+              {/* CONFIRM PASSWORD */}
+              <container className='form__row'>
+                <label className='form__label' htmlFor='confirm-password'>
+                  Confirm Password:&emsp;
+                </label>
+                <input
+                  className='form__input'
+                  id='confirmPassword'
+                  name='confirmPassword'
+                  required
+                  defaultValue={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                ></input>
+              </container>
+            </container>
+          </container>
+
+          <button className='btn btn--lg btn__success' type='submit'>
+            Signup
+          </button>
+        </form>
+      </container>
+    </container>
   );
 }
 

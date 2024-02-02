@@ -3,7 +3,9 @@ import '../../styles/layouts/features.css';
 function Features() {
   return (
     <div className='features glass-1'>
-      <h1 className='features__header'>Features</h1>
+      <h1 className='section__header'>
+        What Can <span>uPlow</span> Do For You?
+      </h1>
 
       {/* Feature 1 - [insert] */}
       <div className='feature'>
@@ -14,7 +16,7 @@ function Features() {
         </div>
         <div className='feature__content'>
           <div className='feature__frame--content glass-2'>
-            <h2 className='feature__title'>Feature 1</h2>
+            <h2 className='section__subheader'>Quickly Manage Your Properties & Jobs</h2>
             <p className='feature__description'>blah blah blah blah</p>
           </div>
         </div>
@@ -24,7 +26,7 @@ function Features() {
       <div className='feature'>
         <div className='feature__content'>
           <div className='feature__frame--content glass-2'>
-            <h2 className='feature__title'>Feature 2</h2>
+            <h2 className='section__subheader'>Easily Compare Plowers, Jobs, & Prices</h2>
             <p className='feature__description'>blah blah blah blah</p>
           </div>
         </div>
@@ -44,7 +46,7 @@ function Features() {
         </div>
         <div className='feature__content'>
           <div className='feature__frame--content glass-2'>
-            <h2 className='feature__title'>Feature 3</h2>
+            <h2 className='section__subheader'>Graphically Track Your Stats</h2>
             <p className='feature__description'>blah blah blah blah</p>
           </div>
         </div>
@@ -54,7 +56,7 @@ function Features() {
       <div className='feature'>
         <div className='feature__content'>
           <div className='feature__frame--content glass-2'>
-            <h2 className='feature__title'>Feature 4</h2>
+            <h2 className='section__subheader'>Instantly Verify And Complete Work</h2>
             <p className='feature__description'>blah blah blah blah</p>
           </div>
         </div>

@@ -6,12 +6,22 @@ import Promotions from '../layouts/Promotions.jsx';
 
 function Home() {
   return (
-    <container className='page-container'>
-      <Hero />
-      <Features />
-      <Benefits />
-      <Testimonials />
-      <Promotions />
+    <container className='page__container'>
+      <container className='page__section'>
+        <Hero />
+      </container>
+      <container className='page__section'>
+        <Features />
+      </container>
+      <container className='page__section'>
+        <Benefits />
+      </container>
+      <container className='page__section'>
+        <Testimonials />
+      </container>
+      <container className='page__section'>
+        <Promotions />
+      </container>
     </container>
   );
 }
