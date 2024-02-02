@@ -34,61 +34,61 @@ function DashAccount() {
 
         <container className='account__row'>
           <container className='account__column glass-2'>
-            <h1 className='account__subheader'>Personal Info</h1>
+            <h2 className='account__subheader'>Personal Info</h2>
             {/* FIRST NAME */}
             <div className='account__row'>
-              <h2 className='account__label'>First Name:&emsp; </h2>
+              <h3 className='account__label'>First Name:&emsp; </h3>
               <p className='account__detail'>{user.firstName}</p>
             </div>
 
             {/* LAST NAME */}
             <div className='account__row'>
-              <h2 className='account__label'>Last Name:&emsp; </h2>
+              <h3 className='account__label'>Last Name:&emsp; </h3>
               <p className='account__detail'>{user.lastName}</p>
             </div>
 
             {/* EMAIL */}
             <div className='account__row'>
-              <h2 className='account__label'>Email:&emsp; </h2>
+              <h3 className='account__label'>Email:&emsp; </h3>
               <p className='account__detail'>{user.email}</p>
             </div>
 
             {/* PHONE */}
             <div className='account__row'>
-              <h2 className='account__label'>Phone:&emsp; </h2>
+              <h3 className='account__label'>Phone:&emsp; </h3>
               <p className='account__detail'>{user.phone}</p>
             </div>
 
             {/* ROLE */}
             <div className='account__row'>
-              <h2 className='account__label'>Role:&emsp; </h2>
+              <h3 className='account__label'>Role:&emsp; </h3>
               <p className='account__detail'>{user.role}</p>
             </div>
           </container>
 
           <container className='account__column glass-2'>
-            <h1 className='account__subheader'>Address Info</h1>
+            <h2 className='account__subheader'>Address Info</h2>
             {/* STREET */}
             <div className='account__row'>
-              <h2 className='account__label'>Street:&emsp; </h2>
+              <h3 className='account__label'>Street:&emsp; </h3>
               <p className='account__detail'>{user.street}</p>
             </div>
 
             {/* CITY */}
             <div className='account__row'>
-              <h2 className='account__label'>City:&emsp; </h2>
+              <h3 className='account__label'>City:&emsp; </h3>
               <p className='account__detail'>{user.city}</p>
             </div>
 
             {/* STATE */}
             <div className='account__row'>
-              <h2 className='account__label'>State:&emsp; </h2>
+              <h3 className='account__label'>State:&emsp; </h3>
               <p className='account__detail'>{user.state}</p>
             </div>
 
             {/* ZIPCODE */}
             <div className='account__row'>
-              <h2 className='account__label'>Zipcode:&emsp; </h2>
+              <h3 className='account__label'>Zipcode:&emsp; </h3>
               <p className='account__detail'>{user.zipcode}</p>
             </div>
           </container>

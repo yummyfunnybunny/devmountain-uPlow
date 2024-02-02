@@ -559,7 +559,7 @@ function Modal() {
     case 'LOGOUT':
       return (
         <div className='modal__bg'>
-          <div className='modal'>
+          <div className='modal glass-1'>
             <div className='modal__row'>
               <h2>Are you sure you want to logout?</h2>
             </div>

@@ -1,5 +1,5 @@
 .modal__bg {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   position: fixed;
   z-index: 1;
   left: 0;
