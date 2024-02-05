@@ -31,6 +31,10 @@ export default {
       user: newUser,
       message: "you've successfully created a new account!",
       redirectUri: '/dashboard',
+      toast: {
+        color: 'green',
+        message: 'Your account has been created!',
+      },
     });
   },
   login: async (req, res) => {
@@ -56,6 +60,10 @@ export default {
         user: user,
         message: 'login successful!',
         redirectUri: '/dashboard',
+        toast: {
+          color: 'green',
+          message: 'You have successfully logged in!',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -68,6 +76,10 @@ export default {
 
       res.status(200).send({
         message: 'You have successfully logged out',
+        toast: {
+          color: 'green',
+          message: 'You have successfully logged out!',
+        },
       });
     }
   },
@@ -93,11 +105,19 @@ export default {
         res.status(400).send({
           success: false,
           message: 'password info incorrect. please try again',
+          toast: {
+            color: 'red',
+            message: 'The password info you entered was incorrect. Please try again.',
+          },
         });
       }
       res.status(200).send({
         success: true,
         message: 'updated your password successfully',
+        toast: {
+          color: 'green',
+          message: 'You have successfully updated your password!',
+        },
       });
     } catch (err) {
       console.log(err);

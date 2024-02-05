@@ -51,6 +51,10 @@ export default {
     res.status(200).send({
       message: 'your information has been updated successfully',
       user: editUser,
+      toast: {
+        color: 'green',
+        message: 'Your account info has been updated!',
+      },
     });
   },
   deleteMe: async (req, res) => {
@@ -91,6 +95,10 @@ export default {
         success: true,
         message: 'your account has been successfully deleted',
         redirectUri: '/',
+        toast: {
+          color: 'green',
+          message: 'Your account has been successfully deleted!',
+        },
       });
     } catch (err) {
       console.log(err);

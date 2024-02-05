@@ -60,6 +60,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'Job successfully created',
+        toast: {
+          color: 'green',
+          message: 'Your job has been successfully created!',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -85,6 +89,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'job successfully updated',
+        toast: {
+          color: 'green',
+          message: 'Your job has been updated!',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -104,6 +112,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'Job was successfully deleted',
+        toast: {
+          color: 'green',
+          message: 'Your job has been deleted!',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -139,6 +151,10 @@ export default {
       res.status(200).send({
         success: true,
         message: "you've successfully unsubscribed the worker from this job",
+        toast: {
+          color: 'green',
+          message: 'You have unsubscribed a worker from your job!',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -187,6 +203,10 @@ export default {
         return res.status(200).send({
           success: false,
           message: 'This job is no longer available. Someone else may have already accepted this job.',
+          toast: {
+            color: 'red',
+            message: 'This job is no longer available.',
+          },
         });
       }
 
@@ -214,6 +234,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'You have successfully subscribed to this job!',
+        toast: {
+          color: 'green',
+          message: 'You have subscribed to this job! see it in your subscriptions tab!',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -249,6 +273,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'you have accepted the workers service offer!',
+        toast: {
+          color: 'green',
+          message: "You have accepted the workers' service offer!",
+        },
       });
     } catch (err) {
       console.log(err);

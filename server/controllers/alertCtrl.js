@@ -67,6 +67,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'You have successfully requested the services of this worker!',
+        toast: {
+          color: 'green',
+          message: 'You have requested service from a worker!',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -112,6 +116,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'You have successfully requested to services this job!',
+        toast: {
+          color: 'green',
+          message: 'You have requested to service a job!',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -140,6 +148,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'You have successfully rejected this job offer',
+        toast: {
+          color: 'green',
+          message: 'You have successfully rejected a customers request for service.',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -168,6 +180,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'You have successfully rejected this service offer',
+        toast: {
+          color: 'green',
+          message: 'You have successfully rejected a workers request to service one of your jobs.',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -182,6 +198,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'alert was successfully deleted',
+        toast: {
+          color: 'green',
+          message: 'Alert successfully deleted.',
+        },
       });
     } catch (err) {
       console.log(err);

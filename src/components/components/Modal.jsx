@@ -36,8 +36,8 @@ function Modal() {
   // console.log(user);
   // console.log('Redux Property:');
   // console.log(property);
-  console.log('Redux Jobs:');
-  console.log(job);
+  // console.log('Redux Jobs:');
+  // console.log(job);
   // console.log('Redux Worker:');
   // console.log(worker);
   // console.log('Redux Alert:');
@@ -131,6 +131,7 @@ function Modal() {
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_LOGGED_IN' });
         navigate('/');
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
         // TODO - display success toast
       })
       .catch((err) => {
@@ -182,6 +183,7 @@ function Modal() {
         // setUser(res.data.user);
         dispatch({ type: 'SET_LOGGED_IN', payload: { ...res.data.user } });
         dispatch({ type: 'NONE' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -202,6 +204,7 @@ function Modal() {
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -228,7 +231,7 @@ function Modal() {
         dispatch({ type: 'RESET_LOGGED_IN' });
         dispatch({ type: 'NONE' });
         navigate(res.data.redirectUri);
-        // TODO - display toast notification
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -244,7 +247,6 @@ function Modal() {
       state: newPropertyState,
       zipcode: newPropertyZipcode,
       // TODO - add pictures
-      // TODO - add coordinates
     };
 
     const mapboxToken =
@@ -275,6 +277,7 @@ function Modal() {
         setNewPropertyState('');
         setNewPropertyZipcode('');
         dispatch({ type: 'NONE' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
@@ -317,6 +320,7 @@ function Modal() {
       })
       .then((res) => {
         console.log(res.data);
+        // TODO - change this dispatch to send the whole res object instead
         dispatch({
           type: 'SET_PROPERTY',
           payload: {
@@ -382,6 +386,7 @@ function Modal() {
         setNewJobInstructions2('');
         setNewJobInstructions3('');
         dispatch({ type: 'NONE' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -418,6 +423,7 @@ function Modal() {
             ...editJob,
           },
         });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
         dispatch({ type: 'NONE' });
       })
       .catch((err) => {
@@ -436,6 +442,7 @@ function Modal() {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_JOB' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -452,6 +459,7 @@ function Modal() {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_JOB' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -470,6 +478,7 @@ function Modal() {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_WORKER' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -484,6 +493,7 @@ function Modal() {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_ALERT' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -497,6 +507,7 @@ function Modal() {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_ALERT' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -511,6 +522,7 @@ function Modal() {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_WORKER' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -526,6 +538,7 @@ function Modal() {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_ALERT' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -541,6 +554,7 @@ function Modal() {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_ALERT' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -554,6 +568,7 @@ function Modal() {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_ALERT' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
@@ -920,8 +935,10 @@ function Modal() {
           {/* JOB TYPE */}
           <div className='form__row'>
             <label className='form__label'>Job Type:&emsp;</label>
-            <select className='form__input' onChange={(e) => setNewJobType(e.target.value)}>
-              <option disabled>- choose type -</option>
+            <select className='form__input' defaultValue={newJobType} onChange={(e) => setNewJobType(e.target.value)}>
+              <option value='' disabled>
+                - choose type -
+              </option>
               <option value='driveway'>Driveway</option>
               <option value='parking-lot'>Parking Lot</option>
               <option value='sidewalk'>Sidewalk</option>
@@ -934,26 +951,37 @@ function Modal() {
           {/* JOB SIZE */}
           <div className='form__row'>
             <label className='form__label'>Job Size-({newJobSizeMeasure}):&emsp;</label>
-            <input className='form__input' onChange={(e) => setNewJobSize(e.target.value)}></input>
+            <input className='form__input' required onChange={(e) => setNewJobSize(e.target.value)}></input>
           </div>
 
           {/* PICTURES */}
           <div className='form__row'>
             <label className='form__label'>Add Picture:&emsp;</label>
-            <input className='form__input' onChange={(e) => setNewJobPicture(e.target.value)}></input>
+            <input className='form__input' required onChange={(e) => setNewJobPicture(e.target.value)}></input>
           </div>
 
           {/* INSTRUCTIONS */}
-          <label className='form__label'>Instructions:&emsp;</label>
-          <p className='form__label'>Separate individual instructions with a period.</p>
+          <label className='form__subheader'>Instructions:&emsp;</label>
           <div className='form__row'>
-            <input className='form__input' onChange={(e) => setNewJobInstructions1(e.target.value)}></input>
+            <input
+              className='form__input'
+              defaultValue={newJobInstructions1}
+              onChange={(e) => setNewJobInstructions1(e.target.value)}
+            ></input>
           </div>
           <div className='form__row'>
-            <input className='form__input' onChange={(e) => setNewJobInstructions2(e.target.value)}></input>
+            <input
+              className='form__input'
+              defaultValue={newJobInstructions2}
+              onChange={(e) => setNewJobInstructions2(e.target.value)}
+            ></input>
           </div>
           <div className='form__row'>
-            <input className='form__input' onChange={(e) => setNewJobInstructions3(e.target.value)}></input>
+            <input
+              className='form__input'
+              defaultValue={newJobInstructions3}
+              onChange={(e) => setNewJobInstructions3(e.target.value)}
+            ></input>
           </div>
 
           {/* BUTTONS */}
