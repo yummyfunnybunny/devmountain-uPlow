@@ -58,6 +58,10 @@ export default {
     res.status(200).send({
       success: true,
       message: 'Property was created successfully',
+      toast: {
+        color: 'green',
+        message: 'Your property has been created!',
+      },
     });
   },
   editProperty: async (req, res) => {
@@ -78,6 +82,10 @@ export default {
         success: true,
         message: 'property updated successfully',
         property: editProperty,
+        toast: {
+          color: 'green',
+          message: 'Your property has been updated!',
+        },
       });
     } catch (err) {
       console.log(err);
@@ -106,6 +114,10 @@ export default {
       res.status(200).send({
         success: true,
         message: 'Property was successfully deleted',
+        toast: {
+          color: 'green',
+          message: 'Your property has been deleted!',
+        },
       });
     } catch (err) {
       console.log(err);

@@ -275,9 +275,11 @@ function Modal() {
         setNewPropertyState('');
         setNewPropertyZipcode('');
         dispatch({ type: 'NONE' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
+        dispatch({ type: 'SET_TOAST', payload: { color: 'red', message: 'Something went wrong. Please try again.' } });
       });
   };
   const submitEditProperty = (e) => {
@@ -326,10 +328,12 @@ function Modal() {
             zipcode: editPropertyZipcode,
           },
         });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
         dispatch({ type: 'NONE' });
       })
       .catch((err) => {
         console.log(err);
+        // dispatch({ type: 'SET_TOAST', payload: { color: 'red', message: 'Something went wrong. Please try again.' } });
       });
   };
   const submitDeleteProperty = (e) => {
@@ -344,9 +348,11 @@ function Modal() {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_PROPERTY' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
         console.log(err);
+        dispatch({ type: 'SET_TOAST', payload: { color: 'red', message: 'Something went wrong. Please try again.' } });
       });
   };
   const submitCreateJob = (e) => {

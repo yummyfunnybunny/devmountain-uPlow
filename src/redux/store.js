@@ -7,6 +7,7 @@ import jobReducer from './jobReducer.js';
 import findJobsReducer from './findJobsReducer.js';
 import workerReducer from './workerReducer.js';
 import alertReducer from './alertReducer.js';
+import toastReducer from './toastReducer.js';
 
 export default configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export default configureStore({
     findJobsReducer: findJobsReducer,
     workerReducer: workerReducer,
     alertReducer: alertReducer,
+    toastReducer: toastReducer,
   },
 });
