@@ -1,4 +1,4 @@
-import '../../styles/pages/auth.css';
+// import '../../styles/pages/auth.css';
 import '../../styles/components/form.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -51,6 +51,7 @@ function Login() {
                 id='email'
                 name='email'
                 required
+                autoFocus
                 defaultValue={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>

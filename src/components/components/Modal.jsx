@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { StateDropdown } from '../../../scripts/forms.jsx';
 
 function Modal() {
   // INITS
@@ -10,90 +11,88 @@ function Modal() {
   const navigate = useNavigate();
 
   // SELECTORS
-  // TODO - rename these redux[name]
-  const modal = useSelector((state) => state.modalReducer.modalType);
-  const user = useSelector((state) => state.loggedInReducer);
-  const property = useSelector((state) => state.propertyReducer);
-  const job = useSelector((state) => state.jobReducer);
-  const worker = useSelector((state) => state.workerReducer);
-  const alert = useSelector((state) => state.alertReducer);
+  const reduxModal = useSelector((state) => state.modalReducer.modalType);
+  const reduxUser = useSelector((state) => state.loggedInReducer);
+  const reduxProperty = useSelector((state) => state.propertyReducer);
+  const reduxJob = useSelector((state) => state.jobReducer);
+  const reduxWorker = useSelector((state) => state.workerReducer);
+  const reduxAlert = useSelector((state) => state.alertReducer);
+
+  // STATE VARIABLES
   const [myJobs, setMyJobs] = useState([]);
+  const [jobToRequestWorker, setJobToRequestWorker] = useState('');
+  const [user, setUser] = useState({
+    firstName: reduxUser.firstName,
+    lastName: reduxUser.lastName,
+    email: reduxUser.email,
+    phone: reduxUser.phone,
+    street: reduxUser.phone,
+    city: reduxUser.city,
+    state: reduxUser.state,
+    zipcode: reduxUser.zipcode,
+    password: '',
+    confirmPassword: '',
+    oldPassword: '',
+    newPassword: '',
+  });
+
+  const [newProperty, setNewProperty] = useState({
+    name: '',
+    street: '',
+    city: '',
+    state: '',
+    zipcode: '',
+    picture: '',
+  });
+  const [editProperty, setEditProperty] = useState({
+    name: reduxProperty.name,
+    street: reduxProperty.street,
+    city: reduxProperty.city,
+    state: reduxProperty.state,
+    zipcode: reduxProperty.zipcode,
+    picture: reduxProperty.picture,
+  });
+  const [newJob, setNewJob] = useState({
+    jobType: '',
+    jobSize: '',
+    pictures: '',
+    instructions1: '',
+    instructions2: '',
+    instructions3: '',
+  });
+  const [editJob, setEditJob] = useState({
+    job_id: reduxJob.job_id,
+    jobType: reduxJob.jobType,
+    jobSize: reduxJob.jobSize,
+    pictures: reduxJob.picture,
+    instructions1: reduxJob.instructions[0],
+    instructions2: reduxJob.instructions[1],
+    instructions3: reduxJob.instructions[2],
+  });
+  console.log(editJob);
 
   useEffect(() => {
     axios
       .get('/myJobsWithProperties')
       .then((res) => {
-        console.log(res.data.jobsWithProperties);
         setMyJobs(res.data.jobsWithProperties);
-        // myJobs = [...res.data.jobs];
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  // console.log('Redux User:');
-  // console.log(user);
-  // console.log('Redux Property:');
-  // console.log(property);
-  // console.log('Redux Jobs:');
-  // console.log(job);
-  // console.log('Redux Worker:');
-  // console.log(worker);
-  // console.log('Redux Alert:');
-  // console.log(alert);
-
-  // STATE VARIABLES
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [email, setEmail] = useState(user.email);
-  const [phone, setPhone] = useState(user.phone);
-  const [street, setStreet] = useState(user.street);
-  const [city, setCity] = useState(user.city);
-  const [state, setState] = useState(user.state);
-  const [zipcode, setZipcode] = useState(user.zipcode);
-
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-
-  // TODO - can you combine these sets of states?
-  const [newPropertyName, setNewPropertyName] = useState('');
-  const [newPropertyStreet, setNewPropertyStreet] = useState('');
-  const [newPropertyCity, setNewPropertyCity] = useState('');
-  const [newPropertyState, setNewPropertyState] = useState('');
-  const [newPropertyZipcode, setNewPropertyZipcode] = useState('');
-  const [newPropertyPicture, setNewPropertyPicture] = useState('');
-
-  const [editPropertyName, setEditPropertyName] = useState(property.name);
-  const [editPropertyStreet, setEditPropertyStreet] = useState(property.street);
-  const [editPropertyCity, setEditPropertyCity] = useState(property.city);
-  const [editPropertyState, setEditPropertyState] = useState(property.state);
-  const [editPropertyZipcode, setEditPropertyZipcode] = useState(property.zipcode);
-  const [editPropertyPicture, setEditPropertyPicture] = useState(property.picture);
-
-  // TODO - can you combine these sets of states?
-
-  const [newJobType, setNewJobType] = useState('');
-  const [newJobSize, setNewJobSize] = useState('');
-  const [newJobPicture, setNewJobPicture] = useState('');
-  const [newJobInstructions1, setNewJobInstructions1] = useState(['']);
-  const [newJobInstructions2, setNewJobInstructions2] = useState(['']);
-  const [newJobInstructions3, setNewJobInstructions3] = useState(['']);
-
-  const [editJobType, setEditJobType] = useState(job.jobType);
-  const [editJobSize, setEditJobSize] = useState(job.jobSize);
-  const [editJobPicture, setEditJobPicture] = useState(job.picture);
-  const [editJobInstructions1, setEditJobInstructions1] = useState(job.instructions[0] || '');
-  const [editJobInstructions2, setEditJobInstructions2] = useState(job.instructions[1] || '');
-  const [editJobInstructions3, setEditJobInstructions3] = useState(job.instructions[2] || '');
-
-  const [jobToRequestWorker, setJobToRequestWorker] = useState('');
+  // update state handler
+  const handleChange = (e, setState, state) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   // TODO - see if you can combine these two switch statements
   let newJobSizeMeasure = '';
-  switch (newJobType) {
+  switch (newJob.jobType) {
     case 'driveway':
     case 'roof':
     case 'pond':
@@ -106,9 +105,12 @@ function Modal() {
     case 'parking-lot':
       newJobSizeMeasure = 'spaces';
       break;
+    default:
+      newJobSizeMeasure = '';
+      break;
   }
   let editJobSizeMeasure = '';
-  switch (editJobType) {
+  switch (editJob.jobType) {
     case 'driveway':
     case 'roof':
     case 'pond':
@@ -121,17 +123,22 @@ function Modal() {
     case 'parking-lot':
       editJobSizeMeasure = 'spaces';
       break;
+    default:
+      editJobSizeMeasure = '';
+      break;
   }
 
-  const submitLogout = () => {
+  const submitLogout = (e) => {
+    e.preventDefault();
+    console.log('== submit logout == ');
     axios
-      .post('/logout')
+      .get('/logout')
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_LOGGED_IN' });
-        navigate('/');
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
+        navigate('/');
         // TODO - display success toast
       })
       .catch((err) => {
@@ -140,46 +147,46 @@ function Modal() {
       });
   };
   const submitEditAccount = (e) => {
-    console.log('submit edit account');
+    // console.log('submit edit account');
     e.preventDefault();
 
     const edittedUser = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone: phone,
-      street: street,
-      city: city,
-      state: state,
-      zipcode: zipcode,
-      user_id: user.user_id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
       role: user.role,
+      street: user.street,
+      city: user.city,
+      state: user.state,
+      zipcode: user.zipcode,
+      user_id: user.user_id,
     };
 
-    console.log('Edited User:');
-    console.log(edittedUser);
+    // console.log('Edited User:');
+    // console.log(edittedUser);
 
     const mapboxToken =
       'pk.eyJ1IjoieXVtbXlmdW5ueWJ1bm55IiwiYSI6ImNrODZwNzQydDA1bjEzZW15NTRqa2NpdnEifQ.6y8NFU2qjw6mTgINZYaRyg';
 
-    const address = encodeURI(`${street} ${city} ${state} ${zipcode}`);
-    console.log(address);
+    const address = encodeURI(`${edittedUser.street} ${edittedUser.city} ${edittedUser.state} ${edittedUser.zipcode}`);
+    // console.log(address);
 
     const mapBoxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?proximity=ip&access_token=${mapboxToken}`;
 
     axios
       .get(mapBoxUrl)
       .then((res) => {
-        console.log('== 1st then ==');
-        console.log(res.data);
+        // console.log('== 1st then ==');
+        // console.log(res.data);
         const coordinates = res.data.features[0].center;
         // console.log(coordinates);
         edittedUser.coordinates = coordinates;
-        console.log(edittedUser);
+        // console.log(edittedUser);
         return axios.put('/me', edittedUser);
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         // setUser(res.data.user);
         dispatch({ type: 'SET_LOGGED_IN', payload: { ...res.data.user } });
         dispatch({ type: 'NONE' });
@@ -190,12 +197,13 @@ function Modal() {
       });
   };
   const submitChangePassword = (e) => {
+    console.log('== submit change password ==');
     e.preventDefault();
 
     const edittedUser = {
       ...user,
-      oldPassword: oldPassword,
-      newPassword: newPassword,
+      oldPassword: user.oldPassword,
+      newPassword: user.newPassword,
     };
     console.log(edittedUser);
 
@@ -215,17 +223,18 @@ function Modal() {
 
     const deleteUser = {
       ...user,
-      password: password,
-      confirmPassword: confirmPassword,
+      password: user.password,
+      confirmPassword: user.confirmPassword,
     };
     console.log(deleteUser);
 
-    if (password !== confirmPassword) {
+    if (deleteUser.password !== deleteUser.confirmPassword) {
       console.log('passwords do not match!');
+      dispatch({ type: 'SET_TOAST', payload: { color: 'red', message: 'The passwords you entered do not match' } });
       return;
     }
     axios
-      .delete(`/me/${password}`, deleteUser)
+      .delete(`/me/${deleteUser.password}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'RESET_LOGGED_IN' });
@@ -235,103 +244,101 @@ function Modal() {
       })
       .catch((err) => {
         console.log(err);
+        dispatch({ type: 'SET_TOAST', payload: err.response.data.toast });
       });
   };
   const submitCreateProperty = (e) => {
     e.preventDefault();
 
     const createProperty = {
-      name: newPropertyName,
-      street: newPropertyStreet,
-      city: newPropertyCity,
-      state: newPropertyState,
-      zipcode: newPropertyZipcode,
+      name: newProperty.name,
+      street: newProperty.street,
+      city: newProperty.city,
+      state: newProperty.state,
+      zipcode: newProperty.zipcode,
       // TODO - add pictures
     };
 
-    const mapboxToken =
-      'pk.eyJ1IjoieXVtbXlmdW5ueWJ1bm55IiwiYSI6ImNrODZwNzQydDA1bjEzZW15NTRqa2NpdnEifQ.6y8NFU2qjw6mTgINZYaRyg';
+    const mapboxToken = import.meta.env.VITE_REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-    const address = encodeURI(`${newPropertyStreet} ${newPropertyCity} ${newPropertyState} ${newPropertyZipcode}`);
-    console.log(address);
+    const address = encodeURI(
+      `${createProperty.street} ${createProperty.city} ${createProperty.state} ${createProperty.zipcode}`
+    );
+    // console.log(address);
 
     const mapBoxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?proximity=ip&access_token=${mapboxToken}`;
 
     axios
       .get(mapBoxUrl)
       .then((res) => {
-        console.log('== 1st then ==');
-        console.log(res.data);
+        // console.log('== 1st then ==');
+        // console.log(res.data);
         const coordinates = res.data.features[0].center;
         // console.log(coordinates);
         createProperty.coordinates = coordinates;
-        console.log(createProperty);
+        // console.log(createProperty);
         return axios.post('/properties', createProperty);
       })
       .then((res) => {
-        console.log('== 2nd then ==');
-        console.log(res.data);
-        setNewPropertyName('');
-        setNewPropertyStreet('');
-        setNewPropertyCity('');
-        setNewPropertyState('');
-        setNewPropertyZipcode('');
+        // console.log('== 2nd then ==');
         dispatch({ type: 'NONE' });
-        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
+        dispatch({ type: 'RESET_PROPERTY' });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         dispatch({ type: 'SET_TOAST', payload: { color: 'red', message: 'Something went wrong. Please try again.' } });
       });
   };
   const submitEditProperty = (e) => {
     e.preventDefault();
 
-    const editProperty = {
-      ...property,
-      name: editPropertyName,
+    const propertyObject = {
+      ...reduxProperty,
+      name: editProperty.name,
       // picture: editPropertyPicture,
-      street: editPropertyStreet,
-      city: editPropertyCity,
-      state: editPropertyState,
-      zipcode: editPropertyZipcode,
+      street: editProperty.street,
+      city: editProperty.city,
+      state: editProperty.state,
+      zipcode: editProperty.zipcode,
     };
 
-    const mapboxToken =
-      'pk.eyJ1IjoieXVtbXlmdW5ueWJ1bm55IiwiYSI6ImNrODZwNzQydDA1bjEzZW15NTRqa2NpdnEifQ.6y8NFU2qjw6mTgINZYaRyg';
+    const mapboxToken = import.meta.env.VITE_REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-    const address = encodeURI(`${editPropertyStreet} ${editPropertyCity} ${editPropertyState} ${editPropertyZipcode}`);
-    console.log(address);
+    const address = encodeURI(
+      `${propertyObject.street} ${propertyObject.city} ${propertyObject.state} ${propertyObject.zipcode}`
+    );
+    // console.log(address);
 
     const mapBoxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?proximity=ip&access_token=${mapboxToken}`;
-    console.log(editProperty);
+    // console.log(propertyObject);
 
     axios
       .get(mapBoxUrl)
       .then((res) => {
-        console.log('== 1st then ==');
-        console.log(res.data);
+        // console.log('== 1st then ==');
+        // console.log(res.data);
         const coordinates = res.data.features[0].center;
         // console.log(coordinates);
-        editProperty.coordinates = coordinates;
-        console.log(editProperty);
-        return axios.put('/properties', editProperty);
+        propertyObject.coordinates = coordinates;
+        // console.log(propertyObject);
+        return axios.put('/properties', propertyObject);
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         // TODO - change this dispatch to send the whole res object instead
-        dispatch({
-          type: 'SET_PROPERTY',
-          payload: {
-            name: editPropertyName,
-            picture: editPropertyPicture,
-            street: editPropertyStreet,
-            city: editPropertyCity,
-            state: editPropertyState,
-            zipcode: editPropertyZipcode,
-          },
-        });
+        // dispatch({
+        //   type: 'SET_PROPERTY',
+        //   payload: {
+        //     name: editPropertyName,
+        //     picture: editPropertyPicture,
+        //     street: editPropertyStreet,
+        //     city: editPropertyCity,
+        //     state: editPropertyState,
+        //     zipcode: editPropertyZipcode,
+        //   },
+        // });
+        dispatch({ type: 'RESET_PROPERTY' });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
         dispatch({ type: 'NONE' });
       })
@@ -343,7 +350,7 @@ function Modal() {
   const submitDeleteProperty = (e) => {
     e.preventDefault();
 
-    const propertyId = property.property_id;
+    const propertyId = reduxProperty.property_id;
     console.log(propertyId);
 
     axios
@@ -363,28 +370,22 @@ function Modal() {
     console.log('== submit create job form ==');
     e.preventDefault();
 
-    const instructionsArray = [newJobInstructions1, newJobInstructions2, newJobInstructions3];
+    const instructionsArray = [newJob.instructions1, newJob.instructions2, newJob.instructions3];
 
     const createJob = {
-      jobType: newJobType,
-      jobSize: newJobSize,
+      jobType: newJob.jobType,
+      jobSize: newJob.jobSize,
       picture: 'img123',
-      coordinates: property.coordinates,
+      coordinates: reduxProperty.coordinates,
       instructions: instructionsArray,
       subscribed: null,
-      property_id: property.property_id,
+      property_id: reduxProperty.property_id,
     };
 
     axios
       .post('/jobs', createJob)
       .then((res) => {
         console.log(res.data);
-        setNewJobType('');
-        setNewJobSize('');
-        setNewJobPicture('');
-        setNewJobInstructions1('');
-        setNewJobInstructions2('');
-        setNewJobInstructions3('');
         dispatch({ type: 'NONE' });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
@@ -395,32 +396,23 @@ function Modal() {
   const submitEditJob = (e) => {
     e.preventDefault();
 
-    const instructionsArray = [editJobInstructions1, editJobInstructions2, editJobInstructions3];
+    const instructionsArray = [editJob.instructions1, editJob.instructions2, editJob.instructions3];
 
-    const editJob = {
-      ...job,
-      jobType: editJobType,
-      jobSize: editJobSize,
-      picture: 'img123',
+    const jobObject = {
+      ...editJob,
+      jobType: editJob.jobType,
+      jobSize: editJob.jobSize,
+      // picture: 'img123',
       instructions: instructionsArray,
-      subscribed: null,
-      // property_id: property.property_id,
     };
 
     axios
-      .put('/jobs', editJob)
+      .put('/jobs', jobObject)
       .then((res) => {
-        console.log(res.data);
-        setEditJobType('');
-        setEditJobSize('');
-        setEditJobPicture('');
-        setEditJobInstructions1('');
-        setEditJobInstructions2('');
-        setEditJobInstructions3('');
         dispatch({
           type: 'SET_JOB',
           payload: {
-            ...editJob,
+            ...jobObject,
           },
         });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
@@ -433,11 +425,11 @@ function Modal() {
   const submitDeleteJob = (e) => {
     e.preventDefault();
 
-    console.log(job.job_id);
-    // const jobId = job.job_id;
+    console.log(reduxJob.job_id);
+    // const jobId = reduxJob.job_id;
 
     axios
-      .delete(`/jobs/${job.job_id}`)
+      .delete(`/jobs/${reduxJob.job_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -451,10 +443,25 @@ function Modal() {
   const submitUnsubscribeWorker = (e) => {
     e.preventDefault();
     console.log('submitUnsubscribeWorker');
-    console.log(job.job_id);
+    console.log(reduxJob.job_id);
 
     axios
-      .put(`/unsubscribeWorker/${job.job_id}`)
+      .put(`/unsubscribeWorker/${reduxJob.job_id}`)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: 'NONE' });
+        dispatch({ type: 'RESET_JOB' });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const submitUnsubscribeFromJob = (e) => {
+    e.preventDefault();
+
+    axios
+      .put(`/unsubscribeFromJob/${reduxJob.job_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -470,7 +477,7 @@ function Modal() {
     console.log('submitting a request for work!!!!');
     // console.log(jobToRequestWorker.jobSize);
     const job = myJobs[jobToRequestWorker];
-    job.recipient_id = worker.user_id;
+    job.recipient_id = reduxWorker.user_id;
     console.log(job);
     axios
       .post('/requestWorker', job)
@@ -488,7 +495,7 @@ function Modal() {
     // Worker => Accepts => Customer Offer
     e.preventDefault();
     axios
-      .put('/acceptJobOffer', alert)
+      .put('/acceptJobOffer', reduxAlert)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -502,7 +509,7 @@ function Modal() {
   const submitRejectRequestWorker = (e) => {
     e.preventDefault();
     axios
-      .delete(`/rejectRequestWorker/${alert.alert_id}`)
+      .delete(`/rejectRequestWorker/${reduxAlert.alert_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -517,7 +524,7 @@ function Modal() {
     e.preventDefault();
 
     axios
-      .post('/requestJob', job)
+      .post('/requestJob', reduxJob)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -533,7 +540,7 @@ function Modal() {
     console.log();
 
     axios
-      .delete(`/deleteAlert/${alert.alert_id}`)
+      .delete(`/deleteAlert/${reduxAlert.alert_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -549,7 +556,7 @@ function Modal() {
     e.preventDefault();
 
     axios
-      .put('/acceptWorkerOffer', alert)
+      .put('/acceptWorkerOffer', reduxAlert)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -563,7 +570,7 @@ function Modal() {
   const submitRejectRequestJob = (e) => {
     e.preventDefault();
     axios
-      .delete(`/rejectRequestJob/${alert.alert_id}`)
+      .delete(`/rejectRequestJob/${reduxAlert.alert_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -576,7 +583,7 @@ function Modal() {
   };
 
   let modalContent;
-  switch (modal) {
+  switch (reduxModal) {
     case 'LOGOUT':
       modalContent = (
         <form className='form form--modal' onSubmit={(e) => submitLogout(e)}>
@@ -606,9 +613,9 @@ function Modal() {
             <label className='form__label'>First Name:&emsp;</label>
             <input
               className='form__input'
-              minLength='10'
-              defaultValue={user.firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              name='firstName'
+              defaultValue={reduxUser.firstName}
+              onChange={(e) => handleChange(e, setUser, user)}
             ></input>
           </div>
 
@@ -617,21 +624,32 @@ function Modal() {
             <label className='form__label'>Last Name:&emsp;</label>
             <input
               className='form__input'
-              defaultValue={user.lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              name='lastName'
+              defaultValue={reduxUser.lastName}
+              onChange={(e) => handleChange(e, setUser, user)}
             ></input>
           </div>
 
           {/* EMAIL */}
           <div className='form__row'>
             <label className='form__label'>Email Name:&emsp;</label>
-            <input className='form__input' defaultValue={user.email} onChange={(e) => setEmail(e.target.value)}></input>
+            <input
+              className='form__input'
+              name='email'
+              defaultValue={reduxUser.email}
+              onChange={(e) => handleChange(e, setUser, user)}
+            ></input>
           </div>
 
           {/* PHONE */}
           <div className='form__row'>
             <label className='form__label'>Phone Name:&emsp;</label>
-            <input className='form__input' defaultValue={user.phone} onChange={(e) => setPhone(e.target.value)}></input>
+            <input
+              className='form__input'
+              name='phone'
+              defaultValue={reduxUser.phone}
+              onChange={(e) => handleChange(e, setUser, user)}
+            ></input>
           </div>
 
           {/* STREET */}
@@ -643,8 +661,8 @@ function Modal() {
               id='street'
               name='street'
               className='form__input'
-              defaultValue={user.street}
-              onChange={(e) => setStreet(e.target.value)}
+              defaultValue={reduxUser.street}
+              onChange={(e) => handleChange(e, setUser, user)}
             ></input>
           </div>
 
@@ -657,8 +675,8 @@ function Modal() {
               id='city'
               name='city'
               className='form__input'
-              defaultValue={user.city}
-              onChange={(e) => setCity(e.target.value)}
+              defaultValue={reduxUser.city}
+              onChange={(e) => handleChange(e, setUser, user)}
             ></input>
           </div>
 
@@ -671,8 +689,8 @@ function Modal() {
               id='state'
               name='state'
               className='form__input'
-              defaultValue={user.state}
-              onChange={(e) => setState(e.target.value)}
+              defaultValue={reduxUser.state}
+              onChange={(e) => handleChange(e, setUser, user)}
             ></input>
           </div>
 
@@ -685,8 +703,8 @@ function Modal() {
               id='zipcode'
               name='zipcode'
               className='form__input'
-              defaultValue={user.zipcode}
-              onChange={(e) => setZipcode(e.target.value)}
+              defaultValue={reduxUser.zipcode}
+              onChange={(e) => handleChange(e, setUser, user)}
             ></input>
           </div>
 
@@ -715,8 +733,9 @@ function Modal() {
             <input
               className='form__input'
               type='password'
-              defaultValue={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
+              name='oldPassword'
+              defaultValue={user.oldPassword}
+              onChange={(e) => handleChange(e, setUser, user)}
             ></input>
           </div>
 
@@ -726,8 +745,9 @@ function Modal() {
             <input
               className='form__input'
               type='password'
-              defaultValue={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              name='newPassword'
+              defaultValue={user.newPassword}
+              onChange={(e) => handleChange(e, setUser, user)}
             ></input>
           </div>
           <div className='form__row'>
@@ -759,8 +779,10 @@ function Modal() {
             <input
               className='form__input'
               type='password'
-              defaultValue={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name='password'
+              defaultValue={user.password}
+              // onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => handleChange(e, setUser, user)}
             ></input>
           </div>
 
@@ -770,8 +792,10 @@ function Modal() {
             <input
               className='form__input'
               type='password'
-              defaultValue={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              name='confirmPassword'
+              defaultValue={user.confirmPassword}
+              // onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => handleChange(e, setUser, user)}
             ></input>
           </div>
           <div className='form__row'>
@@ -794,31 +818,60 @@ function Modal() {
           {/* PROPERTY NAME */}
           <div className='form__row'>
             <label className='form__label'>Property Name:&emsp;</label>
-            <input className='form__input' onChange={(e) => setNewPropertyName(e.target.value)}></input>
+            <input
+              className='form__input'
+              name='name'
+              required
+              onChange={(e) => handleChange(e, setNewProperty, newProperty)}
+            ></input>
           </div>
 
           {/* STREET */}
           <div className='form__row'>
             <label className='form__label'>Street Address:&emsp;</label>
-            <input className='form__input' onChange={(e) => setNewPropertyStreet(e.target.value)}></input>
+            <input
+              className='form__input'
+              name='street'
+              required
+              onChange={(e) => handleChange(e, setNewProperty, newProperty)}
+            ></input>
           </div>
 
           {/* CITY */}
           <div className='form__row'>
             <label className='form__label'>City:&emsp;</label>
-            <input className='form__input' onChange={(e) => setNewPropertyCity(e.target.value)}></input>
+            <input
+              className='form__input'
+              name='city'
+              required
+              onChange={(e) => handleChange(e, setNewProperty, newProperty)}
+            ></input>
           </div>
 
           {/* STATE */}
           <div className='form__row'>
             <label className='form__label'>State:&emsp;</label>
-            <input className='form__input' onChange={(e) => setNewPropertyState(e.target.value)}></input>
+            <select
+              className='form__input'
+              name='state'
+              required
+              defaultValue=''
+              onChange={(e) => handleChange(e, setNewProperty, newProperty)}
+            >
+              <StateDropdown />
+            </select>
           </div>
 
           {/* ZIPCODE */}
           <div className='form__row'>
             <label className='form__label'>Zipcode:&emsp;</label>
-            <input className='form__input' onChange={(e) => setNewPropertyZipcode(e.target.value)}></input>
+            <input
+              className='form__input'
+              name='zipcode'
+              required
+              maxLength='5'
+              onChange={(e) => handleChange(e, setNewProperty, newProperty)}
+            ></input>
           </div>
 
           {/* BUTTONS */}
@@ -845,8 +898,10 @@ function Modal() {
             <label className='form__label'>Property Name:&emsp;</label>
             <input
               className='form__input'
-              defaultValue={property.name}
-              onChange={(e) => setEditPropertyName(e.target.value)}
+              name='name'
+              required
+              defaultValue={reduxProperty.name}
+              onChange={(e) => handleChange(e, setEditProperty, editProperty)}
             ></input>
           </div>
 
@@ -855,8 +910,10 @@ function Modal() {
             <label className='form__label'>Street Address:&emsp;</label>
             <input
               className='form__input'
-              defaultValue={property.street}
-              onChange={(e) => setEditPropertyStreet(e.target.value)}
+              name='street'
+              required
+              defaultValue={reduxProperty.street}
+              onChange={(e) => handleChange(e, setEditProperty, editProperty)}
             ></input>
           </div>
 
@@ -865,8 +922,10 @@ function Modal() {
             <label className='form__label'>City:&emsp;</label>
             <input
               className='form__input'
-              defaultValue={property.city}
-              onChange={(e) => setEditPropertyCity(e.target.value)}
+              name='city'
+              required
+              defaultValue={reduxProperty.city}
+              onChange={(e) => handleChange(e, setEditProperty, editProperty)}
             ></input>
           </div>
 
@@ -875,8 +934,11 @@ function Modal() {
             <label className='form__label'>State:&emsp;</label>
             <input
               className='form__input'
-              defaultValue={property.state}
-              onChange={(e) => setEditPropertyState(e.target.value)}
+              name='state'
+              required
+              maxLength='2'
+              defaultValue={reduxProperty.state}
+              onChange={(e) => handleChange(e, setEditProperty, editProperty)}
             ></input>
           </div>
 
@@ -885,8 +947,11 @@ function Modal() {
             <label className='form__label'>Zipcode:&emsp;</label>
             <input
               className='form__input'
-              defaultValue={property.zipcode}
-              onChange={(e) => setEditPropertyZipcode(e.target.value)}
+              name='zipcode'
+              required
+              maxLength='5'
+              defaultValue={reduxProperty.zipcode}
+              onChange={(e) => handleChange(e, setEditProperty, editProperty)}
             ></input>
           </div>
 
@@ -935,7 +1000,12 @@ function Modal() {
           {/* JOB TYPE */}
           <div className='form__row'>
             <label className='form__label'>Job Type:&emsp;</label>
-            <select className='form__input' defaultValue={newJobType} onChange={(e) => setNewJobType(e.target.value)}>
+            <select
+              className='form__input'
+              name='jobType'
+              defaultValue={newJob.jobType}
+              onChange={(e) => handleChange(e, setNewJob, newJob)}
+            >
               <option value='' disabled>
                 - choose type -
               </option>
@@ -951,13 +1021,24 @@ function Modal() {
           {/* JOB SIZE */}
           <div className='form__row'>
             <label className='form__label'>Job Size-({newJobSizeMeasure}):&emsp;</label>
-            <input className='form__input' required onChange={(e) => setNewJobSize(e.target.value)}></input>
+            <input
+              className='form__input'
+              name='jobSize'
+              required
+              defaultValue={newJob.jobSize}
+              onChange={(e) => handleChange(e, setNewJob, newJob)}
+            ></input>
           </div>
 
           {/* PICTURES */}
           <div className='form__row'>
             <label className='form__label'>Add Picture:&emsp;</label>
-            <input className='form__input' required onChange={(e) => setNewJobPicture(e.target.value)}></input>
+            <input
+              className='form__input'
+              name='pictures'
+              defaultValue={newJob.pictures}
+              onChange={(e) => handleChange(e, setNewJob, newJob)}
+            ></input>
           </div>
 
           {/* INSTRUCTIONS */}
@@ -965,22 +1046,25 @@ function Modal() {
           <div className='form__row'>
             <input
               className='form__input'
-              defaultValue={newJobInstructions1}
-              onChange={(e) => setNewJobInstructions1(e.target.value)}
+              name='instructions1'
+              defaultValue={newJob.instructions1}
+              onChange={(e) => handleChange(e, setNewJob, newJob)}
             ></input>
           </div>
           <div className='form__row'>
             <input
               className='form__input'
-              defaultValue={newJobInstructions2}
-              onChange={(e) => setNewJobInstructions2(e.target.value)}
+              name='instructions2'
+              defaultValue={newJob.instructions2}
+              onChange={(e) => handleChange(e, setNewJob, newJob)}
             ></input>
           </div>
           <div className='form__row'>
             <input
               className='form__input'
-              defaultValue={newJobInstructions3}
-              onChange={(e) => setNewJobInstructions3(e.target.value)}
+              name='instructions3'
+              defaultValue={newJob.instructions3}
+              onChange={(e) => handleChange(e, setNewJob, newJob)}
             ></input>
           </div>
 
@@ -1005,7 +1089,12 @@ function Modal() {
           {/* JOB TYPE */}
           <div className='form__row'>
             <label className='form__label'>Job Type:&emsp;</label>
-            <select className='form__input' defaultValue={editJobType} onChange={(e) => setEditJobType(e.target.value)}>
+            <select
+              className='form__input'
+              name='jobType'
+              defaultValue={editJob.jobType}
+              onChange={(e) => handleChange(e, setEditJob, editJob)}
+            >
               <option disabled>- choose type -</option>
               <option value='driveway'>Driveway</option>
               <option value='parking-lot'>Parking Lot</option>
@@ -1021,18 +1110,22 @@ function Modal() {
             <label className='form__label'>Job Size-({editJobSizeMeasure}):&emsp;</label>
             <input
               className='form__input'
-              defaultValue={editJobSize}
-              onChange={(e) => setEditJobSize(e.target.value)}
+              name='jobSize'
+              defaultValue={editJob.jobSize}
+              onChange={(e) => handleChange(e, setEditJob, editJob)}
             ></input>
           </div>
 
           {/* PICTURES */}
           <div className='form__row'>
-            <label className='form__label'>Add Picture:&emsp;</label>
+            <label className='form__label' name='picture'>
+              Add Picture:&emsp;
+            </label>
             <input
               className='form__input'
-              defaultValue={editJobPicture}
-              onChange={(e) => setEditJobPicture(e.target.value)}
+              name='pictures'
+              defaultValue={editJob.pictures}
+              onChange={(e) => handleChange(e, setEditJob, editJob)}
             ></input>
           </div>
 
@@ -1042,22 +1135,25 @@ function Modal() {
           <div className='form__row'>
             <input
               className='form__input'
-              defaultValue={editJobInstructions1}
-              onChange={(e) => setEditJobInstructions1(e.target.value)}
+              name='instructions1'
+              defaultValue={editJob.instructions1}
+              onChange={(e) => handleChange(e, setEditJob, editJob)}
             ></input>
           </div>
           <div className='form__row'>
             <input
               className='form__input'
-              defaultValue={editJobInstructions2}
-              onChange={(e) => setEditJobInstructions2(e.target.value)}
+              name='instructions2'
+              defaultValue={editJob.instructions2}
+              onChange={(e) => handleChange(e, setEditJob, editJob)}
             ></input>
           </div>
           <div className='form__row'>
             <input
               className='form__input'
-              defaultValue={editJobInstructions3}
-              onChange={(e) => setEditJobInstructions3(e.target.value)}
+              name='instructions3'
+              defaultValue={editJob.instructions3}
+              onChange={(e) => handleChange(e, setEditJob, editJob)}
             ></input>
           </div>
 
@@ -1118,7 +1214,32 @@ function Modal() {
         </form>
       );
       break;
+    case 'UNSUBSCRIBE_FROM_JOB':
+      modalContent = (
+        <form className='form form--modal' onSubmit={(e) => submitUnsubscribeFromJob(e)}>
+          <div className='form__row'>
+            <h2>Unsubscribe From Job</h2>
+          </div>
+          <div className='form__row'>
+            <p>Are you sure you want to unsubscribe from this job?</p>
+          </div>
+          <div className='form__row'>
+            <p>We will send an alert to the customer to notify them that you no longer wish to service their job</p>
+          </div>
+          {/* BUTTONS */}
+          <div className='form__row'>
+            <button className='btn btn__warning btn--md' type='submit'>
+              Unsubscribe
+            </button>
+            <button className='btn btn__caution btn--md' onClick={() => dispatch({ type: 'NONE' })}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      );
+      break;
     case 'REQUEST_WORKER':
+      // customer => requests => worker
       modalContent = (
         <form className='form form--modal' onSubmit={(e) => submitRequestWorker(e)}>
           <div className='form__row'>

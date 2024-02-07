@@ -64,31 +64,38 @@ export default {
       // TODO - send alerts to all workers subscribed to your jobs
       // TODO - Delete all jobs associated with this user
       const userToDelete = await User.findByPk(req.session.user_id);
-      if (userToDelete.password === password) {
-        let propertiesToDelete;
-        propertiesToDelete = await userToDelete.getProperties();
-        await Promise.all(
-          propertiesToDelete.map(async (prop) => {
-            await Job.destroy({
-              where: {
-                property_id: prop.property_id,
-              },
-            });
-          })
-        );
-
-        // TODO - Delete all properties associated with this user
-        await Property.destroy({
-          where: {
-            user_id: req.session.user_id,
-          },
-        });
-        await User.destroy({
-          where: {
-            user_id: req.session.user_id,
+      if (userToDelete.password !== password) {
+        return res.status(400).send({
+          toast: {
+            color: 'red',
+            message: 'The password you entered is incorrect',
           },
         });
       }
+
+      let propertiesToDelete;
+      propertiesToDelete = await userToDelete.getProperties();
+      await Promise.all(
+        propertiesToDelete.map(async (prop) => {
+          await Job.destroy({
+            where: {
+              property_id: prop.property_id,
+            },
+          });
+        })
+      );
+
+      // TODO - Delete all properties associated with this user
+      await Property.destroy({
+        where: {
+          user_id: req.session.user_id,
+        },
+      });
+      await User.destroy({
+        where: {
+          user_id: req.session.user_id,
+        },
+      });
 
       req.session.destroy();
       res.status(200).send({

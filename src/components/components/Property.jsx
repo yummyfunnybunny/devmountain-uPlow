@@ -14,7 +14,7 @@ function Property(props) {
       {/* <div className='property__meta'> */}
       <div className='property__image'>
         {/* IMAGE */}
-        <img className='property__pic' src='https://picsum.photos/200'></img>
+        <img className='property__pic' src='property_placeholder.jpg'></img>
       </div>
 
       {/* <div className='property__divider'></div> */}

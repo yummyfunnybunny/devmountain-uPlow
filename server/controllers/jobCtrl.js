@@ -3,27 +3,29 @@ import { User, Property, Job, Alert } from '../database/model.js';
 export default {
   myJobs: async (req, res) => {
     console.log('== My Jobs Route ==');
-
-    let user;
-    let properties;
-    let jobs = [];
     try {
-      user = await User.findByPk(req.session.user_id);
-      properties = await user.getProperties();
-      await Promise.all(
-        properties.map(async (prop) => {
-          const propJob = await prop.getJobs();
-          jobs = [...jobs, ...propJob];
-        })
-      );
+      const user = await User.findByPk(req.session.user_id);
+      const properties = await user.getProperties({
+        attributes: ['property_id'],
+      });
+      const propertyIds = properties.map((prop) => {
+        return prop.property_id;
+      });
+
+      const jobs = await Job.findAll({
+        where: {
+          property_id: [...propertyIds],
+        },
+        order: [['created_at', 'ASC']],
+      });
+      res.status(200).send({
+        success: true,
+        message: 'jobs retrieved successfully',
+        jobs: jobs,
+      });
     } catch (err) {
       console.log(err);
     }
-    res.status(200).send({
-      success: true,
-      message: 'jobs retrieved successfully',
-      jobs: jobs,
-    });
   },
   availableJobs: async (req, res) => {
     console.log(' == Available Jobs Route ==');
@@ -130,6 +132,7 @@ export default {
         where: {
           subscribed: userId,
         },
+        order: [['created_at', 'ASC']],
       });
       console.log(subscriptions);
       res.status(200).send({
@@ -146,6 +149,19 @@ export default {
     console.log(req.params.job_id);
     try {
       const job = await Job.findByPk(req.params.job_id);
+
+      // create job unsubscribe alert
+      const newAlert = {
+        alertType: 'UNSUBSCRIBE_WORKER',
+        hasRead: false,
+        recipient_id: job.subscribed,
+        sender_id: req.session.user_id,
+        job_id: job.job_id,
+        property_id: job.property_id,
+        message: `A customer has unsubscribed you from their job.`,
+      };
+      await Alert.create({ ...newAlert });
+
       job.subscribed = null;
       await job.save();
       res.status(200).send({
@@ -154,6 +170,38 @@ export default {
         toast: {
           color: 'green',
           message: 'You have unsubscribed a worker from your job!',
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  unsubscribeFromJob: async (req, res) => {
+    try {
+      const job = await Job.findByPk(req.params.job_id);
+      const property = await job.getProperty();
+
+      // create job unsubscribe alert
+      const newAlert = {
+        alertType: 'UNSUBSCRIBE_FROM_JOB',
+        hasRead: false,
+        recipient_id: property.user_id,
+        sender_id: req.session.user_id,
+        job_id: job.job_id,
+        property_id: job.property_id,
+        message: `A worker has unsubscribed from one of your jobs.`,
+      };
+      await Alert.create({ ...newAlert });
+
+      job.subscribed = null;
+      await job.save();
+
+      res.status(200).send({
+        success: true,
+        message: "you've successfully unsubscribed the worker from this job",
+        toast: {
+          color: 'green',
+          message: 'You have successfully unsubscribed from the job!',
         },
       });
     } catch (err) {

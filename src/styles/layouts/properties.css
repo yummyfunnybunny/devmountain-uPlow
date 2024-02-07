@@ -10,7 +10,8 @@
 
 .property {
   margin-bottom: 2rem;
-  padding: 0.5rem;
+  padding: 1rem;
+  /* padding: 2rem; */
   border-radius: var(--radius-inner);
   display: flex;
   align-items: center;
@@ -19,12 +20,14 @@
 
 .property__image {
   padding: 5px;
-  min-width: 20%;
+  max-width: 20%;
   display: flex;
   justify-content: center;
 }
 
 .property__pic {
+  width: 100%;
+  height: 100%;
   border-radius: var(--radius-inner);
 }
 

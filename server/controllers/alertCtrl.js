@@ -19,6 +19,7 @@ export default {
             model: User,
           },
         ],
+        order: [['created_at', 'ASC']],
       });
       console.log(alerts);
       res.status(200).send({

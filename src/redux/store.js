@@ -8,6 +8,7 @@ import findJobsReducer from './findJobsReducer.js';
 import workerReducer from './workerReducer.js';
 import alertReducer from './alertReducer.js';
 import toastReducer from './toastReducer.js';
+import forecastReducer from './forecastReducer.js';
 
 export default configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export default configureStore({
     workerReducer: workerReducer,
     alertReducer: alertReducer,
     toastReducer: toastReducer,
+    forecastReducer: forecastReducer,
   },
 });

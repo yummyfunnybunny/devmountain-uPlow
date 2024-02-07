@@ -24,12 +24,13 @@ app.use(session({ secret: 'uplowRocks$69', saveUninitialized: true, resave: fals
 // SECTION -- Route Handlers
 
 // ANCHOR -- Auth
-const { signup, login, logout, changePassword, loginRequired, isLoggedIn } = authCtrl;
+const { signup, login, logout, changePassword, loginRequired, isLoggedIn, getWeather } = authCtrl;
 app.post('/signup', signup);
 app.post('/login', login);
-app.post('/logout', loginRequired, logout);
+app.get('/logout', loginRequired, logout);
 app.post('/changePassword', loginRequired, changePassword);
 app.get('/isLoggedIn', isLoggedIn);
+app.get('/weather/:latitude/:longitude', loginRequired, getWeather);
 
 // ANCHOR -- Users
 const { getMe, editMe, deleteMe, getWorkers, getWorker } = userCtrl;
@@ -56,6 +57,7 @@ const {
   deleteJob,
   getSubscriptions,
   unsubscribeWorker,
+  unsubscribeFromJob,
   myJobsWithProperties,
   acceptJobOffer,
   acceptServiceOffer,
@@ -66,6 +68,7 @@ app.get('/availableJobs', loginRequired, availableJobs);
 app.post('/jobs', loginRequired, createJob);
 app.put('/jobs', loginRequired, updateJob);
 app.put('/unsubscribeWorker/:job_id', loginRequired, unsubscribeWorker);
+app.put('/unsubscribeFromJob/:job_id', loginRequired, unsubscribeFromJob);
 app.delete('/jobs/:job_id', loginRequired, deleteJob);
 app.get('/mySubscriptions/:user_id', loginRequired, getSubscriptions);
 app.put('/acceptJobOffer', loginRequired, acceptJobOffer);

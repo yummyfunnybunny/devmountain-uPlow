@@ -1,26 +1,35 @@
-import '../../styles/pages/auth.css';
+// import '../../styles/pages/auth.css';
 import '../../styles/components/form.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { StateDropdown, trimFormData } from '../../../scripts/forms.jsx';
 
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [signup, setSignup] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    role: '',
+    street: '',
+    city: '',
+    state: '',
+    zipcode: '',
+    password: '',
+    confirmPassword: '',
+  });
+  console.log(signup);
 
-  const [street, setStreet] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zipcode, setZipcode] = useState('');
-
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [role, setRole] = useState('');
+  const handleChange = (e) => {
+    setSignup({
+      ...signup,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const submitSignup = (e) => {
     e.preventDefault();
@@ -31,14 +40,21 @@ function Signup() {
     // - check that both passwords match
 
     const signupData = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone: phone,
-      password: password,
-      confirmPassword: confirmPassword,
-      role: role,
+      firstName: signup.firstName,
+      lastName: signup.lastName,
+      email: signup.email,
+      phone: signup.phone,
+      role: signup.role,
+      street: signup.street,
+      city: signup.city,
+      state: signup.state,
+      zipcode: signup.zipcode,
+      password: signup.password,
+      confirmPassword: signup.confirmPassword,
     };
+
+    trimFormData(signupData);
+
     console.log(signupData);
 
     axios
@@ -47,6 +63,7 @@ function Signup() {
         console.log(res);
         console.log(window);
         dispatch({ type: 'SET_LOGGED_IN', payload: res.data.user });
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
         navigate(res.data.redirectUri);
         // TODO - display success toast
       })
@@ -75,8 +92,10 @@ function Signup() {
                   id='firstName'
                   name='firstName'
                   required
-                  defaultValue={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  type='text'
+                  autoFocus
+                  defaultValue={signup.firstName}
+                  onChange={(e) => handleChange(e)}
                 ></input>
               </container>
 
@@ -90,8 +109,9 @@ function Signup() {
                   id='lastName'
                   name='lastName'
                   required
-                  defaultValue={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  type='text'
+                  defaultValue={signup.lastName}
+                  onChange={(e) => handleChange(e)}
                 ></input>
               </container>
 
@@ -105,8 +125,9 @@ function Signup() {
                   id='email'
                   name='email'
                   required
-                  defaultValue={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type='email'
+                  defaultValue={signup.email}
+                  onChange={(e) => handleChange(e)}
                 ></input>
               </container>
 
@@ -120,8 +141,11 @@ function Signup() {
                   id='phone'
                   name='phone'
                   required
-                  defaultValue={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  type='tel'
+                  minLength='10'
+                  maxLength='10'
+                  defaultValue={signup.phone}
+                  onChange={(e) => handleChange(e)}
                 ></input>
               </container>
 
@@ -132,11 +156,11 @@ function Signup() {
                 </label>
                 <select
                   className='form__input'
-                  id='accountType'
-                  name='accountType'
+                  id='role'
+                  name='role'
                   required
-                  defaultValue={role}
-                  onChange={(e) => setRole(e.target.value)}
+                  defaultValue={signup.role}
+                  onChange={(e) => handleChange(e)}
                 >
                   <option value='' disabled>
                     - Role -
@@ -159,8 +183,8 @@ function Signup() {
                   id='street'
                   name='street'
                   required
-                  defaultValue={street}
-                  onChange={(e) => setPhone(e.target.value)}
+                  defaultValue={signup.street}
+                  onChange={(e) => handleChange(e)}
                 ></input>
               </container>
 
@@ -174,8 +198,8 @@ function Signup() {
                   id='city'
                   name='city'
                   required
-                  defaultValue={city}
-                  onChange={(e) => setPhone(e.target.value)}
+                  defaultValue={signup.city}
+                  onChange={(e) => handleChange(e)}
                 ></input>
               </container>
 
@@ -184,14 +208,16 @@ function Signup() {
                 <label className='form__label' htmlFor='state'>
                   State:&emsp;
                 </label>
-                <input
+                <select
                   className='form__input'
                   id='state'
                   name='state'
                   required
-                  defaultValue={state}
-                  onChange={(e) => setPhone(e.target.value)}
-                ></input>
+                  defaultValue={signup.state}
+                  onChange={(e) => handleChange(e)}
+                >
+                  <StateDropdown />
+                </select>
               </container>
 
               {/* ZIPCODE */}
@@ -204,8 +230,8 @@ function Signup() {
                   id='zipcode'
                   name='zipcode'
                   required
-                  defaultValue={zipcode}
-                  onChange={(e) => setPhone(e.target.value)}
+                  defaultValue={signup.zipcode}
+                  onChange={(e) => handleChange(e)}
                 ></input>
               </container>
             </container>
@@ -221,9 +247,10 @@ function Signup() {
                   className='form__input'
                   id='password'
                   name='password'
+                  type='password'
                   required
-                  defaultValue={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  defaultValue={signup.password}
+                  onChange={(e) => handleChange(e)}
                 ></input>
               </container>
 
@@ -236,9 +263,10 @@ function Signup() {
                   className='form__input'
                   id='confirmPassword'
                   name='confirmPassword'
+                  type='password'
                   required
-                  defaultValue={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  defaultValue={signup.confirmPassword}
+                  onChange={(e) => handleChange(e)}
                 ></input>
               </container>
             </container>

@@ -24,12 +24,14 @@
 
 .subscription__image {
   padding: 5px;
-  min-width: 20%;
+  max-width: 20%;
   display: flex;
   justify-content: center;
 }
 
 .subscription__pic {
+  width: 100%;
+  height: 100%;
   border-radius: var(--radius-inner);
 }
 

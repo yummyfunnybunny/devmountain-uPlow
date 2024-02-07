@@ -29,6 +29,8 @@ function modalReducer(state = initialState, action) {
       return { ...state, modalType: 'DELETE_JOB' };
     case 'UNSUBSCRIBE_WORKER':
       return { ...state, modalType: 'UNSUBSCRIBE_WORKER' };
+    case 'UNSUBSCRIBE_FROM_JOB':
+      return { ...state, modalType: 'UNSUBSCRIBE_FROM_JOB' };
     case 'REQUEST_WORKER':
       return { ...state, modalType: 'REQUEST_WORKER' };
     case 'ACCEPT_REQUEST_WORKER':
@@ -40,7 +42,7 @@ function modalReducer(state = initialState, action) {
     case 'REQUEST_JOB':
       return { ...state, modalType: 'REQUEST_JOB' };
     case 'ACCEPT_REQUEST_JOB':
-      return { ...state, modalType: 'ACCEPT_REQUEST_JOb' };
+      return { ...state, modalType: 'ACCEPT_REQUEST_JOB' };
     case 'COUNTER_REQUEST_JOB':
       return { ...state, modalType: 'COUNTER_REQUEST_JOB' };
     case 'REJECT_REQUEST_JOB':

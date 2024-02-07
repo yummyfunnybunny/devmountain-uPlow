@@ -1,9 +1,10 @@
 // import '../../styles/components/subscription.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Subscription(props) {
+  const dispatch = useDispatch();
   const { subscription } = props;
   console.log(subscription);
   const [property, setProperty] = useState();
@@ -40,7 +41,7 @@ function Subscription(props) {
     <div className='subscription glass-2'>
       {/* SLIDES */}
       <div className='subscription__image'>
-        <img className='subscription__pic' src='https://picsum.photos/200'></img>
+        <img className='subscription__pic' src='job_placeholder.jpg'></img>
       </div>
 
       <container className='subscription__content'>
@@ -82,7 +83,15 @@ function Subscription(props) {
           <h2 className='subscription__header'>Options</h2>
           {/* <button className='btn'>Message Owner</button> */}
           {/* <button className='btn'>Request Service</button> */}
-          <button className='btn btn__warning btn--md '>Unsubscribe</button>
+          <button
+            className='btn btn__warning btn--md'
+            onClick={() => (
+              // dispatch({ type: 'SET_WORKER', payload: worker }),
+              dispatch({ type: 'SET_JOB', payload: subscription }), dispatch({ type: 'UNSUBSCRIBE_FROM_JOB' })
+            )}
+          >
+            Unsubscribe
+          </button>
         </div>
       </container>
     </div>

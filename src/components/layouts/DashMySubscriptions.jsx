@@ -20,11 +20,10 @@ function DashMySubscriptions() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [reduxJobs]);
 
   return (
     <div className='subscriptions'>
-      {/* <div className='my-subscriptions__list'> */}
       {subscriptions.length > 0 ? (
         subscriptions.map((sub) => {
           return <Subscription key={sub.job_id} subscription={sub} />;
@@ -32,7 +31,6 @@ function DashMySubscriptions() {
       ) : (
         <></>
       )}
-      {/* </div> */}
     </div>
   );
 }

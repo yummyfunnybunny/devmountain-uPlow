@@ -35,8 +35,8 @@ function MyJob(props) {
 
   return (
     <div className='job glass-2'>
-      <div className='job_image'>
-        <img className='job__pic' src='https://picsum.photos/200'></img>
+      <div className='job__image'>
+        <img className='job__pic' src='job_placeholder.jpg'></img>
       </div>
 
       <div className='job__content'>

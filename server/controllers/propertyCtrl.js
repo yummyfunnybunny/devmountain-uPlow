@@ -9,6 +9,7 @@ export default {
     try {
       myProperties = await Property.findAll({
         where: { user_id: userId },
+        order: [['created_at', 'ASC']],
       });
       // console.log(myProperties);
       res.status(200).send({

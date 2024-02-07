@@ -1,8 +1,15 @@
 import { User, Customer, Worker } from '../database/model.js';
+import axios from 'axios';
+// const openWeatherKey = import.meta.env.VITE_REACT_APP_OPENWEATHER_KEY;
+import dotenv from 'dotenv';
+
+dotenv.config();
+const { OPENWEATHER_KEY } = process.env;
 
 export default {
   signup: async (req, res) => {
-    const { firstName, lastName, email, phone, password, confirmPassword, role } = req.body;
+    // const { firstName, lastName, email, phone, password, confirmPassword, role } = req.body;
+    // console.log(req.body);
 
     // TODO - data validation
     // - check that email doesnt already exist
@@ -11,12 +18,16 @@ export default {
     try {
       // add user to DB
       newUser = await User.create({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-        phone: phone,
-        role: role,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone,
+        role: req.body.role,
+        street: req.body.street,
+        city: req.body.city,
+        state: req.body.state,
+        zipcode: req.body.zipcode,
+        password: req.body.password,
       });
 
       // set session to user ID
@@ -70,9 +81,10 @@ export default {
     }
   },
   logout: async (req, res) => {
-    // console.log('- Logout Route -');
+    console.log('- Logout Route -');
     if (req.session.user_id) {
       req.session.destroy();
+      console.log(req.session);
 
       res.status(200).send({
         message: 'You have successfully logged out',
@@ -124,7 +136,7 @@ export default {
     }
   },
   loginRequired: (req, res, next) => {
-    console.log('login required route');
+    console.log('== login required route ==');
     // console.log(req.session);
     if (!req.session.user_id) {
       res.status(401).send({ error: 'Unauthorized' });
@@ -147,6 +159,21 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    }
+  },
+  getWeather: async (req, res) => {
+    console.log('== GET WEATHER ROUTE ==');
+    const { latitude, longitude } = req.params;
+    try {
+      const weather = await axios.get(
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHER_KEY}`
+      );
+      console.log(weather);
+      res.status(200).send({
+        weather: weather,
+      });
+    } catch (err) {
+      console.log(err);
     }
   },
 };

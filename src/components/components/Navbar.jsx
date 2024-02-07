@@ -7,22 +7,22 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 function Navbar() {
-  const loggedIn = useSelector((state) => state.loggedInReducer);
+  const reduxUser = useSelector((state) => state.loggedInReducer);
   const dispatch = useDispatch();
   console.log('==loggedInReducer==');
-  console.log(loggedIn);
+  console.log(reduxUser);
 
-  useEffect(() => {
-    axios
-      .get('/isLoggedIn')
-      .then((res) => {
-        console.log(res.data);
-        dispatch({ type: 'SET_LOGGED_IN', payload: { ...res.data.user } });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('/isLoggedIn')
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       dispatch({ type: 'SET_LOGGED_IN', payload: { ...res.data.user } });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <div className='navbar glass-1'>
@@ -40,7 +40,7 @@ function Navbar() {
         <NavLink className='nav__link' to='/Faq'>
           FAQ
         </NavLink>
-        {loggedIn.loggedIn ? (
+        {reduxUser.loggedIn ? (
           <>
             <button className='nav__link' onClick={() => dispatch({ type: 'LOGOUT' })}>
               Logout

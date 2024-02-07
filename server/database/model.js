@@ -260,6 +260,7 @@ Property.init(
   },
   {
     sequelize: db,
+    timestamps: true,
   }
 );
 
@@ -309,6 +310,7 @@ Job.init(
   },
   {
     sequelize: db,
+    timestamps: true,
   }
 );
 

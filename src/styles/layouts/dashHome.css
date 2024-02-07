@@ -1,3 +1,81 @@
-.dash--home {
+.dash__home {
+  /* border: 1px solid red; */
   border-radius: var(--radius-outer);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.weather {
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  padding: 1rem;
+  border: var(--radius--inner);
+}
+
+.forecasts {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+}
+
+.forecast {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 1rem;
+  border: var(--radius-inner);
+}
+
+.weather__day {
+  text-align: center;
+}
+
+.weather__icon {
+  width: 6rem;
+  height: 6rem;
+}
+
+.weather__condition {
+  margin: 0.5rem 0;
+  max-width: 10rem;
+  height: 3rem;
+  text-align: center;
+}
+
+.weather__row {
+  width: 100%;
+  margin: 0.25rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.weather__detail {
+  /* border: 1px solid red; */
+  /* align-self:  */
+}
+
+.snowing {
+  animation: snowing 2s ease-in infinite;
+}
+
+@keyframes snowing {
+  0% {
+    box-shadow: rgba(84, 228, 247, 0.45) 1px 1px 40px 0px inset;
+  }
+  50% {
+    box-shadow: rgba(84, 228, 247, 0.45) 1px 1px 40px 30px inset;
+  }
+  100% {
+    box-shadow: rgba(84, 228, 247, 0.45) 1px 1px 40px 0px inset;
+  }
 }

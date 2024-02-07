@@ -1,4 +1,6 @@
 import '../../styles/layouts/benefits.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPiggyBank, faBoltLightning, faGamepad } from '@fortawesome/free-solid-svg-icons';
 
 function Benefits() {
   return (
@@ -8,40 +10,40 @@ function Benefits() {
       </h1>
 
       <div className='benefits__cards'>
-        {/* Card 1 - [insert] */}
-        <div className='benefits__card'>
-          <div className='benefit__bg'>
-            <img className='benefit__img' src='./benefit_1.jpg'></img>
+        <div className='benefit__card-container'>
+          <div className='benefit__card'>
+            <div className='benefit__front glass-1' style={{ border: '5px solid #00ff77' }}>
+              <FontAwesomeIcon icon={faPiggyBank} size='10x' style={{ color: '#00ff77' }} />
+            </div>
+            <div className='benefit__back glass-2'>
+              <h1>Reduce Cost</h1>
+              <h3>Find the best prices that can help you save money</h3>
+            </div>
           </div>
-          <h2 className='section__subheader'>Reduce your Plowing Expenses</h2>
-          {/* <p className='benefits__details'>blah blah blah blah</p> */}
         </div>
 
-        {/* Card 2 - [insert] */}
-        <div className='benefits__card'>
-          <div className='benefit__bg'>
-            <img className='benefit__img' src='./benefit_2.jpg'></img>
+        <div className='benefit__card-container'>
+          <div className='benefit__card'>
+            <div className='benefit__front glass-1' style={{ border: '5px solid #d0cd02' }}>
+              <FontAwesomeIcon icon={faBoltLightning} size='10x' style={{ color: '#d0cd02' }} />;
+            </div>
+            <div className='benefit__back glass-2'>
+              <h1>Fast Response Times</h1>
+              <h3>Find workers as soon as you need it and request immediate service</h3>
+            </div>
           </div>
-          <h2 className='section__subheader'>Control Your Properties</h2>
-          {/* <p className='benefits__details'>blah blah blah blah</p> */}
         </div>
 
-        {/* Card 3 - [insert] */}
-        <div className='benefits__card'>
-          <div className='benefit__bg'>
-            <img className='benefit__img' src='./benefit_3.jpg'></img>
+        <div className='benefit__card-container'>
+          <div className='benefit__card'>
+            <div className='benefit__front glass-1' style={{ border: '5px solid #d07702' }}>
+              <FontAwesomeIcon icon={faGamepad} size='10x' style={{ color: '#d07702' }} />
+            </div>
+            <div className='benefit__back glass-2'>
+              <h1>Total Control</h1>
+              <h3>You can control every aspect of the plowing process</h3>
+            </div>
           </div>
-          <h2 className='section__subheader'>Instant Updates</h2>
-          {/* <p className='benefits__details'>blah blah blah blah</p> */}
-        </div>
-
-        {/* Card 4 - [insert] */}
-        <div className='benefits__card benefits__card--4'>
-          <div className='benefit__bg'>
-            <img className='benefit__img' src='./benefit_4.jpg'></img>
-          </div>
-          <h2 className='benefits__title'>Reviews</h2>
-          {/* <p className='benefits__details'>blah blah blah blah</p> */}
         </div>
       </div>
     </div>

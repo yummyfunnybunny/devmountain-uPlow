@@ -9,7 +9,6 @@ TODO:
 - service jobs, verify service, create service
 - service history
 - dashboard home -> helpful widgets
-- home-page benefits -> flipping cards animation on mouse-over
 - Home-page testimonials -> carousel
 - contact-page -> mapbox with HQ location, contact info,
 - FAQ page -> accordian
@@ -22,6 +21,7 @@ TODO:
 - fix issue with stacked nodes on the mapbox
 - fix DashMyJobs not refreshing/updating after unsubscribing a worker (user perspective)
 - alerts need date/time they were created
+- add timestamps to properties and jobs and add SORTBY when fetching
 
 ==== ERROR HANDLING ====
 
