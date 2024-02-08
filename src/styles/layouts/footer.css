@@ -20,6 +20,20 @@
 
 .footer__social-icon {
   margin: 0.75rem;
+  transition: color 0.25s;
+}
+
+.social__ghost:hover {
+  color: #1877f2;
+}
+.social__fish:hover {
+  color: #f57d00;
+}
+.social__poo:hover {
+  color: #ff0084;
+}
+.social__bug:hover {
+  color: #09b83e;
 }
 
 .footer__center {

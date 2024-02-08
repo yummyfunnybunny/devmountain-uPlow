@@ -19,9 +19,6 @@ function Home() {
       <container className='page__section'>
         <Testimonials />
       </container>
-      <container className='page__section'>
-        <Promotions />
-      </container>
     </container>
   );
 }

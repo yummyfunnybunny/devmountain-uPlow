@@ -34,9 +34,6 @@ function Navbar() {
         <NavLink className='nav__link' to='/Contact'>
           Contact
         </NavLink>
-        <NavLink className='nav__link' to='/Help'>
-          Help
-        </NavLink>
         <NavLink className='nav__link' to='/Faq'>
           FAQ
         </NavLink>

@@ -9,14 +9,14 @@ function Dashnav() {
   return (
     <div className='dash__nav glass-1'>
       <button className='btn--dash-nav' onClick={() => dispatch({ type: 'HOME' })}>
-        Home
+        Forecast
       </button>
       <button className='btn--dash-nav' onClick={() => dispatch({ type: 'ALERTS' })}>
         Alerts
       </button>
-      <button className='btn--dash-nav' onClick={() => dispatch({ type: 'MESSAGES' })}>
+      {/* <button className='btn--dash-nav' onClick={() => dispatch({ type: 'MESSAGES' })}>
         Messages
-      </button>
+      </button> */}
       {reduxUser.role === 'customer' ? (
         <>
           <button className='btn--dash-nav' onClick={() => dispatch({ type: 'MY_PROPERTIES' })}>
@@ -45,9 +45,9 @@ function Dashnav() {
       ) : (
         <></>
       )}
-      <button className='btn--dash-nav' onClick={() => dispatch({ type: 'SERVICE_HISTORY' })}>
+      {/* <button className='btn--dash-nav' onClick={() => dispatch({ type: 'SERVICE_HISTORY' })}>
         Service History
-      </button>
+      </button> */}
       <button className='btn--dash-nav' onClick={() => dispatch({ type: 'ACCOUNT' })}>
         Account
       </button>
