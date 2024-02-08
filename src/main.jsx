@@ -11,6 +11,7 @@ import Dashboard from './components/pages/Dashboard.jsx';
 import Contact from './components/pages/Contact.jsx';
 import Login from './components/pages/Login.jsx';
 import Signup from './components/pages/Signup.jsx';
+import FAQ from './components/pages/FAQ.jsx';
 
 // ANCHOR -- Create Router
 const router = createBrowserRouter(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path='/Signup' element={<Signup />} />
       <Route path='/Dashboard' element={<Dashboard />} />
       <Route path='/Contact' element={<Contact />} />
+      <Route path='/Faq' element={<FAQ />} />
     </Route>
   )
 );
