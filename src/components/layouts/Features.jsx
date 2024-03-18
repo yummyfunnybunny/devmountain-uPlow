@@ -1,6 +1,7 @@
 import '../../styles/layouts/features.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSnowflake } from '@fortawesome/free-solid-svg-icons';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function Features() {
   return (
@@ -12,7 +13,7 @@ function Features() {
       {/* Feature 1 - [insert] */}
       <div className='feature'>
         <div className='feature__pic'>
-          <div className='feature__img' style={{ backgroundImage: `url(${'feature_home.jpg'})` }}></div>
+          <div className='feature__img' style={{ backgroundImage: `url(../../../public/feature_home.jpg)` }}></div>
         </div>
         <div className='feature__content'>
           <h2 className='section__subheader'>Quickly Manage Your Properties & Jobs</h2>
