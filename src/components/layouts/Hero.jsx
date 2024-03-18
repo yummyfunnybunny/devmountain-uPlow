@@ -6,7 +6,7 @@ function Hero() {
   return (
     <div className='hero'>
       <div className='hero__bg'>
-        <img className='hero__img' src='./hero-img.jpg'></img>
+        <img className='hero__img' src='../../../public/hero-img.jpg'></img>
       </div>
       <div className='hero__content'>
         <div className='hero__left'>

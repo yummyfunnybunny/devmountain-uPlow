@@ -54,14 +54,14 @@ function Features() {
           </ul>
         </div>
         <div className='feature__pic'>
-          <div className='feature__img' style={{ backgroundImage: `url(${'feature_shovel.jpg'})` }}></div>
+          <div className='feature__img' style={{ backgroundImage: `url(../../../public/feature_shovel.jpg)` }}></div>
         </div>
       </div>
 
       {/* Feature 3 - [insert] */}
       <div className='feature'>
         <div className='feature__pic'>
-          <div className='feature__img' style={{ backgroundImage: `url(${'feature_plowing.jpg'})` }}></div>
+          <div className='feature__img' style={{ backgroundImage: `url(../../../public/feature_plowing.jpg)` }}></div>
         </div>
         <div className='feature__content'>
           <h2 className='section__subheader'>Graphically Track Your Stats</h2>
@@ -102,7 +102,7 @@ function Features() {
           </ul>
         </div>
         <div className='feature__pic'>
-          <div className='feature__img' style={{ backgroundImage: `url(${'feature_skate.jpg'})` }}></div>
+          <div className='feature__img' style={{ backgroundImage: `url(../../../public/feature_skate.jpg)` }}></div>
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@ function Subscription(props) {
     <div className='subscription glass-2'>
       {/* SLIDES */}
       <div className='subscription__image'>
-        <img className='subscription__pic' src='job_placeholder.jpg'></img>
+        <img className='subscription__pic' src='../../../public/job_placeholder.jpg'></img>
       </div>
 
       <container className='subscription__content'>
