@@ -31,5 +31,192 @@
     "zipcode": "84045",
     "coordinates": [-111.9026504, 40.3310042],
     "user_id": "1"
+  },
+  {
+    "property_id": "4",
+    "name": "Gloin household",
+    "picture": "img12345",
+    "street": "852 W 180 S",
+    "city": "Orem",
+    "state": "UT",
+    "zipcode": "84058",
+    "coordinates": [-111.7159638, 40.2943723],
+    "user_id": "8"
+  },
+  {
+    "property_id": "5",
+    "name": "Supermans home",
+    "picture": "img12345",
+    "street": "1038 E 290 N st",
+    "city": "Pleasant Grove",
+    "state": "UT",
+    "zipcode": "84062",
+    "coordinates": [-111.7164725, 40.3667204],
+    "user_id": "9"
+  },
+  {
+    "property_id": "6",
+    "name": "Batmans Cave",
+    "picture": "img12345",
+    "street": "782 W 2310 N",
+    "city": "Pleasant Grove",
+    "state": "UT",
+    "zipcode": "84062",
+    "coordinates": [-111.9026504, 40.3310042],
+    "user_id": "10"
+  },
+  {
+    "property_id": "7",
+    "name": "The Fun House",
+    "picture": "img12345",
+    "street": "13153 S 3100 W",
+    "city": "Riverton",
+    "state": "UT",
+    "zipcode": "84065",
+    "coordinates": [-111.9650255, 40.5123693],
+    "user_id": "9"
+  },
+  {
+    "property_id": "8",
+    "name": "The Windmill",
+    "picture": "img12345",
+    "street": "1062 Windchime Cir",
+    "city": "Riverton",
+    "state": "UT",
+    "zipcode": "84065",
+    "coordinates": [-111.9230762, 40.5347958],
+    "user_id": "8"
+  },
+  {
+    "property_id": "9",
+    "name": "The Draper Place",
+    "picture": "img12345",
+    "street": "12090 Woodridge Rd",
+    "city": "Sandy",
+    "state": "UT",
+    "zipcode": "84094",
+    "coordinates": [-111.8564202, 40.5316445],
+    "user_id": "7"
+  },
+  {
+    "property_id": "10",
+    "name": "The Nest",
+    "picture": "img12345",
+    "street": "1953 Revere Way",
+    "city": "Eagle Mountain",
+    "state": "UT",
+    "zipcode": "84005",
+    "coordinates": [-112.0067155, 40.3150503],
+    "user_id": "6"
+  },
+  {
+    "property_id": "11",
+    "name": "Hidden Dragon",
+    "picture": "img12345",
+    "street": "2109 E Fall St",
+    "city": "Eagle Mountain",
+    "state": "UT",
+    "zipcode": "84005",
+    "coordinates": [-112.0034914, 40.3033497],
+    "user_id": "5"
+  },
+  {
+    "property_id": "12",
+    "name": "The Shire",
+    "picture": "img12345",
+    "street": "5815 Victoria Ln",
+    "city": "Highland",
+    "state": "UT",
+    "zipcode": "84003",
+    "coordinates": [-111.7982833, 40.425358],
+    "user_id": "4"
+  },
+  {
+    "property_id": "13",
+    "name": "Centennial Blvd Home",
+    "picture": "img12345",
+    "street": "3259 Cramden Dr",
+    "city": "Lehi",
+    "state": "UT",
+    "zipcode": "84043",
+    "coordinates": [-111.90163, 40.4179277],
+    "user_id": "3"
+  },
+  {
+    "property_id": "14",
+    "name": "Goober Place",
+    "picture": "img12345",
+    "street": "2267 Pebblestone Ln W",
+    "city": "Lehi",
+    "state": "UT",
+    "zipcode": "84043",
+    "coordinates": [-111.8861436, 40.4450409],
+    "user_id": "2"
+  },
+  {
+    "property_id": "15",
+    "name": "Centennial Blvd Home",
+    "picture": "img12345",
+    "street": "1964 Hawk Cir",
+    "city": "Sandy",
+    "state": "UT",
+    "zipcode": "84092",
+    "coordinates": [-111.8355516, 40.5697763],
+    "user_id": "3"
+  },
+  {
+    "property_id": "16",
+    "name": "Jordans Court",
+    "picture": "img12345",
+    "street": "1853 W 7705 S",
+    "city": "West Jordan",
+    "state": "UT",
+    "zipcode": "84084",
+    "coordinates": [-111.9420514, 40.6109262],
+    "user_id": "4"
+  },
+  {
+    "property_id": "17",
+    "name": "Salty Abode",
+    "picture": "img12345",
+    "street": "3841 900 E",
+    "city": "Salt Lake City",
+    "state": "UT",
+    "zipcode": "84106",
+    "coordinates": [-111.8652517, 40.6884567],
+    "user_id": "5"
+  },
+  {
+    "property_id": "18",
+    "name": "Proving Grounds",
+    "picture": "img12345",
+    "street": "551 N 2430 W",
+    "city": "Provo",
+    "state": "UT",
+    "zipcode": "84601",
+    "coordinates": [-111.7015035, 40.2414861],
+    "user_id": "6"
+  },
+  {
+    "property_id": "19",
+    "name": "Pleasanty Surprised",
+    "picture": "img12345",
+    "street": "1460 E 860 S St",
+    "city": "Pleasant Grove",
+    "state": "UT",
+    "zipcode": "84062",
+    "coordinates": [-111.7072566, 40.3537785],
+    "user_id": "7"
+  },
+  {
+    "property_id": "20",
+    "name": "Groove Street Funk",
+    "picture": "img12345",
+    "street": "527 N 1180 E St",
+    "city": "Pleasant Grove",
+    "state": "UT",
+    "zipcode": "84062",
+    "coordinates": [-111.712942, 40.3693548],
+    "user_id": "8"
   }
 ]

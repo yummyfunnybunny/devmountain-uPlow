@@ -1,4 +1,21 @@
-TODO:
+# Project Name: uPlow
+
+## Description:
+
+This app allows users to create accounts as either customers or workers. Customers can create properties, and jobs associated with their properties. Customers can
+also search the interactive map and request service from workers. Workers can search for jobs and request to service jobs.
+
+## Features:
+
+- signup and login
+- get, create, update, delete properties
+- get, create, update, delete jobs
+- workers => request to service a customers jobs
+- customers => request service from workers
+- Workers => accept or decline service offers from customers
+- customers => accept or decline service offers from workers
+
+To Do List
 
 ==== FEATURES ====
 

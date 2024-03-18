@@ -103,5 +103,50 @@
     "coordinates": [-111.8807829, 40.2980275],
     "role": "worker",
     "profilePicture": "img123"
+  },
+  {
+    "user_id": "8",
+    "firstName": "Katie",
+    "lastName": "Gloin",
+    "email": "gloink@gmail.com",
+    "password": "test1234",
+    "phone": "123456789",
+    "street": "852 W 180 S",
+    "city": "Orem",
+    "state": "UT",
+    "zipcode": "84058",
+    "coordinates": [-111.7159638, 40.2943723],
+    "role": "worker",
+    "profilePicture": "img123"
+  },
+  {
+    "user_id": "9",
+    "firstName": "Super",
+    "lastName": "Man",
+    "email": "superman@gmail.com",
+    "password": "test1234",
+    "phone": "123456789",
+    "street": "1038 E 290 N st",
+    "city": "Pleasant Grove",
+    "state": "UT",
+    "zipcode": "84062",
+    "coordinates": [-111.7164725, 40.3667204],
+    "role": "worker",
+    "profilePicture": "img123"
+  },
+  {
+    "user_id": "10",
+    "firstName": "Bat",
+    "lastName": "Man",
+    "email": "batman@gmail.com",
+    "password": "test1234",
+    "phone": "123456789",
+    "street": "782 W 2310 N",
+    "city": "Pleasant Grove",
+    "state": "UT",
+    "zipcode": "84062",
+    "coordinates": [-111.7521423, 40.3892483],
+    "role": "worker",
+    "profilePicture": "img123"
   }
 ]

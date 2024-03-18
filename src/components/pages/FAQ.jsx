@@ -22,7 +22,7 @@ function FAQ() {
           </h1>
           <div className='faqs '>
             {/* QUESTION */}
-            <div className='faq '>
+            <div className='feaq '>
               <div className='faq__question glass-1'>
                 <h1>What if a customer wont pay?</h1>
                 <button className='faq__btn' onClick={(e) => faqExpand(e)}>
