@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -21,11 +22,12 @@ function Login() {
     console.log(loginData);
 
     axios
-      .post('/login', loginData)
+      .post(`${root}/login`, loginData)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'SET_LOGGED_IN', payload: res.data.user });
-        navigate(res.data.redirectUri);
+        // navigate(res.data.redirectUri);
+        navigate(`${root}/dashboard`);
         // TODO - display success toast
       })
       .catch((err) => {

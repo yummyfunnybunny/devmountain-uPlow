@@ -13,16 +13,18 @@ import Login from './components/pages/Login.jsx';
 import Signup from './components/pages/Signup.jsx';
 import FAQ from './components/pages/FAQ.jsx';
 
+const root = import.meta.env.VITE_REACT_APP_ROOT;
+
 // ANCHOR -- Create Router
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />}>
+    <Route path={`${root}/`} element={<App />}>
       <Route index element={<Home />} />
-      <Route path='/Login' element={<Login />} />
-      <Route path='/Signup' element={<Signup />} />
-      <Route path='/Dashboard' element={<Dashboard />} />
-      <Route path='/Contact' element={<Contact />} />
-      <Route path='/Faq' element={<FAQ />} />
+      <Route path={`${root}/login`} element={<Login />} />
+      <Route path={`${root}/signup`} element={<Signup />} />
+      <Route path={`${root}/dashboard`} element={<Dashboard />} />
+      <Route path={`${root}/contact`} element={<Contact />} />
+      <Route path={`${root}/faq`} element={<FAQ />} />
     </Route>
   )
 );

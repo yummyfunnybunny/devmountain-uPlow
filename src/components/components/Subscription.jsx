@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function Subscription(props) {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function Subscription(props) {
 
   useEffect(() => {
     axios
-      .get(`/propertyBySubscription/${subscription.job_id}`)
+      .get(`${root}/propertyBySubscription/${subscription.job_id}`)
       .then((res) => {
         console.log(res.data);
         setProperty(res.data.property);

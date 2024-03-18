@@ -2,6 +2,7 @@ import '../../styles/layouts/footer.css';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSnowplow, faFish, faPoo, faGhost, faBug } from '@fortawesome/free-solid-svg-icons';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function Footer() {
   return (
@@ -17,25 +18,25 @@ function Footer() {
         <p>&#169; 2024 Jake Nichols USA, inc. All rights reserved.</p>
       </div>
       <div className='footer__links'>
-        <NavLink className='footer__link' to='/'>
+        <NavLink className='footer__link' to={`${root}/`}>
           Home
         </NavLink>
-        <NavLink className='footer__link' to='/Contact'>
+        <NavLink className='footer__link' to={`${root}/Contact`}>
           Contact
         </NavLink>
-        <NavLink className='footer__link' to='/Help'>
+        <NavLink className='footer__link' to={`${root}/Help`}>
           Help
         </NavLink>
-        <NavLink className='footer__link' to='/Faq'>
+        <NavLink className='footer__link' to={`${root}/Faq`}>
           FAQ
         </NavLink>
-        <NavLink className='footer__link' to='/Signup'>
+        <NavLink className='footer__link' to={`${root}/Signup`}>
           Signup
         </NavLink>
-        <NavLink className='footer__link' to='/Login'>
+        <NavLink className='footer__link' to={`${root}/Login`}>
           Login
         </NavLink>
-        <NavLink className='footer__link' to='/dashboard'>
+        <NavLink className='footer__link' to={`${root}/dashboard`}>
           Dashboard
         </NavLink>
       </div>

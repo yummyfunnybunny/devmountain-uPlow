@@ -3,6 +3,7 @@ import Mapbox from '../components/Mapbox.jsx';
 import { useState, useEffect } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function DashFindJobs() {
   // const reduxAvailableJobs = useSelector((state) => state.findJobsReducer);
@@ -10,7 +11,7 @@ function DashFindJobs() {
 
   useEffect(() => {
     axios
-      .get('/availableJobs')
+      .get(`${root}/availableJobs`)
       .then((res) => {
         console.log(res.data);
         setAvailableJobs(res.data.availableJobs);

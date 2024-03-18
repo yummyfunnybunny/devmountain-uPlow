@@ -101,7 +101,6 @@ export default {
       res.status(200).send({
         success: true,
         message: 'your account has been successfully deleted',
-        redirectUri: '/',
         toast: {
           color: 'green',
           message: 'Your account has been successfully deleted!',

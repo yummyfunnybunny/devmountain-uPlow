@@ -2,6 +2,7 @@ import '../../styles/layouts/dashMyJobs.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function MyJob(props) {
   // console.log(props);
@@ -23,7 +24,7 @@ function MyJob(props) {
 
   useEffect(() => {
     axios
-      .get(`/workerByJob/${job_id}`)
+      .get(`${root}/workerByJob/${job_id}`)
       .then((res) => {
         console.log(res.data);
         setWorker(res.data.worker);

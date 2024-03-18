@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { StateDropdown } from '../../../scripts/forms.jsx';
 
+const root = import.meta.env.VITE_REACT_APP_ROOT;
+
 function Modal() {
   // INITS
   const dispatch = useDispatch();
@@ -73,7 +75,7 @@ function Modal() {
 
   useEffect(() => {
     axios
-      .get('/myJobsWithProperties')
+      .get(`${root}/myJobsWithProperties`)
       .then((res) => {
         setMyJobs(res.data.jobsWithProperties);
       })
@@ -132,13 +134,13 @@ function Modal() {
     e.preventDefault();
     console.log('== submit logout == ');
     axios
-      .get('/logout')
+      .get(`${root}/logout`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_LOGGED_IN' });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
-        navigate('/');
+        navigate(`${root}/`);
         // TODO - display success toast
       })
       .catch((err) => {
@@ -183,7 +185,7 @@ function Modal() {
         // console.log(coordinates);
         edittedUser.coordinates = coordinates;
         // console.log(edittedUser);
-        return axios.put('/me', edittedUser);
+        return axios.put(`${root}/me`, edittedUser);
       })
       .then((res) => {
         // console.log(res.data);
@@ -208,7 +210,7 @@ function Modal() {
     console.log(edittedUser);
 
     axios
-      .post('/changePassword', edittedUser)
+      .post(`${root}/changePassword`, edittedUser)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -234,12 +236,13 @@ function Modal() {
       return;
     }
     axios
-      .delete(`/me/${deleteUser.password}`)
+      .delete(`${root}/me/${deleteUser.password}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'RESET_LOGGED_IN' });
         dispatch({ type: 'NONE' });
-        navigate(res.data.redirectUri);
+        // navigate(res.data.redirectUri);
+        navigate(`${root}/`);
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
@@ -277,7 +280,7 @@ function Modal() {
         // console.log(coordinates);
         createProperty.coordinates = coordinates;
         // console.log(createProperty);
-        return axios.post('/properties', createProperty);
+        return axios.post(`${root}/properties`, createProperty);
       })
       .then((res) => {
         // console.log('== 2nd then ==');
@@ -322,7 +325,7 @@ function Modal() {
         // console.log(coordinates);
         propertyObject.coordinates = coordinates;
         // console.log(propertyObject);
-        return axios.put('/properties', propertyObject);
+        return axios.put(`${root}/properties`, propertyObject);
       })
       .then((res) => {
         // console.log(res.data);
@@ -354,7 +357,7 @@ function Modal() {
     console.log(propertyId);
 
     axios
-      .delete(`/properties/${propertyId}`)
+      .delete(`${root}/properties/${propertyId}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -383,7 +386,7 @@ function Modal() {
     };
 
     axios
-      .post('/jobs', createJob)
+      .post(`${root}/jobs`, createJob)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -407,7 +410,7 @@ function Modal() {
     };
 
     axios
-      .put('/jobs', jobObject)
+      .put(`${root}/jobs`, jobObject)
       .then((res) => {
         dispatch({
           type: 'SET_JOB',
@@ -429,7 +432,7 @@ function Modal() {
     // const jobId = reduxJob.job_id;
 
     axios
-      .delete(`/jobs/${reduxJob.job_id}`)
+      .delete(`${root}/jobs/${reduxJob.job_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -446,7 +449,7 @@ function Modal() {
     console.log(reduxJob.job_id);
 
     axios
-      .put(`/unsubscribeWorker/${reduxJob.job_id}`)
+      .put(`${root}/unsubscribeWorker/${reduxJob.job_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -461,7 +464,7 @@ function Modal() {
     e.preventDefault();
 
     axios
-      .put(`/unsubscribeFromJob/${reduxJob.job_id}`)
+      .put(`${root}/unsubscribeFromJob/${reduxJob.job_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -480,7 +483,7 @@ function Modal() {
     job.recipient_id = reduxWorker.user_id;
     console.log(job);
     axios
-      .post('/requestWorker', job)
+      .post(`${root}/requestWorker`, job)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -495,7 +498,7 @@ function Modal() {
     // Worker => Accepts => Customer Offer
     e.preventDefault();
     axios
-      .put('/acceptJobOffer', reduxAlert)
+      .put(`${root}/acceptJobOffer`, reduxAlert)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -509,7 +512,7 @@ function Modal() {
   const submitRejectRequestWorker = (e) => {
     e.preventDefault();
     axios
-      .delete(`/rejectRequestWorker/${reduxAlert.alert_id}`)
+      .delete(`${root}/rejectRequestWorker/${reduxAlert.alert_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -524,7 +527,7 @@ function Modal() {
     e.preventDefault();
 
     axios
-      .post('/requestJob', reduxJob)
+      .post(`${root}/requestJob`, reduxJob)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -540,7 +543,7 @@ function Modal() {
     console.log();
 
     axios
-      .delete(`/deleteAlert/${reduxAlert.alert_id}`)
+      .delete(`${root}/deleteAlert/${reduxAlert.alert_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -556,7 +559,7 @@ function Modal() {
     e.preventDefault();
 
     axios
-      .put('/acceptWorkerOffer', reduxAlert)
+      .put(`${root}/acceptWorkerOffer`, reduxAlert)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -570,7 +573,7 @@ function Modal() {
   const submitRejectRequestJob = (e) => {
     e.preventDefault();
     axios
-      .delete(`/rejectRequestJob/${reduxAlert.alert_id}`)
+      .delete(`${root}/rejectRequestJob/${reduxAlert.alert_id}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });

@@ -1,3 +1,4 @@
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 function forwardGeocode(address) {
   const mapboxToken =
     'pk.eyJ1IjoieXVtbXlmdW5ueWJ1bm55IiwiYSI6ImNrODZwNzQydDA1bjEzZW15NTRqa2NpdnEifQ.6y8NFU2qjw6mTgINZYaRyg';
@@ -14,6 +15,8 @@ function forwardGeocode(address) {
     // console.log(coordinates);
     createProperty.coordinates = coordinates;
     console.log(createProperty);
-    return axios.post('/properties', createProperty);
+    return axios.post(`${root}/properties`, createProperty);
   });
 }
+
+export default forwardGeocode;

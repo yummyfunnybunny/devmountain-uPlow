@@ -13,7 +13,11 @@ import alertCtrl from './controllers/alertCtrl.js';
 const app = express();
 // const port = '8000';
 dotenv.config();
+// const { VITE_REACT_APP_ROOT } = process.env;
+const root = process.env.VITE_REACT_APP_ROOT;
 const { PORT } = process.env;
+console.log('ROOT:');
+console.log(root);
 // ViteExpress.config({ printViteDevServerHost: true });
 
 // ANCHOR -- Middle-Ware
@@ -25,28 +29,28 @@ app.use(session({ secret: 'uplowRocks$69', saveUninitialized: true, resave: fals
 
 // ANCHOR -- Auth
 const { signup, login, logout, changePassword, loginRequired, isLoggedIn, getWeather } = authCtrl;
-app.post('/signup', signup);
-app.post('/login', login);
-app.get('/logout', loginRequired, logout);
-app.post('/changePassword', loginRequired, changePassword);
-app.get('/isLoggedIn', isLoggedIn);
-app.get('/weather/:latitude/:longitude', loginRequired, getWeather);
+app.post(`${root}/signup`, signup);
+app.post(`${root}/login`, login);
+app.get(`${root}/logout`, loginRequired, logout);
+app.post(`${root}/changePassword`, loginRequired, changePassword);
+app.get(`${root}/isLoggedIn`, isLoggedIn);
+app.get(`${root}/weather/:latitude/:longitude`, loginRequired, getWeather);
 
 // ANCHOR -- Users
 const { getMe, editMe, deleteMe, getWorkers, getWorker } = userCtrl;
-app.get('/me', loginRequired, getMe);
-app.put('/me', loginRequired, editMe);
-app.delete('/me/:password', loginRequired, deleteMe);
-app.get('/workers', loginRequired, getWorkers);
-app.get('/workerByjob/:job_id', loginRequired, getWorker);
+app.get(`${root}/me`, loginRequired, getMe);
+app.put(`${root}/me`, loginRequired, editMe);
+app.delete(`${root}/me/:password`, loginRequired, deleteMe);
+app.get(`${root}/workers`, loginRequired, getWorkers);
+app.get(`${root}/workerByjob/:job_id`, loginRequired, getWorker);
 
 // ANCHOR -- Properties
 const { myProperties, getPropertyBySubscription, createProperty, editProperty, deleteProperty } = propertyCtrl;
-app.get('/properties', loginRequired, myProperties);
-app.get('/propertyBySubscription/:job_id', loginRequired, getPropertyBySubscription);
-app.post('/properties', loginRequired, createProperty);
-app.put('/properties', loginRequired, editProperty);
-app.delete('/properties/:property_id', loginRequired, deleteProperty);
+app.get(`${root}/properties`, loginRequired, myProperties);
+app.get(`${root}/propertyBySubscription/:job_id`, loginRequired, getPropertyBySubscription);
+app.post(`${root}/properties`, loginRequired, createProperty);
+app.put(`${root}/properties`, loginRequired, editProperty);
+app.delete(`${root}/properties/:property_id`, loginRequired, deleteProperty);
 
 // ANCHOR -- Jobs
 const {
@@ -62,26 +66,26 @@ const {
   acceptJobOffer,
   acceptServiceOffer,
 } = jobCtrl;
-app.get('/myJobs', loginRequired, myJobs);
-app.get('/myJobsWithProperties', loginRequired, myJobsWithProperties);
-app.get('/availableJobs', loginRequired, availableJobs);
-app.post('/jobs', loginRequired, createJob);
-app.put('/jobs', loginRequired, updateJob);
-app.put('/unsubscribeWorker/:job_id', loginRequired, unsubscribeWorker);
-app.put('/unsubscribeFromJob/:job_id', loginRequired, unsubscribeFromJob);
-app.delete('/jobs/:job_id', loginRequired, deleteJob);
-app.get('/mySubscriptions/:user_id', loginRequired, getSubscriptions);
-app.put('/acceptJobOffer', loginRequired, acceptJobOffer);
-app.put('/acceptWorkerOffer', loginRequired, acceptServiceOffer);
+app.get(`${root}/myJobs`, loginRequired, myJobs);
+app.get(`${root}/myJobsWithProperties`, loginRequired, myJobsWithProperties);
+app.get(`${root}/availableJobs`, loginRequired, availableJobs);
+app.post(`${root}/jobs`, loginRequired, createJob);
+app.put(`${root}/jobs`, loginRequired, updateJob);
+app.put(`${root}/unsubscribeWorker/:job_id`, loginRequired, unsubscribeWorker);
+app.put(`${root}/unsubscribeFromJob/:job_id`, loginRequired, unsubscribeFromJob);
+app.delete(`${root}/jobs/:job_id`, loginRequired, deleteJob);
+app.get(`${root}/mySubscriptions/:user_id`, loginRequired, getSubscriptions);
+app.put(`${root}/acceptJobOffer`, loginRequired, acceptJobOffer);
+app.put(`${root}/acceptWorkerOffer`, loginRequired, acceptServiceOffer);
 
 // ANCHOER -- Alerts
 const { myAlerts, requestWorker, requestJob, rejectRequestWorker, rejectRequestJob, deleteAlert } = alertCtrl;
-app.get('/myAlerts', loginRequired, myAlerts);
-app.post('/requestWorker', loginRequired, requestWorker);
-app.post('/requestJob', loginRequired, requestJob);
-app.delete('/rejectRequestWorker/:alert_id', loginRequired, rejectRequestWorker);
-app.delete('/rejectRequestJob/:alert_id', loginRequired, rejectRequestJob);
-app.delete('/deleteAlert/:alert_id', loginRequired, deleteAlert);
+app.get(`${root}/myAlerts`, loginRequired, myAlerts);
+app.post(`${root}/requestWorker`, loginRequired, requestWorker);
+app.post(`${root}/requestJob`, loginRequired, requestJob);
+app.delete(`${root}/rejectRequestWorker/:alert_id`, loginRequired, rejectRequestWorker);
+app.delete(`${root}/rejectRequestJob/:alert_id`, loginRequired, rejectRequestJob);
+app.delete(`${root}/deleteAlert/:alert_id`, loginRequired, deleteAlert);
 
 // !SECTION
 

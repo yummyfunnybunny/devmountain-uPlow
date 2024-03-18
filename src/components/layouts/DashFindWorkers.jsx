@@ -3,6 +3,7 @@ import Mapbox from '../components/Mapbox.jsx';
 import { useState, useEffect } from 'react';
 // import { useSelector } from 'react-redux';
 import axios from 'axios';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function DashFindWorkers() {
   const [workers, setWorkers] = useState([]);
@@ -12,7 +13,7 @@ function DashFindWorkers() {
 
   useEffect(() => {
     axios
-      .get('/workers')
+      .get(`${root}/workers`)
       .then((res) => {
         console.log(res.data);
         setWorkers(res.data.workers);

@@ -41,7 +41,7 @@ export default {
       success: true,
       user: newUser,
       message: "you've successfully created a new account!",
-      redirectUri: '/dashboard',
+      // redirectUri: '/dashboard',
       toast: {
         color: 'green',
         message: 'Your account has been created!',
@@ -70,7 +70,7 @@ export default {
         success: true,
         user: user,
         message: 'login successful!',
-        redirectUri: '/dashboard',
+        // redirectUri: '/dashboard',
         toast: {
           color: 'green',
           message: 'You have successfully logged in!',

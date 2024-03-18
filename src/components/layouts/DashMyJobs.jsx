@@ -2,6 +2,7 @@ import Job from '../components/Job.jsx';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function DashMyJobs() {
   const reduxJobs = useSelector((state) => state.jobReducer);
@@ -12,7 +13,7 @@ function DashMyJobs() {
 
   useEffect(() => {
     axios
-      .get('/myJobs')
+      .get(`${root}/myJobs`)
       .then((res) => {
         console.log(res.data);
         setJobs(res.data.jobs);

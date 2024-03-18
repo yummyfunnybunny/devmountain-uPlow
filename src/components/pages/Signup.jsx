@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { StateDropdown, trimFormData } from '../../../scripts/forms.jsx';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function Signup() {
   const dispatch = useDispatch();
@@ -58,13 +59,14 @@ function Signup() {
     console.log(signupData);
 
     axios
-      .post('/signup', signupData)
+      .post(`${root}/signup`, signupData)
       .then((res) => {
         console.log(res);
         console.log(window);
         dispatch({ type: 'SET_LOGGED_IN', payload: res.data.user });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
-        navigate(res.data.redirectUri);
+        // navigate(res.data.redirectUri);
+        navigate(`${root}/dashboard`);
         // TODO - display success toast
       })
       .catch((err) => {

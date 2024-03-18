@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
-
 import '../../styles/layouts/hero.css';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function Hero() {
   return (
@@ -16,10 +16,10 @@ function Hero() {
         <div className='hero__right'>
           <h1>Get started now!</h1>
           <div className='hero__cta'>
-            <NavLink to='/signup'>
+            <NavLink to={`${root}/signup`}>
               <button className='btn btn__cta1 btn--lg'>Sign Up</button>
             </NavLink>
-            <NavLink to='/login'>
+            <NavLink to={`${root}/login`}>
               <button className='btn btn__cta2 btn--lg'>Login</button>
             </NavLink>
           </div>

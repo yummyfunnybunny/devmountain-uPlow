@@ -3,6 +3,7 @@ import Alert from '../components/Alert.jsx';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function DashAlerts() {
   const [myAlerts, setMyAlerts] = useState([]);
@@ -10,7 +11,7 @@ function DashAlerts() {
 
   useEffect(() => {
     axios
-      .get('/myAlerts')
+      .get(`${root}/myAlerts`)
       .then((res) => {
         console.log(res.data);
         setMyAlerts(res.data.alerts);

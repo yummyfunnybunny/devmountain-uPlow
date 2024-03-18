@@ -3,6 +3,7 @@ import '../../styles/components/subscription.css';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function DashMySubscriptions() {
   const reduxJobs = useSelector((state) => state.jobReducer);
@@ -12,7 +13,7 @@ function DashMySubscriptions() {
 
   useEffect(() => {
     axios
-      .get(`/mySubscriptions/${reduxUser.user_id}`)
+      .get(`${root}/mySubscriptions/${reduxUser.user_id}`)
       .then((res) => {
         console.log(res.data);
         setSubscriptions(res.data.subscriptions);

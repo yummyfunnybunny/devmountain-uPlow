@@ -4,6 +4,7 @@ import Property from '../components/Property.jsx';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function DashMyProperties() {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ function DashMyProperties() {
 
   useEffect(() => {
     axios
-      .get('/properties')
+      .get(`${root}/properties`)
       .then((res) => {
         console.log(res.data);
         setProperties(res.data.properties);
