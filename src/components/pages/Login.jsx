@@ -26,13 +26,12 @@ function Login() {
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'SET_LOGGED_IN', payload: res.data.user });
-        // navigate(res.data.redirectUri);
+        dispatch({ type: 'SET_TOAST', payload: res.data.toast });
         navigate(`${root}/dashboard`);
-        // TODO - display success toast
       })
       .catch((err) => {
         console.log(err);
-        // TODO - display failed toast
+        dispatch({ type: 'SET_TOAST', payload: err.response.data.toast });
       });
   };
 

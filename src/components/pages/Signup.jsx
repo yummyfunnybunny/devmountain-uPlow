@@ -38,6 +38,12 @@ function Signup() {
     // TODO - form validation
     // - remove white space
     // - undercase everything
+    // phone number must be 10 characters and all numbers, no letters or special characters - 1234567890
+    // role must be either 'Customer' or 'Worker'
+    // street address cannot have special characters
+    // city cannot have any numbers or special characters
+    // state is required
+    // zipcode must have 5 digits, no letters or special characters
     // - check that both passwords match
 
     const signupData = {

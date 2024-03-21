@@ -1,4 +1,5 @@
 import { User, Property, Job, Customer, Worker } from '../database/model.js';
+import { comparePasswords } from './authCtrl.js';
 
 export default {
   getMe: async (req, res) => {
@@ -61,10 +62,11 @@ export default {
     const { password } = req.params;
 
     try {
-      // TODO - send alerts to all workers subscribed to your jobs
-      // TODO - Delete all jobs associated with this user
       const userToDelete = await User.findByPk(req.session.user_id);
-      if (userToDelete.password !== password) {
+
+      // check that the password entered matches the current password in the DB before proceding
+      const isMatch = await comparePasswords(password, userToDelete.password);
+      if (!isMatch) {
         return res.status(400).send({
           toast: {
             color: 'red',
@@ -73,6 +75,10 @@ export default {
         });
       }
 
+      // TODO - WORKERS - unsibscribe yourself from any jobs you are subscribed to and send the customers alerts
+      // TODO - CUSTOMERS - unsubscribe workers from your jobs and send them alerts
+
+      // Find and delete all jobs associated with this user
       let propertiesToDelete;
       propertiesToDelete = await userToDelete.getProperties();
       await Promise.all(
@@ -85,22 +91,25 @@ export default {
         })
       );
 
-      // TODO - Delete all properties associated with this user
+      // Delete all properties associated with this user
       await Property.destroy({
         where: {
           user_id: req.session.user_id,
         },
       });
+
+      // Delete the User
       await User.destroy({
         where: {
           user_id: req.session.user_id,
         },
       });
 
+      // remove the user session
       req.session.destroy();
+
+      // send success response
       res.status(200).send({
-        success: true,
-        message: 'your account has been successfully deleted',
         toast: {
           color: 'green',
           message: 'Your account has been successfully deleted!',

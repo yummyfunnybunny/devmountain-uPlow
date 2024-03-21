@@ -11,8 +11,8 @@ const root = import.meta.env.VITE_REACT_APP_ROOT;
 function Navbar() {
   const reduxUser = useSelector((state) => state.loggedInReducer);
   const dispatch = useDispatch();
-  console.log('==loggedInReducer==');
-  console.log(reduxUser);
+  // console.log('==loggedInReducer==');
+  // console.log(reduxUser);
 
   // useEffect(() => {
   //   axios

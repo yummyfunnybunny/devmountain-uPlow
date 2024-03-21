@@ -202,6 +202,9 @@ function Modal() {
     console.log('== submit change password ==');
     e.preventDefault();
 
+    // TODO - form validation
+    // check that old password matches new password
+
     const edittedUser = {
       ...user,
       oldPassword: user.oldPassword,
@@ -218,6 +221,7 @@ function Modal() {
       })
       .catch((err) => {
         console.log(err);
+        dispatch({ type: 'SET_TOAST', payload: err.response.data.toast });
       });
   };
   const submitDeleteAccount = (e) => {
