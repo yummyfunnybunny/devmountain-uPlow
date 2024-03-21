@@ -3,7 +3,7 @@
     "job_id": "1",
     "jobType": "sidewalk",
     "jobSize": "300",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.9133662, 40.3847755],
     "instructions": ["please make sure to get right infront of the steps", "dont pile snow next to the entrance sign"],
     "subscribed": "6",
@@ -13,7 +13,7 @@
     "job_id": "2",
     "jobType": "parking lot",
     "jobSize": "250",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.8746606, 40.4194356],
     "instructions": ["please pile snow on the back end of the lot"],
     "subscribed": "6",
@@ -23,7 +23,7 @@
     "job_id": "3",
     "jobType": "walkway",
     "jobSize": "500",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.8746606, 40.4194356],
     "instructions": ["blahblahblah", "blahblahblah"],
     "subscribed": null,
@@ -33,7 +33,7 @@
     "job_id": "4",
     "jobType": "driveway",
     "jobSize": "1000",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.9026504, 40.3310042],
     "instructions": ["please watch out for the dog toys!", "please plow all the way to the side of the garage"],
     "subscribed": null,
@@ -43,7 +43,7 @@
     "job_id": "5",
     "jobType": "parking lot",
     "jobSize": "50",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.7159638, 40.2943723],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -57,7 +57,7 @@
     "job_id": "6",
     "jobType": "sidewalk",
     "jobSize": "2000",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.7164725, 40.3667204],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -71,7 +71,7 @@
     "job_id": "7",
     "jobType": "walkway",
     "jobSize": "150",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.9026504, 40.3310042],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -85,7 +85,7 @@
     "job_id": "8",
     "jobType": "roof",
     "jobSize": "500",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.9650255, 40.5123693],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -99,7 +99,7 @@
     "job_id": "9",
     "jobType": "pond",
     "jobSize": "2000",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.9230762, 40.5347958],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -113,7 +113,7 @@
     "job_id": "10",
     "jobType": "driveway",
     "jobSize": "250",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.8564202, 40.5316445],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -127,7 +127,7 @@
     "job_id": "11",
     "jobType": "parking lot",
     "jobSize": "13",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-112.0067155, 40.3150503],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -141,7 +141,7 @@
     "job_id": "12",
     "jobType": "sidewalk",
     "jobSize": "200",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-112.0034914, 40.3033497],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -155,7 +155,7 @@
     "job_id": "13",
     "jobType": "roof",
     "jobSize": "325",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.7982833, 40.425358],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -169,7 +169,7 @@
     "job_id": "14",
     "jobType": "pond",
     "jobSize": "475",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.90163, 40.4179277],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -183,7 +183,7 @@
     "job_id": "15",
     "jobType": "driveway",
     "jobSize": "250",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.8861436, 40.4450409],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -197,7 +197,7 @@
     "job_id": "16",
     "jobType": "parking lot",
     "jobSize": "1000",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.8355516, 40.5697763],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -211,7 +211,7 @@
     "job_id": "17",
     "jobType": "sidewalk",
     "jobSize": "215",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.9420514, 40.6109262],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -225,7 +225,7 @@
     "job_id": "18",
     "jobType": "walkway",
     "jobSize": "500",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.8652517, 40.6884567],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -239,7 +239,7 @@
     "job_id": "19",
     "jobType": "roof",
     "jobSize": "2000",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.7015035, 40.2414861],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -253,7 +253,7 @@
     "job_id": "20",
     "jobType": "driveway",
     "jobSize": "2000",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.7072566, 40.3537785],
     "instructions": [
       "sed id semper risus in hendrerit gravida",
@@ -267,7 +267,7 @@
     "job_id": "21",
     "jobType": "parking lot",
     "jobSize": "5",
-    "pictures": ["img1", "img2", "img3"],
+    "pictures": null,
     "coordinates": [-111.712942, 40.3693548],
     "instructions": [
       "sed id semper risus in hendrerit gravida",

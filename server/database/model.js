@@ -232,9 +232,9 @@ Property.init(
       allowNull: false,
     },
     picture: {
-      type: DataTypes.STRING(60), // NOTE -- not sure if this will work, will have to check
-      allowNull: false,
-      validate: { notEmpty: true },
+      type: DataTypes.BLOB(),
+      allowNull: true,
+      //validate: { notEmpty: true },
     },
     street: {
       type: DataTypes.STRING(100),
@@ -289,7 +289,8 @@ Job.init(
       allowNull: false,
     },
     pictures: {
-      type: DataTypes.ARRAY(DataTypes.STRING()),
+      type: DataTypes.BLOB(),
+      allowNull: true,
     },
     coordinates: {
       type: DataTypes.ARRAY(DataTypes.FLOAT),

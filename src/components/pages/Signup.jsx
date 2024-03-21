@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { StateDropdown, trimFormData } from '../../../scripts/forms.jsx';
 const root = import.meta.env.VITE_REACT_APP_ROOT;
+const mapboxToken = import.meta.env.VITE_REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 function Signup() {
   const dispatch = useDispatch();
@@ -62,18 +63,27 @@ function Signup() {
 
     trimFormData(signupData);
 
-    console.log(signupData);
+    // console.log(signupData);
+
+    // build the URI to fetch the coordinates of the created user address
+    const address = encodeURI(`${signupData.street} ${signupData.city} ${signupData.state} ${signupData.zipcode}`);
+    const mapBoxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?proximity=ip&access_token=${mapboxToken}`;
 
     axios
-      .post(`${root}/signup`, signupData)
+      .get(mapBoxUrl)
+      .then((res) => {
+        const coordinates = res.data.features[0].center;
+        // signupData.append('coordinates', coordinates);
+        signupData.coordinates = coordinates;
+        console.log(signupData);
+        return axios.post(`${root}/signup`, signupData);
+      })
       .then((res) => {
         console.log(res);
         console.log(window);
         dispatch({ type: 'SET_LOGGED_IN', payload: res.data.user });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
-        // navigate(res.data.redirectUri);
         navigate(`${root}/dashboard`);
-        // TODO - display success toast
       })
       .catch((err) => {
         console.log(err);

@@ -11,16 +11,16 @@ export default {
     } catch (err) {
       console.log(err);
     }
-    console.log('me route');
-    console.log(user);
+    // console.log('me route');
+    // console.log(user);
 
     if (!user) {
-      console.log('me failed');
+      // console.log('me failed');
       res.status(404).send({
         message: 'user was not found!',
       });
     } else {
-      console.log('me success');
+      // console.log('me success');
       res.status(200).send({
         message: 'user found',
         user: user,
@@ -30,11 +30,11 @@ export default {
   editMe: async (req, res) => {
     console.log('edit me route');
     const userId = req.session.user_id;
-    console.log(userId);
+    // console.log(userId);
     // console.log(req.body);
     const editUser = req.body;
-    console.log('editUser:');
-    console.log(editUser);
+    // console.log('editUser:');
+    // console.log(editUser);
 
     try {
       await User.update(

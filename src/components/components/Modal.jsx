@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { StateDropdown } from '../../../scripts/forms.jsx';
 
 const root = import.meta.env.VITE_REACT_APP_ROOT;
+const mapboxToken = import.meta.env.VITE_REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 function Modal() {
   // INITS
@@ -22,6 +23,7 @@ function Modal() {
 
   // STATE VARIABLES
   const [myJobs, setMyJobs] = useState([]);
+  console.log(myJobs);
   const [jobToRequestWorker, setJobToRequestWorker] = useState('');
   const [user, setUser] = useState({
     firstName: reduxUser.firstName,
@@ -39,14 +41,15 @@ function Modal() {
   });
 
   const [newProperty, setNewProperty] = useState({
-    name: '',
-    street: '',
-    city: '',
-    state: '',
-    zipcode: '',
+    name: 'poop',
+    street: '596 main st',
+    city: 'contoocook',
+    state: 'NH',
+    zipcode: '03229',
     picture: '',
   });
   const [editProperty, setEditProperty] = useState({
+    property_id: reduxProperty.property_id,
     name: reduxProperty.name,
     street: reduxProperty.street,
     city: reduxProperty.city,
@@ -71,7 +74,7 @@ function Modal() {
     instructions2: reduxJob.instructions[1],
     instructions3: reduxJob.instructions[2],
   });
-  console.log(editJob);
+  console.log(newJob);
 
   useEffect(() => {
     axios
@@ -89,6 +92,14 @@ function Modal() {
     setState({
       ...state,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleFileChange = (e, setState, state) => {
+    console.log(e.target.files[0]);
+    setState({
+      ...state,
+      [e.target.name]: e.target.files[0],
     });
   };
 
@@ -141,7 +152,6 @@ function Modal() {
         dispatch({ type: 'RESET_LOGGED_IN' });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
         navigate(`${root}/`);
-        // TODO - display success toast
       })
       .catch((err) => {
         console.log(err);
@@ -165,31 +175,21 @@ function Modal() {
       user_id: user.user_id,
     };
 
-    // console.log('Edited User:');
-    // console.log(edittedUser);
-
-    const mapboxToken =
-      'pk.eyJ1IjoieXVtbXlmdW5ueWJ1bm55IiwiYSI6ImNrODZwNzQydDA1bjEzZW15NTRqa2NpdnEifQ.6y8NFU2qjw6mTgINZYaRyg';
-
+    // build the address url for coordinate fetching
     const address = encodeURI(`${edittedUser.street} ${edittedUser.city} ${edittedUser.state} ${edittedUser.zipcode}`);
-    // console.log(address);
-
     const mapBoxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?proximity=ip&access_token=${mapboxToken}`;
 
+    // send the axios request:
+    // 1 - to mapbox for the coordinates
+    // 2 - to the backend
     axios
       .get(mapBoxUrl)
       .then((res) => {
-        // console.log('== 1st then ==');
-        // console.log(res.data);
         const coordinates = res.data.features[0].center;
-        // console.log(coordinates);
         edittedUser.coordinates = coordinates;
-        // console.log(edittedUser);
         return axios.put(`${root}/me`, edittedUser);
       })
       .then((res) => {
-        // console.log(res.data);
-        // setUser(res.data.user);
         dispatch({ type: 'SET_LOGGED_IN', payload: { ...res.data.user } });
         dispatch({ type: 'NONE' });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
@@ -232,20 +232,16 @@ function Modal() {
       password: user.password,
       confirmPassword: user.confirmPassword,
     };
-    console.log(deleteUser);
 
     if (deleteUser.password !== deleteUser.confirmPassword) {
-      console.log('passwords do not match!');
       dispatch({ type: 'SET_TOAST', payload: { color: 'red', message: 'The passwords you entered do not match' } });
       return;
     }
     axios
       .delete(`${root}/me/${deleteUser.password}`)
       .then((res) => {
-        console.log(res.data);
         dispatch({ type: 'RESET_LOGGED_IN' });
         dispatch({ type: 'NONE' });
-        // navigate(res.data.redirectUri);
         navigate(`${root}/`);
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
@@ -255,103 +251,88 @@ function Modal() {
       });
   };
   const submitCreateProperty = (e) => {
+    console.log('== submit create property ==');
     e.preventDefault();
 
-    const createProperty = {
-      name: newProperty.name,
-      street: newProperty.street,
-      city: newProperty.city,
-      state: newProperty.state,
-      zipcode: newProperty.zipcode,
-      // TODO - add pictures
-    };
+    // build formData object
+    const createdProperty = new FormData();
+    createdProperty.append('name', newProperty.name);
+    createdProperty.append('street', newProperty.street);
+    createdProperty.append('city', newProperty.city);
+    createdProperty.append('state', newProperty.state);
+    createdProperty.append('zipcode', newProperty.zipcode);
+    createdProperty.append('picture', newProperty.picture);
 
-    const mapboxToken = import.meta.env.VITE_REACT_APP_MAPBOX_ACCESS_TOKEN;
-
+    // build the URI to fetch the coordinates of the created property address
     const address = encodeURI(
-      `${createProperty.street} ${createProperty.city} ${createProperty.state} ${createProperty.zipcode}`
+      `${createdProperty.street} ${createdProperty.city} ${createdProperty.state} ${createdProperty.zipcode}`
     );
-    // console.log(address);
-
     const mapBoxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?proximity=ip&access_token=${mapboxToken}`;
 
+    // send axios request:
+    // 1: first to mapbox to get the coordinates
+    // 2: than to the backend with formData
     axios
       .get(mapBoxUrl)
       .then((res) => {
-        // console.log('== 1st then ==');
-        // console.log(res.data);
         const coordinates = res.data.features[0].center;
-        // console.log(coordinates);
-        createProperty.coordinates = coordinates;
-        // console.log(createProperty);
-        return axios.post(`${root}/properties`, createProperty);
+        createdProperty.append('coordinates', coordinates);
+        return axios.post(`${root}/properties`, createdProperty, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
       })
       .then((res) => {
-        // console.log('== 2nd then ==');
         dispatch({ type: 'NONE' });
         dispatch({ type: 'RESET_PROPERTY' });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
       })
       .catch((err) => {
-        // console.log(err);
         dispatch({ type: 'SET_TOAST', payload: { color: 'red', message: 'Something went wrong. Please try again.' } });
       });
   };
   const submitEditProperty = (e) => {
     e.preventDefault();
 
-    const propertyObject = {
-      ...reduxProperty,
-      name: editProperty.name,
-      // picture: editPropertyPicture,
-      street: editProperty.street,
-      city: editProperty.city,
-      state: editProperty.state,
-      zipcode: editProperty.zipcode,
-    };
+    // build formData object
+    const editedProperty = new FormData();
+    editedProperty.append('property_id', editProperty.property_id);
+    editedProperty.append('name', editProperty.name);
+    editedProperty.append('street', editProperty.street);
+    editedProperty.append('city', editProperty.city);
+    editedProperty.append('state', editProperty.state);
+    editedProperty.append('zipcode', editProperty.zipcode);
+    editedProperty.append('picture', editProperty.picture);
 
-    const mapboxToken = import.meta.env.VITE_REACT_APP_MAPBOX_ACCESS_TOKEN;
-
+    // build the URI to fetch the coordinates of the created property address
     const address = encodeURI(
-      `${propertyObject.street} ${propertyObject.city} ${propertyObject.state} ${propertyObject.zipcode}`
+      `${editedProperty.street} ${editedProperty.city} ${editedProperty.state} ${editedProperty.zipcode}`
     );
-    // console.log(address);
-
     const mapBoxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?proximity=ip&access_token=${mapboxToken}`;
-    // console.log(propertyObject);
 
+    // send axios request:
+    // 1: first to mapbox to get the coordinates
+    // 2: than to the backend with formData
     axios
       .get(mapBoxUrl)
       .then((res) => {
-        // console.log('== 1st then ==');
-        // console.log(res.data);
         const coordinates = res.data.features[0].center;
-        // console.log(coordinates);
-        propertyObject.coordinates = coordinates;
-        // console.log(propertyObject);
-        return axios.put(`${root}/properties`, propertyObject);
+        editedProperty.append('coordinates', coordinates);
+        return axios.put(`${root}/properties`, editedProperty, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
       })
       .then((res) => {
-        // console.log(res.data);
-        // TODO - change this dispatch to send the whole res object instead
-        // dispatch({
-        //   type: 'SET_PROPERTY',
-        //   payload: {
-        //     name: editPropertyName,
-        //     picture: editPropertyPicture,
-        //     street: editPropertyStreet,
-        //     city: editPropertyCity,
-        //     state: editPropertyState,
-        //     zipcode: editPropertyZipcode,
-        //   },
-        // });
         dispatch({ type: 'RESET_PROPERTY' });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
         dispatch({ type: 'NONE' });
       })
       .catch((err) => {
         console.log(err);
-        // dispatch({ type: 'SET_TOAST', payload: { color: 'red', message: 'Something went wrong. Please try again.' } });
+        dispatch({ type: 'SET_TOAST', payload: { color: 'red', message: 'Something went wrong. Please try again.' } });
       });
   };
   const submitDeleteProperty = (e) => {
@@ -377,20 +358,26 @@ function Modal() {
     console.log('== submit create job form ==');
     e.preventDefault();
 
+    // format the instructions array
     const instructionsArray = [newJob.instructions1, newJob.instructions2, newJob.instructions3];
 
-    const createJob = {
-      jobType: newJob.jobType,
-      jobSize: newJob.jobSize,
-      picture: 'img123',
-      coordinates: reduxProperty.coordinates,
-      instructions: instructionsArray,
-      subscribed: null,
-      property_id: reduxProperty.property_id,
-    };
+    // build formData object
+    const createdJob = new FormData();
+    createdJob.append('jobType', newJob.jobType);
+    createdJob.append('jobSize', newJob.jobSize);
+    createdJob.append('pictures', newJob.pictures);
+    createdJob.append('instructions', instructionsArray);
+    createdJob.append('coordinates', reduxProperty.coordinates);
+    // createdJob.append('subscribed', null);
+    createdJob.append('property_id', reduxProperty.property_id);
 
+    // send the axios request
     axios
-      .post(`${root}/jobs`, createJob)
+      .post(`${root}/jobs`, createdJob, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'NONE' });
@@ -403,23 +390,41 @@ function Modal() {
   const submitEditJob = (e) => {
     e.preventDefault();
 
+    // format the instructions array
     const instructionsArray = [editJob.instructions1, editJob.instructions2, editJob.instructions3];
 
-    const jobObject = {
-      ...editJob,
-      jobType: editJob.jobType,
-      jobSize: editJob.jobSize,
-      // picture: 'img123',
-      instructions: instructionsArray,
-    };
+    // build formData object
+    const editedJob = new FormData();
+    editedJob.append('job_id', editJob.job_id);
+    editedJob.append('jobType', editJob.jobType);
+    editedJob.append('jobSize', editJob.jobSize);
+    editedJob.append('pictures', editJob.pictures);
+    editedJob.append('instructions', instructionsArray);
+    // editedJob.append('coordinates', reduxProperty.coordinates);
+    // editedJob.append('subscribed', editJob.sunscribed);
+    editedJob.append('property_id', reduxJob.property_id);
+
+    console.log(editedJob);
+
+    // const jobObject = {
+    //   ...editJob,
+    //   jobType: editJob.jobType,
+    //   jobSize: editJob.jobSize,
+    //   // picture: 'img123',
+    //   instructions: instructionsArray,
+    // };
 
     axios
-      .put(`${root}/jobs`, jobObject)
+      .put(`${root}/jobs`, editedJob, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       .then((res) => {
         dispatch({
           type: 'SET_JOB',
           payload: {
-            ...jobObject,
+            ...editedJob,
           },
         });
         dispatch({ type: 'SET_TOAST', payload: res.data.toast });
@@ -480,6 +485,7 @@ function Modal() {
       });
   };
   const submitRequestWorker = (e) => {
+    // Customer => Requests => Worker
     e.preventDefault();
     console.log('submitting a request for work!!!!');
     // console.log(jobToRequestWorker.jobSize);
@@ -829,6 +835,7 @@ function Modal() {
               className='form__input'
               name='name'
               required
+              defaultValue={newProperty.name}
               onChange={(e) => handleChange(e, setNewProperty, newProperty)}
             ></input>
           </div>
@@ -840,6 +847,7 @@ function Modal() {
               className='form__input'
               name='street'
               required
+              defaultValue={newProperty.street}
               onChange={(e) => handleChange(e, setNewProperty, newProperty)}
             ></input>
           </div>
@@ -851,6 +859,7 @@ function Modal() {
               className='form__input'
               name='city'
               required
+              defaultValue={newProperty.city}
               onChange={(e) => handleChange(e, setNewProperty, newProperty)}
             ></input>
           </div>
@@ -862,7 +871,7 @@ function Modal() {
               className='form__input'
               name='state'
               required
-              defaultValue=''
+              // defaultValue=''
               onChange={(e) => handleChange(e, setNewProperty, newProperty)}
             >
               <StateDropdown />
@@ -877,7 +886,20 @@ function Modal() {
               name='zipcode'
               required
               maxLength='5'
+              defaultValue={newProperty.zipcode}
               onChange={(e) => handleChange(e, setNewProperty, newProperty)}
+            ></input>
+          </div>
+
+          {/* PICTURE */}
+          <div className='form__row'>
+            <label className='form__label'>Property Image:&emsp;</label>
+            <input
+              className='form__input'
+              name='picture'
+              type='file'
+              accept='.png, .jpeg, .jpg'
+              onChange={(e) => handleFileChange(e, setNewProperty, newProperty)}
             ></input>
           </div>
 
@@ -962,6 +984,18 @@ function Modal() {
             ></input>
           </div>
 
+          {/* PICTURE */}
+          <div className='form__row'>
+            <label className='form__label'>Property Image:&emsp;</label>
+            <input
+              className='form__input'
+              name='picture'
+              type='file'
+              accept='.png, .jpeg, .jpg'
+              onChange={(e) => handleFileChange(e, setEditProperty, editProperty)}
+            ></input>
+          </div>
+
           {/* BUTTONS */}
           <div className='form__row'>
             <button className='btn btn__success btn--md' type='submit'>
@@ -1037,14 +1071,16 @@ function Modal() {
             ></input>
           </div>
 
-          {/* PICTURES */}
+          {/* PICTURE */}
           <div className='form__row'>
             <label className='form__label'>Add Picture:&emsp;</label>
             <input
               className='form__input'
               name='pictures'
-              defaultValue={newJob.pictures}
-              onChange={(e) => handleChange(e, setNewJob, newJob)}
+              type='file'
+              accept='.png, .jpeg, .jpg'
+              // defaultValue={newJob.pictures}
+              onChange={(e) => handleFileChange(e, setNewJob, newJob)}
             ></input>
           </div>
 
@@ -1131,14 +1167,16 @@ function Modal() {
             <input
               className='form__input'
               name='pictures'
+              type='file'
+              accept='.png, .jpeg, .jpg'
               defaultValue={editJob.pictures}
-              onChange={(e) => handleChange(e, setEditJob, editJob)}
+              onChange={(e) => handleFileChange(e, setEditJob, editJob)}
             ></input>
           </div>
 
           {/* INSTRUCTIONS */}
           <label className='form__label'>Instructions:&emsp;</label>
-          <p className='form__label'>Separate individual instructions with a period.</p>
+          {/* <p className='form__label'>Separate individual instructions with a period.</p> */}
           <div className='form__row'>
             <input
               className='form__input'

@@ -11,9 +11,11 @@ export default {
         include: [
           {
             model: Property,
+            attributes: { exclude: ['picture'] },
           },
           {
             model: Job,
+            attributes: { exclude: ['pictures'] },
           },
           {
             model: User,

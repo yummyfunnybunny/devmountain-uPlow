@@ -11,7 +11,7 @@ export default {
   signup: async (req, res) => {
     console.log('=== singup endpoint ===');
     // const { firstName, lastName, email, phone, password, confirmPassword, role } = req.body;
-    // console.log(req.body);
+    console.log(req.body);
 
     // TODO - data validation
     // - check that email doesnt already exist
@@ -34,6 +34,7 @@ export default {
         state: req.body.state,
         zipcode: req.body.zipcode,
         password: hashedPassword,
+        coordinates: req.body.coordinates,
       });
 
       // set session to user ID
@@ -86,14 +87,6 @@ export default {
         });
         return;
       }
-
-      // if (!user || user.password != password) {
-      //   console.log('user or password do not matching or invalid');
-      //   res.status(400).send({
-      //     message: 'Invalid login info. Please try again.',
-      //   });
-      //   return;
-      // }
 
       // set the user session
       req.session.user_id = user.user_id;
@@ -199,21 +192,21 @@ export default {
       }
     }
   },
-  getWeather: async (req, res) => {
-    console.log('== GET WEATHER ROUTE ==');
-    const { latitude, longitude } = req.params;
-    try {
-      const weather = await axios.get(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHER_KEY}`
-      );
-      console.log(weather);
-      res.status(200).send({
-        weather: weather,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  },
+  // getWeather: async (req, res) => {
+  //   console.log('== GET WEATHER ROUTE ==');
+  //   const { latitude, longitude } = req.params;
+  //   try {
+  //     const weather = await axios.get(
+  //       `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHER_KEY}`
+  //     );
+  //     console.log(weather);
+  //     res.status(200).send({
+  //       weather: weather,
+  //     });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
 };
 
 export const hashPassword = async (password) => {

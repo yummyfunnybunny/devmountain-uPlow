@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function Property(props) {
   const { id, name, picture, street, city, state, zipcode, coordinates } = props;
-  const property = useSelector((state) => state.propertyReducer);
+  // const property = useSelector((state) => state.propertyReducer);
   const user = useSelector((state) => state.loggedInReducer);
-  const reduxJobs = useSelector((state) => state.jobReducer);
+  // const reduxJobs = useSelector((state) => state.jobReducer);
   const dispatch = useDispatch();
 
   return (
@@ -14,7 +14,7 @@ function Property(props) {
       {/* <div className='property__meta'> */}
       <div className='property__image'>
         {/* IMAGE */}
-        <img className='property__pic' src='../../../public/property_placeholder.jpg'></img>
+        <img className='property__pic' src={picture}></img>
       </div>
 
       {/* <div className='property__divider'></div> */}

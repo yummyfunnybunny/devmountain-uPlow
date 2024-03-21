@@ -6,7 +6,7 @@ const root = import.meta.env.VITE_REACT_APP_ROOT;
 
 function MyJob(props) {
   // console.log(props);
-  const { job_id, jobType, jobSize, picture, subscribed, instructions } = props.job;
+  const { job_id, jobType, jobSize, pictures, subscribed, instructions } = props.job;
   console.log(props.job);
 
   const [worker, setWorker] = useState(null);
@@ -37,7 +37,8 @@ function MyJob(props) {
   return (
     <div className='job glass-2'>
       <div className='job__image'>
-        <img className='job__pic' src='../../../public/job_placeholder.jpg'></img>
+        {/* <img className='job__pic' src='../../../public/job_placeholder.jpg'></img> */}
+        <img className='job__pic' src={pictures}></img>
       </div>
 
       <div className='job__content'>
@@ -121,7 +122,7 @@ function MyJob(props) {
                   job_id: job_id,
                   jobType: jobType,
                   jobSize: jobSize,
-                  picture: picture,
+                  picture: pictures,
                   instructions: instructions,
                 },
               })

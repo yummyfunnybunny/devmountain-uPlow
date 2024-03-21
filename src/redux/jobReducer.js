@@ -5,7 +5,7 @@ const initialState = {
   picture: '-',
   instructions: ['-', '-', '-'],
   subscribed: '-',
-  // property_id: '-',
+  property_id: '-',
 };
 
 function jobReducer(state = initialState, action) {
@@ -19,7 +19,7 @@ function jobReducer(state = initialState, action) {
         picture: action.payload.picture,
         instructions: action.payload.instructions,
         subscribed: action.payload.subscribed,
-        // property_id: action.payload.property_id,
+        property_id: action.payload.property_id,
       };
     case 'RESET_JOB':
       return {
@@ -30,7 +30,7 @@ function jobReducer(state = initialState, action) {
         picture: '-',
         instructions: ['-', '-', '-'],
         subscribed: '-',
-        // property_id: '-',
+        property_id: '-',
       };
     default:
       return state;

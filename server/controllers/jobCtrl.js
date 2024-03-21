@@ -1,26 +1,42 @@
 import { User, Property, Job, Alert } from '../database/model.js';
+import helpers from './helpers.js';
+
+const { bufferToImage } = helpers;
 
 export default {
   myJobs: async (req, res) => {
     console.log('== My Jobs Route ==');
     try {
+      // find the current user
       const user = await User.findByPk(req.session.user_id);
       const properties = await user.getProperties({
         attributes: ['property_id'],
       });
+
+      // fetch all that users properties
       const propertyIds = properties.map((prop) => {
         return prop.property_id;
       });
 
+      // now get all the jobs from those properties
       const jobs = await Job.findAll({
         where: {
           property_id: [...propertyIds],
         },
         order: [['created_at', 'ASC']],
       });
+
+      // turn all the picture buffers into dataURIs
+      await Promise.all(
+        jobs.map(async (job) => {
+          job.pictures = bufferToImage(job.pictures, '../../../public/job_placeholder.jpg');
+        })
+      );
+
+      // send the response with all the jobs
       res.status(200).send({
-        success: true,
-        message: 'jobs retrieved successfully',
+        // success: true,
+        // message: 'jobs retrieved successfully',
         jobs: jobs,
       });
     } catch (err) {
@@ -52,16 +68,28 @@ export default {
   },
   createJob: async (req, res) => {
     console.log('== Create Job Route ==');
-    const createJob = req.body;
-    console.log(createJob);
+    const createdJob = req.body;
+    console.log(createdJob);
+
+    // turn the coordinates from a string into an array
+    createdJob.coordinates = createdJob.coordinates.split(',');
+
+    // turn the instructions from a string into an array
+    createdJob.instructions = createdJob.instructions.split(',');
+
+    // obtain the file buffer and set the imagebuffer
+    createdJob.pictures = null;
+    if (req.file) {
+      // imageBuffer = req.file.buffer;
+      createdJob.pictures = req.file.buffer;
+    }
 
     try {
+      // create the new job
       await Job.create({
-        ...createJob,
+        ...createdJob,
       });
       res.status(200).send({
-        success: true,
-        message: 'Job successfully created',
         toast: {
           color: 'green',
           message: 'Your job has been successfully created!',
@@ -75,9 +103,24 @@ export default {
     console.log('== Update Job Route ==');
     console.log(req.body);
     const editJob = req.body;
+    // console.log('after changing data type');
+    // console.log(editJob);
+
+    // turn jobSize into a number
     editJob.jobSize = +editJob.jobSize;
-    console.log('after changing data type');
-    console.log(editJob);
+
+    // turn the coordinates from a string into an array
+    // editJob.coordinates = editJob.coordinates.split(',');
+
+    // turn the instructions from a string into an array
+    editJob.instructions = editJob.instructions.split(',');
+
+    // obtain the file buffer and set the imagebuffer
+    editJob.pictures = null;
+    if (req.file) {
+      // imageBuffer = req.file.buffer;
+      editJob.pictures = req.file.buffer;
+    }
 
     try {
       await Job.update(
@@ -89,8 +132,6 @@ export default {
         }
       );
       res.status(200).send({
-        success: true,
-        message: 'job successfully updated',
         toast: {
           color: 'green',
           message: 'Your job has been updated!',
@@ -134,7 +175,16 @@ export default {
         },
         order: [['created_at', 'ASC']],
       });
+
+      // turn all the picture buffers into dataURIs
+      await Promise.all(
+        subscriptions.map(async (sub) => {
+          sub.pictures = bufferToImage(sub.pictures, '../../../public/job_placeholder.jpg');
+        })
+      );
       console.log(subscriptions);
+
+      // send the response with all the subscriptions
       res.status(200).send({
         success: true,
         message: 'subscriptions successfully retrieved',
@@ -209,7 +259,7 @@ export default {
     }
   },
   myJobsWithProperties: async (req, res) => {
-    console.log('==my jobs with properties route');
+    console.log('== my jobs with properties route ==');
     try {
       const user = await User.findByPk(req.session.user_id);
       const properties = await user.getProperties();
@@ -222,6 +272,7 @@ export default {
           property_id: [...propertyIds],
           subscribed: null,
         },
+        attributes: { exclude: ['pictures'] },
         include: [
           {
             model: Property,
@@ -229,6 +280,9 @@ export default {
           },
         ],
       });
+
+      console.log(jobsWithProperties);
+
       res.status(200).send({
         success: true,
         message: 'jobs with properties successfully retrieved',

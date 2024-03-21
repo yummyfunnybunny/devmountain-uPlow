@@ -1,4 +1,4 @@
-# Project Name: uPlow
+# uPlow
 
 ## Description:
 
@@ -7,48 +7,43 @@ also search the interactive map and request service from workers. Workers can se
 
 ## Features:
 
-- signup and login
-- get, create, update, delete properties
-- get, create, update, delete jobs
-- workers => request to service a customers jobs
-- customers => request service from workers
-- Workers => accept or decline service offers from customers
-- customers => accept or decline service offers from workers
+- authentication includes sign-up, logg-in, logout, editing and deleting accounts. includes password hashing with bcrypt.
+- signup as one of two roles: customer or worker
+- create properties and jobs associated with your account. includes uploading your own photos for your properties and jobs.
+- use the interactive map to either search for workers (as a customer) or search for jobs (as a worker) and make requests to get jobs serviced
+- stay updated on your jobs with automatic alert system that lets you know when things change regarding your jobs
 
-To Do List
+## Future Considerations
 
-==== FEATURES ====
+New Features:
 
-- weather API alerts
-- file uploads into the DB
-- pricing and payment system
+- pricing and payment system with stripe
 - counter offers
 - service jobs, verify service, create service
 - service history
-- dashboard home -> helpful widgets
-- Home-page testimonials -> carousel
-- contact-page -> mapbox with HQ location, contact info,
-- FAQ page -> accordian
-- Sass for styling
-- bcrypt + json webtokens
+- help page
+
+Styling:
+
+- migrate to Sass
+- contact-page -> mapbox with HQ location
 - jobs multiple pictures carousel
+- loading spinner when map is loading
+- style the mapbox map
+- responsive to all screen sizes
 
-==== ISSUES ====
+Weather:
 
-- fix issue with stacked nodes on the mapbox
-- fix DashMyJobs not refreshing/updating after unsubscribing a worker (user perspective)
-- alerts need date/time they were created
-- add timestamps to properties and jobs and add SORTBY when fetching
+- save weather data to reduce fetches to weatherAPI
+- weather alerts
 
-==== ERROR HANDLING ====
-
-==== FORM VALIDATION ====
+form validation:
 
 - remove extra white space
 - lowercase everything but first letters of words
 - format phone numbers (dashes, numbers only)
 
-==== NORMALIZATION, NAME CHANGES, condensing code ====
+Condensing, normalizing, cohesion:
 
 - RENAME: customer rejects/accepts/counters worker offer (modalType, modal submit function, endpoint, controller function)
 - RENAME: worker rejects/accepts/counters customer offer (modalType, modal submit function, endpoint, controller function)
@@ -59,58 +54,22 @@ To Do List
 - CONDENSE: change all dispatch functions to use the spread operator instead of listing each attribute
 - CONDENSE: combine css files (dashMyProperties & property)
 
-STRETCH:
+Error Handling:
 
-- style the mapbox map
-- contact page
-- help page
-- FAQ page
-- loading spinner when map is loading
-- bcrypt replaces express sessions
-- weather alerts and weather forecasts on home dashboard
+- create error handling loop to handle all errors with one system
 
-<!-- NOTE -->
+Security:
 
-<!-- SECTION -- MAPBOX -->
-<!-- create the map -->
+- rate limiting
+- form validation for SQL injection
 
-mapbox with react: https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/
+Image Uploading:
 
-<!-- Add points to a web map, part 1: prepare your data -->
+- limit file sizes and use sharp to format images before saving to the database
 
-https://docs.mapbox.com/help/tutorials/add-points-pt-1/
+## Known Issues
 
-<!-- Add points to a web map, part 2: create a map style -->
-
-https://docs.mapbox.com/help/tutorials/add-points-pt-2/
-
-<!-- Add points to a web map, part 3: add interactivity -->
-
-https://docs.mapbox.com/help/tutorials/add-points-pt-3/
-
-<!-- Markers and Controls API Reference -->
-
-https://docs.mapbox.com/mapbox-gl-js/api/markers/#marker#getelement
-
-<!-- CSS styling for popups as well as custome markers -->
-
-https://docs.mapbox.com/help/tutorials/building-a-store-locator/
-
-<!-- geocoding api playground page -->
-
-https://docs.mapbox.com/playground/geocoding/?search_text=1264%20N%20Commerce%20Dr%2C%20Saratoga%20Springs%2C%20UT%2084045&proximity=-73.990593%2C40.740121&access_token=pk.eyJ1IjoieXVtbXlmdW5ueWJ1bm55IiwiYSI6ImNrODZwNzQydDA1bjEzZW15NTRqa2NpdnEifQ.6y8NFU2qjw6mTgINZYaRyg
-
-<!-- Formatting your address for forward geocoding -->
-
-https://docs.mapbox.com/help/troubleshooting/address-geocoding-format-guide/
-
-<!-- !SECTION -->
-
-<!-- ANCHOR -- .env files with Vite & React -->
-
-https://stackoverflow.com/questions/73834404/react-uncaught-referenceerror-process-is-not-defined
-
-- in your files that call your environment variables, call them like this:
-  import.meta.env.VITE*REACT_APP*[your variable name]
-- and in your .env files, name your variables like this:
-  VITE*REACT_APP*[your variable name]
+- fix issue with stacked nodes on the map
+- fix DashMyJobs not refreshing/updating after unsubscribing a worker (user perspective)
+- alerts need date/time they were created
+- first faq accordian doesnt open

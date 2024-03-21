@@ -8,6 +8,8 @@ import userCtrl from './controllers/userCtrl.js';
 import propertyCtrl from './controllers/propertyCtrl.js';
 import jobCtrl from './controllers/jobCtrl.js';
 import alertCtrl from './controllers/alertCtrl.js';
+import multer from 'multer';
+import bodyParser from 'body-parser';
 
 // ANCHOR -- Initializers
 const app = express();
@@ -16,25 +18,28 @@ dotenv.config();
 // const { VITE_REACT_APP_ROOT } = process.env;
 const root = process.env.VITE_REACT_APP_ROOT;
 const { PORT } = process.env;
-console.log('ROOT:');
-console.log(root);
+// console.log('ROOT:');
+// console.log(root);
 // ViteExpress.config({ printViteDevServerHost: true });
+const upload = multer(); // init multer package
+// const upload = multer({ limits: { fileSize: 10 * 1024 * 1024 } }); // 10 MB limit
 
 // ANCHOR -- Middle-Ware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(bodyParser.json({ limit: '35mb' }));
 app.use(session({ secret: 'uplowRocks$69', saveUninitialized: true, resave: false }));
 
 // SECTION -- Route Handlers
 
 // ANCHOR -- Auth
-const { signup, login, logout, changePassword, loginRequired, isLoggedIn, getWeather } = authCtrl;
+const { signup, login, logout, changePassword, loginRequired, isLoggedIn } = authCtrl;
 app.post(`${root}/signup`, signup);
 app.post(`${root}/login`, login);
 app.get(`${root}/logout`, loginRequired, logout);
 app.post(`${root}/changePassword`, loginRequired, changePassword);
 app.get(`${root}/isLoggedIn`, isLoggedIn);
-app.get(`${root}/weather/:latitude/:longitude`, loginRequired, getWeather);
+// app.get(`${root}/weather/:latitude/:longitude`, loginRequired, getWeather);
 
 // ANCHOR -- Users
 const { getMe, editMe, deleteMe, getWorkers, getWorker } = userCtrl;
@@ -48,8 +53,8 @@ app.get(`${root}/workerByjob/:job_id`, loginRequired, getWorker);
 const { myProperties, getPropertyBySubscription, createProperty, editProperty, deleteProperty } = propertyCtrl;
 app.get(`${root}/properties`, loginRequired, myProperties);
 app.get(`${root}/propertyBySubscription/:job_id`, loginRequired, getPropertyBySubscription);
-app.post(`${root}/properties`, loginRequired, createProperty);
-app.put(`${root}/properties`, loginRequired, editProperty);
+app.post(`${root}/properties`, upload.single('picture'), loginRequired, createProperty);
+app.put(`${root}/properties`, upload.single('picture'), loginRequired, editProperty);
 app.delete(`${root}/properties/:property_id`, loginRequired, deleteProperty);
 
 // ANCHOR -- Jobs
@@ -69,8 +74,8 @@ const {
 app.get(`${root}/myJobs`, loginRequired, myJobs);
 app.get(`${root}/myJobsWithProperties`, loginRequired, myJobsWithProperties);
 app.get(`${root}/availableJobs`, loginRequired, availableJobs);
-app.post(`${root}/jobs`, loginRequired, createJob);
-app.put(`${root}/jobs`, loginRequired, updateJob);
+app.post(`${root}/jobs`, upload.single('pictures'), loginRequired, createJob);
+app.put(`${root}/jobs`, upload.single('pictures'), loginRequired, updateJob);
 app.put(`${root}/unsubscribeWorker/:job_id`, loginRequired, unsubscribeWorker);
 app.put(`${root}/unsubscribeFromJob/:job_id`, loginRequired, unsubscribeFromJob);
 app.delete(`${root}/jobs/:job_id`, loginRequired, deleteJob);
@@ -86,6 +91,12 @@ app.post(`${root}/requestJob`, loginRequired, requestJob);
 app.delete(`${root}/rejectRequestWorker/:alert_id`, loginRequired, rejectRequestWorker);
 app.delete(`${root}/rejectRequestJob/:alert_id`, loginRequired, rejectRequestJob);
 app.delete(`${root}/deleteAlert/:alert_id`, loginRequired, deleteAlert);
+
+app.post(`${root}/testCreateProperty`, upload.single('picture'), (req, res) => {
+  console.log('=== test create property endpoint == ');
+  console.log(req.body);
+  console.log(req.file);
+});
 
 // !SECTION
 
